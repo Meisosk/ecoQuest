@@ -10,6 +10,11 @@ export default {
       height: {
         90: "90%",
       },
+      colors: {
+        primary: "#1E3D33",
+        secondary: "#12261E",
+        background: "#1E1E1E",
+      },
     },
   },
   plugins: [],

@@ -1,18 +1,19 @@
 import React from "react";
 import logo from "../assets/ecoquestlogo.png";
+import { Link } from "react-router-dom";
 
 function NavBar() {
   return (
     <>
       <div className="h-screen">
-        <div className="rounded-r bg-gray-900 flex justify-between w-full p-6 items-center ">
+        <div className="rounded-r bg-secondary flex justify-between w-full p-6 items-center ">
           <div className="flex justify-between  items-center space-x-3">
             <img className="w-32" src={logo} alt="logo" />
           </div>
         </div>
         <div
           id="Main"
-          className="xl:rounded-r transform  xl:translate-x-0  ease-in-out transition duration-500  items-start h-90 w-full sm:w-64 bg-gray-900 flex-col flex justify-between"
+          className="xl:rounded-r transform  xl:translate-x-0  ease-in-out transition duration-500  items-start h-90 w-full sm:w-64 bg-secondary flex-col flex justify-between"
         >
           <div className="flex flex-col justify-start items-center px-6 h-2/3 w-full  ">
             <div
@@ -34,7 +35,10 @@ function NavBar() {
                   <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                   <polyline points="9 22 9 12 15 12 15 22"></polyline>
                 </svg>
-                <p className="text-base leading-4  ">Home</p>
+
+                <Link to="/" className="text-base leading-4 text-gray-300  ">
+                  Home
+                </Link>
               </button>
               <button className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
                 <svg
@@ -51,7 +55,12 @@ function NavBar() {
                   <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
                   <line x1="4" y1="22" x2="4" y2="15"></line>
                 </svg>
-                <p className="text-base leading-4  ">Challenges</p>
+                <Link
+                  to="/challenges"
+                  className="text-base leading-4 text-gray-300  "
+                >
+                  Challenges
+                </Link>
               </button>
               <button className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2 w-full md:w-52">
                 <svg
@@ -69,7 +78,12 @@ function NavBar() {
                   <line x1="12" y1="9" x2="12" y2="13"></line>
                   <line x1="12" y1="17" x2="12.01" y2="17"></line>
                 </svg>
-                <p className="text-base leading-4  ">Facilities Near You</p>
+                <Link
+                  to="/facilities"
+                  className="text-base leading-4 text-gray-300  "
+                >
+                  Facilities Near You
+                </Link>
               </button>
               <button className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
                 <svg
@@ -86,7 +100,12 @@ function NavBar() {
                   <line x1="12" y1="1" x2="12" y2="23"></line>
                   <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                 </svg>
-                <p className="text-base leading-4  ">Donate</p>
+                <Link
+                  to="/donate"
+                  className="text-base leading-4 text-gray-300  "
+                >
+                  Dontate
+                </Link>
               </button>
               <button className="flex justify-start items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 rounded px-3 py-2  w-full md:w-52">
                 <svg
@@ -104,29 +123,39 @@ function NavBar() {
                   <line x1="12" y1="16" x2="12" y2="12"></line>
                   <line x1="12" y1="8" x2="12.01" y2="8"></line>
                 </svg>
-                <p className="text-base leading-4  ">About Us</p>
+                <Link
+                  to="/about"
+                  className="text-base leading-4 text-gray-300 "
+                >
+                  About Us
+                </Link>
               </button>
             </div>
           </div>
 
           <div className="flex flex-col justify-between items-center pb-6   px-6  w-full  space-y-32  border-t border-gray-600">
             <div className=" flex justify-between items-center w-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="35"
-                height="35"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#cecece"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="mt-3"
+              <Link
+                to="/profile"
+                className="text-base leading-4 text-gray-300 "
               >
-                <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
-                <circle cx="12" cy="10" r="3" />
-                <circle cx="12" cy="12" r="10" />
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="35"
+                  height="35"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#cecece"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mt-3"
+                >
+                  <path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" />
+                  <circle cx="12" cy="10" r="3" />
+                  <circle cx="12" cy="12" r="10" />
+                </svg>
+              </Link>
               <div className="flex justify-center items-center  space-x-2">
                 <div></div>
                 <div className="flex justify-start flex-col items-start ">
