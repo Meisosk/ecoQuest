@@ -1,7 +1,7 @@
 import { supabase } from "./App";
 
-async function getUsers() {
-  const { data, error } = await supabase.from("Users").select();
+async function GetQuests() {
+  const { data, error } = await supabase.from("Quests").select();
   if (error) {
     console.error("Error fetching data: ", error);
   } else {
@@ -10,4 +10,4 @@ async function getUsers() {
   }
 }
 
-export default getUsers;
+export default GetQuests;

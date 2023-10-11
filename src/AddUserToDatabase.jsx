@@ -27,15 +27,32 @@ function AddUserToDatabase() {
       .insert([
         { email: email, username: username, password: password, location: location },
       ]);
+
+      if (error) {
+        console.error('Error inserting data: ', error);
+      } else {
+        console.log('Data inserted: ', {email: email, username: username, password: password, location: location});
+        const userData = await getUsers()
+        setUsers(userData)
+      }
+    };
   
-    if (error) {
-      console.error('Error inserting data: ', error);
-    } else {
-      console.log('Data inserted: ', {email: email, username: username, password: password, location: location});
-      const userData = await getUsers()
-      setUsers(userData)
-    }
-  };
+  
+const handleEditUsername = async (username, newUsername) => {
+  const {data, error} = await supabase
+  .from('Users')
+  .update({username: newUsername})
+  .eq('username', username)
+
+  if (error) {
+    console.error('Error updating username: ', error);
+  } else {
+    console.log('Username updated: ', {username: newUsername});
+    const userData = await getUsers()
+    setUsers(userData)
+  }
+}
+
 
 
 
@@ -80,6 +97,16 @@ function AddUserToDatabase() {
         <li className=" bg-red-800 flex justify-center" key={user.username}>
           {user.username}
           <button onClick={() => handleDeleteUsers(user.username)}>Delete</button>
+          <button
+        onClick={() => {
+          const newUsername = prompt('Enter the new username:', user.username);
+          if (newUsername) {
+            handleEditUsername(user.username, newUsername);
+          }
+        }}
+      >
+        Edit
+      </button>
         </li>
       ))}
     </ul>
