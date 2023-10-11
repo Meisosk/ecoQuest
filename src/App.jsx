@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
+import "./input.css";
 
 const supabase = createClient(
   "https://caanhmrdxdwqpumrwxjt.supabase.co",
@@ -21,7 +22,9 @@ function App() {
   return (
     <ul>
       {users.map((user) => (
-        <li key={user.username}>{user.username}</li>
+        <li className=" bg-green-800 flex justify-center" key={user.username}>
+          {user.username}
+        </li>
       ))}
     </ul>
   );
