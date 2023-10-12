@@ -30,6 +30,7 @@ const PieChart = (props) => {
           style: {
             color: "#ffffff",
             fontSize: "20px",
+            fontFamily: "'Lato', sans-serif"
           },
         },
         colors: ["#EDA408", "#874210", "#4F741F", "#95D329", "#d3891a"],
