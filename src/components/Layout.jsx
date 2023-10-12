@@ -3,9 +3,9 @@ import NavBar from "./NavBar";
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex">
+    <div className="flex w-screen">
       <NavBar />
-      <div className="w-full p-4">{children}</div>
+      <div className="w-full flex justify-center">{children}</div>
     </div>
   );
 };
