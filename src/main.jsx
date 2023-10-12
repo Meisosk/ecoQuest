@@ -12,9 +12,15 @@ import Challenges from "./components/Challenges.jsx";
 import Facilities from "./components/Facilities.jsx";
 import Donation from "./components/Donation.jsx";
 import About from "./components/About.jsx";
+import QuestsPage from "./components/QuestsPage.jsx";
+import AuthProvider from "./components/AuthProvider.jsx";
+import Register from "./components/FakeRegister.jsx";
+import AddUserToDatabase from "./AddUserToDatabase.jsx";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <AuthProvider>
     <Router>
       <Layout>
         <Routes>
@@ -24,8 +30,15 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/donate" element={<Donation />} />
           <Route path="/about" element={<About />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/quests" element={<QuestsPage />} />
+          <Route path="/fakesignup" element={<Register />} />
+          <Route path="/test" element={<AddUserToDatabase />}/>
         </Routes>
       </Layout>
     </Router>
+    </AuthProvider>
   </React.StrictMode>
 );
+
+//wrapping the entire Router with authprovider means all componenents within
+//can access the authentication context
