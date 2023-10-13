@@ -44,61 +44,61 @@ function Home() {
             <p className="text-center text-xl  p-2 ">Leaderboard</p>
             {/* leaderboard */}
             <div className="flex justify-center mt-5">
-              <div class="relative overflow-x-auto w-4/6">
-                <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                  <thead class="text-xs text-gray-700 uppercase bg-background dark:text-gray-400">
+              <div className="relative overflow-x-auto w-4/6">
+                <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                  <thead className="text-xs text-gray-700 uppercase bg-background dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         Rank
                       </th>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         Name
                       </th>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         Level
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         1
                       </th>
-                      <td class="px-6 py-4">Joe</td>
-                      <td class="px-6 py-4">99</td>
+                      <td className="px-6 py-4">Joe</td>
+                      <td className="px-6 py-4">99</td>
                     </tr>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         2
                       </th>
-                      <td class="px-6 py-4">Bob</td>
-                      <td class="px-6 py-4">5</td>
+                      <td className="px-6 py-4">Bob</td>
+                      <td className="px-6 py-4">5</td>
                     </tr>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         3
                       </th>
-                      <td class="px-6 py-4">Hank</td>
-                      <td class="px-6 py-4">4</td>
+                      <td className="px-6 py-4">Hank</td>
+                      <td className="px-6 py-4">4</td>
                     </tr>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         4
                       </th>
-                      <td class="px-6 py-4">Rob</td>
-                      <td class="px-6 py-4">2</td>
+                      <td className="px-6 py-4">Rob</td>
+                      <td className="px-6 py-4">2</td>
                     </tr>
                   </tbody>
                 </table>

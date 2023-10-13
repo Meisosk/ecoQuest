@@ -25,6 +25,7 @@ export default {
         background: "#1E1E1E",
         xp: "#4F741F",
         button: "#F18320",
+        landbg: "#5B805F",
       },
     },
   },
