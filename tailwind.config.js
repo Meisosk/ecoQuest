@@ -24,6 +24,7 @@ export default {
         secondary: "#12261E",
         background: "#1E1E1E",
         xp: "#4F741F",
+        button: "#F18320",
       },
     },
   },

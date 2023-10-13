@@ -46,7 +46,7 @@ const SearchBar = (props) => {
               placeholder="Enter city or state name..."
             />
 
-            <button className=" h-12 bg-amber-500" type="submit">
+            <button className=" h-12 bg-button" type="submit">
               Submit
             </button>
           </div>
