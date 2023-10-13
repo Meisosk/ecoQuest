@@ -89,9 +89,7 @@ function Profile() {
                   <img className="h-16" src={achive1} alt="" />
                   <p>Saved the Planet again</p>
                 </div>
-                <button className="bg-amber-500 mr-5 p-2 py-1">
-                  Completed
-                </button>
+                <button className="bg-button mr-5 p-2 py-1">Completed</button>
                 <button className=" bg-red-700 mr-5 p-2 py-1">Delete</button>
               </div>
               <div className="mb-6">
@@ -99,9 +97,7 @@ function Profile() {
                   <img className="h-16" src={achive2} alt="" />
                   <p>Plant a plant again</p>
                 </div>
-                <button className="bg-amber-500 mr-5 p-2 py-1">
-                  Completed
-                </button>
+                <button className="bg-button mr-5 p-2 py-1">Completed</button>
                 <button className=" bg-red-700 mr-5 p-2 py-1">Delete</button>
               </div>
               <div className="mb-6">
@@ -109,9 +105,7 @@ function Profile() {
                   <img className="h-16" src={achive3} alt="" />
                   <p>Take a shorter shower </p>
                 </div>
-                <button className="bg-amber-500 mr-5 p-2 py-1">
-                  Completed
-                </button>
+                <button className="bg-button mr-5 p-2 py-1">Completed</button>
                 <button className=" bg-red-700 mr-5 p-2 py-1">Delete</button>
               </div>
             </div>
