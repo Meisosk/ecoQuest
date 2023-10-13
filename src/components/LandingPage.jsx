@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function LandingPage() {
   return (
-    <div className="h-full w-screen bg-landbg ">
+    <div className="h-screen w-full bg-landbg ">
       {/* <img className="w-1/4 h-1/5" src={logo} alt="" /> */}
       <div className="flex justify-end mr-10 pt-5">
         <Link to="/fakesignup">
@@ -17,10 +17,10 @@ function LandingPage() {
           <button className="px-2 py-1 text-xl text-stone-100">Sign In</button>
         </Link>
       </div>
-      <div className="flex flex-col items-center justify-end h-2/5 w-screen">
+      <div className="flex flex-col items-center justify-end h-[94%] w-full">
         <img className="w-full h-2/5 " src={factories} alt="" />
         <div className="w-full h-2/5 bg-secondary">
-          <img className="h-2/5 w-full" src={trees} alt="" />
+          <img className="w-full h-full" src={trees} alt="" />
         </div>
       </div>
     </div>
