@@ -5,6 +5,14 @@ import GetQuests from "../GetQuests";
 function QuestsPage() {
   const [quests, setQuests] = useState([]);
 
+  function capitalizeWords(str) {
+    return str
+      .toLowerCase()
+      .split(" ") //if you don't put a space in here, it will split on each character instead of each word!
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "); //if you don't put a space in here, it will not put spaces between the rejoined words
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await GetQuests();
@@ -32,17 +40,27 @@ function QuestsPage() {
   };
 
   return (
-    <div className="grid grid-cols-4 gap-20">
+    <>
+    <div className="ml-5 mt-10 w-70 ">
+    <div className="flex justify-even gap-5 flex-wrap rounded-3xl">
         {quests.map((quest) => (
-          <div className=" bg-green-950 rounded-md flex flex-col" key={quest.id}>
+          <div className=" bg-green-950 rounded-3xl flex flex-col p-5 shadow-2xl" key={quest.id}>
+            <div>
             <h2 className="self-start">Difficulty Level: {quest.level}</h2>
-            <p className="bg-green-950 self-center">{quest.text}</p>
-            <button className="bg-amber-500 p-1 shadow-xl w-4/5 self-center " onClick={() => handleChoice(quest.id)}>
+            </div>
+            <div className="w-60">
+            <p className="bg-green-950 max-w-sm mt-4 mb-4 ">{capitalizeWords(quest.text)}</p>
+            </div>
+            <div className="flex flex-col justify-between text-center mt-auto">
+            <button className="bg-amber-500 p-1 shadow-xl w-auto" onClick={() => handleChoice(quest.id)}>
               ACCEPT THIS QUEST
             </button>
+            </div>
           </div>
         ))}
       </div>
+      </div>
+      </>
   );
 }
 
