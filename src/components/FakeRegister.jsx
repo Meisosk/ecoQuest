@@ -4,7 +4,9 @@ import { supabase } from "../App"
 const FakeRegister = () => {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const locationRef = useRef(null);
   const confirmPasswordRef = useRef(null);
+  const usernameRef = useRef(null);
   const [errorMsg, setErrorMsg] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false); // disabling multiple clicks
@@ -14,8 +16,10 @@ const FakeRegister = () => {
   const register = () => {
     let email = emailRef.current?.value ?? '';
     let password = passwordRef.current?.value ?? '';
-    console.log("this is the email and pw going in", {email, password});
-    return supabase.auth.signUp({ email, password });
+    let username = usernameRef.current?.value ?? '';
+    let location = locationRef.current?.value ?? '';
+    console.log("this is the data going in", {email, password, username, location});
+    return supabase.auth.signUp({ email, password, options: {data: {username: username, location: location}}})
   };
 
     const handleSubmit = async (e) => {
@@ -23,7 +27,9 @@ const FakeRegister = () => {
       if (
         !passwordRef.current?.value ||
         !emailRef.current?.value ||
-        !confirmPasswordRef.current?.value
+        !confirmPasswordRef.current?.value ||
+        !usernameRef.current?.value ||
+        !locationRef.current?.value
       ) {
         setErrorMsg("Please fill out all the fields");
         return;
@@ -53,6 +59,14 @@ const FakeRegister = () => {
       <div>
         <h2 className="text-center mb-4">Register</h2>
         <form onSubmit={handleSubmit}>
+        <div id="username">
+            <label>Username</label>
+            <input type="username" ref={usernameRef} required /> 
+          </div>
+          <div id="location">
+            <label>Location</label>
+            <input type="text" ref={locationRef} required /> 
+          </div>
           <div id="email">
             <label>Email</label>
             <input type="email" ref={emailRef} required />
