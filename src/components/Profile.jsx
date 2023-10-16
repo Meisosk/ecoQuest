@@ -25,54 +25,54 @@ function Profile() {
           <p className="p-5 text-lg">Friends List:</p>
           <div>
             <div className="flex justify-center mt-5">
-              <div class="relative overflow-x-auto w-4/6">
-                <table class="w-full  text-gray-500 dark:text-gray-400 text-lg">
-                  <thead class="text-sm text-gray-700 uppercase bg-background dark:text-gray-400">
+              <div className="relative overflow-x-auto w-4/6">
+                <table className="w-full  text-gray-500 dark:text-gray-400 text-lg">
+                  <thead className="text-sm text-gray-700 uppercase bg-background dark:text-gray-400">
                     <tr>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         Name
                       </th>
-                      <th scope="col" class="px-6 py-3">
+                      <th scope="col" className="px-6 py-3">
                         Status
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         Joe
                       </th>
-                      <td class="px-6 py-4">Signed In</td>
+                      <td className="px-6 py-4">Signed In</td>
                     </tr>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         Bob
                       </th>
-                      <td class="px-6 py-4">Signed Out</td>
+                      <td className="px-6 py-4">Signed Out</td>
                     </tr>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         Hank
                       </th>
-                      <td class="px-6 py-4">Signed In</td>
+                      <td className="px-6 py-4">Signed In</td>
                     </tr>
-                    <tr class="bg-secondary border-b dark:border-gray-700">
+                    <tr className="bg-secondary border-b dark:border-gray-700">
                       <th
                         scope="row"
-                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
                         Rob
                       </th>
-                      <td class="px-6 py-4">Signed In</td>
+                      <td className="px-6 py-4">Signed In</td>
                     </tr>
                   </tbody>
                 </table>
