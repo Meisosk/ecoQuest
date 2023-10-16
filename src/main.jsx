@@ -14,25 +14,28 @@ import QuestsPage from "./components/QuestsPage.jsx";
 import AuthProvider from "./components/AuthProvider.jsx";
 import Register from "./components/FakeRegister.jsx";
 import AddUserToDatabase from "./AddUserToDatabase.jsx";
+import { FormProvider } from "./components/FormProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <AuthProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/facilities" element={<Facilities />} />
-            <Route path="/donate" element={<Donation />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/quests" element={<QuestsPage />} />
-            <Route path="/fakesignup" element={<Register />} />
-            <Route path="/test" element={<AddUserToDatabase />} />
-          </Routes>
-        </Layout>
-      </Router>
-    </AuthProvider>
+    <FormProvider>
+      <AuthProvider>
+        <Router>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/facilities" element={<Facilities />} />
+              <Route path="/donate" element={<Donation />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/quests" element={<QuestsPage />} />
+              <Route path="/fakesignup" element={<Register />} />
+              <Route path="/test" element={<AddUserToDatabase />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </AuthProvider>
+    </FormProvider>
   </React.StrictMode>
 );
 
