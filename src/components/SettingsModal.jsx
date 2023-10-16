@@ -32,7 +32,7 @@ function SettingsModal({ closeModal }) {
               <button
                 data-modal-hide="popup-modal"
                 type="button"
-                className=" mb-3 w-56 text-white bg-button hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm  items-center px-5 py-2.5 text-center mr-2"
+                className=" mb-3 w-56 text-white bg-button hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm  items-center px-5 py-2.5 text-center mr-2"
               >
                 Log Out
               </button>
