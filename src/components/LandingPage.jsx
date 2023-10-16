@@ -3,7 +3,11 @@ import trees from "../assets/Vector.png";
 import factories from "../assets/Vector (1).png";
 import { Link } from "react-router-dom";
 
+
 function LandingPage() {
+
+ 
+
   return (
     <div className="h-screen w-full bg-landbg ">
       {/* <img className="w-1/4 h-1/5" src={logo} alt="" /> */}
@@ -13,7 +17,7 @@ function LandingPage() {
             Sign Up
           </button>
         </Link>
-        <Link>
+        <Link to="/fakesignin">
           <button className="px-2 py-1 text-xl text-stone-100">Sign In</button>
         </Link>
       </div>
