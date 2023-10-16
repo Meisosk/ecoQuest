@@ -14,6 +14,7 @@ import QuestsPage from "./components/QuestsPage.jsx";
 import AuthProvider from "./components/AuthProvider.jsx";
 import Register from "./components/FakeRegister.jsx";
 import AddUserToDatabase from "./AddUserToDatabase.jsx";
+import Login from "./components/FakeSignIn.jsx";
 import { FormProvider } from "./components/FormProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -30,6 +31,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
               <Route path="/profile" element={<Profile />} />
               <Route path="/quests" element={<QuestsPage />} />
               <Route path="/fakesignup" element={<Register />} />
+              <Route path="/fakesignin" element={<Login />} />
               <Route path="/test" element={<AddUserToDatabase />} />
             </Routes>
           </Layout>
