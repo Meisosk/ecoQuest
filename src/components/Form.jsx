@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import * as EmissionConstants from "../data/calculator";
+import { useForm } from "./FormProvider";
 
 function Form({ onSubmit }) {
   // State variables to store user inputs
+
+  const { setEmissionTotal } = useForm();
+
   const [carMilesDriven, setCarMilesDriven] = useState(0);
   const [electricityUsage, setElectricityUsage] = useState(0);
   const [heatingOilConsumption, setHeatingOilConsumption] = useState(0);
@@ -16,10 +20,6 @@ function Form({ onSubmit }) {
   const [pants, setPants] = useState(0);
   const [skirts, setSkirts] = useState(0);
   const [jackets, setJackets] = useState(0);
-
-  useEffect(() => {
-    console.log(totalEmissions);
-  }, [totalEmissions]);
 
   const calculateEmissions = (clothingTotal) => {
     const carEmissions =
@@ -41,7 +41,7 @@ function Form({ onSubmit }) {
       dietEmissions = EmissionConstants.EMISSIONS_PER_DIET_MEAT_MIN;
     }
 
-    const total =
+    let total =
       carEmissions +
       electricityEmissions +
       heatingOilEmissions +
@@ -51,6 +51,7 @@ function Form({ onSubmit }) {
     if (throwsOutClothes) {
       total += (total / 100) * 3;
     }
+    setEmissionTotal(total);
     setTotalEmissions(total);
   };
 
