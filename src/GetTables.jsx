@@ -10,7 +10,7 @@ if (!user) {
   const { data, error } = await supabase
   .from("Quests")
   .select("*, Accepted(*)")
-    .is("Accepted", null)
+    .is("Accepted", null, "userId", user.data.user.id)
 
 
   if (error) {
