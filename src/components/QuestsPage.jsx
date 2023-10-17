@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../App";
-import GetQuests from "../GetQuests";
+import { dataFetchingFunctions } from "../GetTables";
+const { GetQuests } = dataFetchingFunctions;
 
 function QuestsPage() {
   const [quests, setQuests] = useState([]);
