@@ -23,25 +23,42 @@ function QuestsPage() {
   }, []);
 
   const handleChoice = async (questId) => {
-    const user = supabase.auth.user();
-    const userId = user ? user.id : null;
+    const user = await supabase.auth.getUser();
+    console.log("this is the supabase auth uuid showing:", user.data.user.id)
 
-    if (!userId) {
+    if (!user) {
       console.error("User is not logged in");
       return;
     }
-    const updatedQuests = quests.map((quest) => {
-      if (quest.id === questId) {
-        supabase
-          .from("Accepted")
-          .insert([{ user_id: userId, quest_id: questId }]);
-        return { ...quest, status: "accepted" };
+
+    try {
+      const { error } = await supabase
+        .from("Accepted")
+        .insert([{ userId: user.data.user.id, questId: questId }]);
+        console.log("inserted values: ", user.data.user.id, questId)
+       
+
+      if (error) {
+        console.error("Error inserting into Accepted table:", error.message);
+        return;
       }
-      return quest;
-    });
-    setQuests(updatedQuests);
+
+      const updatedQuests = quests.map((quest) => {
+        if (quest.id === questId) {
+          return { ...quest, status: "accepted" };
+        }
+        return quest;
+      });
+
+      setQuests(updatedQuests);
+    } catch (error) {
+      console.error("Error handling quest choice:", error);
+    }
   };
 
+
+
+  
   return (
     <>
       <div className="ml-5 mt-10 w-70 ">
