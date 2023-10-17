@@ -1,0 +1,34 @@
+#email,
+#password,
+#username,
+#location,
+#confirm-password {
+  margin-bottom: 20px;
+}
+
+#email label,
+#password label,
+#username label,
+#location label,
+#confirm-password label {
+  display: block;
+  color: white;
+  font-size: 16px;
+  border-bottom: 2px solid #fff;
+  padding-right: 55px;
+}
+
+#email input,
+#password input,
+#username input,
+#location input,
+#confirm-password input {
+  width: 100%;
+  padding: 4px;
+  border: none;
+  border-bottom: 2px solid #fff;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  outline: none;
+}
