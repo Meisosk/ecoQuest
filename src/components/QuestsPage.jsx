@@ -5,6 +5,7 @@ const { GetQuests } = dataFetchingFunctions;
 
 function QuestsPage() {
   const [quests, setQuests] = useState([]);
+  const [filteredQuests, setFilteredQuests] = useState([]);
 
   function capitalizeWords(str) {
     return str
@@ -28,6 +29,22 @@ function QuestsPage() {
 
     if (!user) {
       console.error("User is not logged in");
+      return;
+    }
+
+    const { data: existingAccepted, error: existingError} = await supabase
+    .from("Accepted")
+    .select("*")
+    .eq("userId", user.data.user.id)
+    .eq("questId", questId)
+
+    if (existingError) {
+      console.error("Error", existingError.message)
+      return;
+    }
+
+    if (existingAccepted && existingAccepted.length > 0 ) {
+      console.log("User already has this quest")
       return;
     }
 
