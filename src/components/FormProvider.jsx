@@ -8,14 +8,13 @@ export function FormProvider({ children }) {
   const [formVisible, setFormVisible] = useState(true);
   const [emissionTotal, setEmissionTotal] = useState(0);
   const [exsistingFormData, setExsistingFormData] = useState(null);
-  const [formData, setFormData] = useState(
-    exsistingFormData ? exsistingFormData : []
-  );
+  const [formData, setFormData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const form = await GetFormData();
-      if (form[0].FormData.length >= 1) {
+      console.log("exsisting form data", form);
+      if (form && form[0] && form[0].FormData && form[0].FormData.length >= 1) {
         setExsistingFormData(form[0].FormData);
         setFormVisible(false);
       }
@@ -24,20 +23,23 @@ export function FormProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    console.log("exsisting form data", exsistingFormData);
+    setFormData(exsistingFormData);
   }, [exsistingFormData]);
 
-  // [21.771, 0.050553, 0.047724, 1.3172302, 1.95275]
-
   useEffect(() => {
-    AddFormData(formData);
-    console.log("new form data", formData);
-    let total = 0;
-    for (let i = 0; i < formData.length; i++) {
-      total += formData[i];
-    }
-    setEmissionTotal(total);
-  }, [formData, exsistingFormData]);
+    const updateFormData = async () => {
+      if (formData && formData.length > 0) {
+        AddFormData(formData);
+        console.log("new form data", formData);
+        let total = 0;
+        for (let i = 0; i < formData.length; i++) {
+          total += formData[i];
+        }
+        setEmissionTotal(total);
+      }
+    };
+    updateFormData();
+  }, [formData]);
 
   const toggleFormVisibility = () => {
     setFormVisible((prevFormVisible) => !prevFormVisible);
