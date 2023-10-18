@@ -39,13 +39,32 @@ async function GetQuests() {
   return filteredQuests;
 }
 
+async function FilterAcceptedQuests() {
+  const user = await supabase.auth.getUser();
+
+  if (!user) {
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("Quests")
+    .select("*, Accepted!inner(*)")
+    .neq("id", user.data.user.id);
+
+  if (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  } else {
+    console.log("Data fetched: ", data);
+    return data;
+  }
+}
+
 async function GetFacilities() {
   const { data, error } = await supabase.from("Co2Emissions").select();
-  // .eq("CITY NAME", "NEW YORK");
   if (error) {
     console.error("Error fetching data: ", error);
   } else {
-    // console.log("Data fetched: ", data);
     return data;
   }
 }
@@ -57,30 +76,51 @@ async function GetCities() {
   if (error) {
     console.error("Error fetching data: ", error);
   } else {
-    // console.log("Data fetched: ", data);
     return data;
   }
 }
 
-export const dataFetchingFunctions = { GetQuests, GetFacilities, GetCities };
+async function AddFormData(formDataArray) {
+  const user = await supabase.auth.getUser();
+  if (!user) {
+    return;
+  }
 
-// async function FilterAcceptedQuests() {
-//   const user = await supabase.auth.getUser();
+  const { error } = await supabase
+    .from("users")
+    .update({
+      FormData: formDataArray,
+    })
+    .eq("id", user.data.user.id);
+  if (error) {
+    console.error("Error updating FormData: ", error);
+    return null;
+  }
+  return;
+}
 
-// if (!user) {
-//   return;
-// }
+async function GetFormData() {
+  const user = await supabase.auth.getUser();
+  if (!user) {
+    return;
+  }
 
-//   const { data, error } = await supabase
-//   .from("Quests")
-//   .select("*, Accepted!inner(*)")
-//     .neq("id", user.data.user.id)
+  const { data, error } = await supabase
+    .from("users")
+    .select("FormData")
+    .eq("id", user.data.user.id);
+  if (error) {
+    console.error("Error updating FormData: ", error);
+    return null;
+  }
+  return data;
+}
 
-//   if (error) {
-//     console.error("Error fetching data: ", error);
-//     return [];
-//   } else {
-//     console.log("Data fetched: ", data);
-//     return data;
-//   }
-// }
+export const dataFetchingFunctions = {
+  GetQuests,
+  GetFacilities,
+  GetCities,
+  AddFormData,
+  GetFormData,
+  FilterAcceptedQuests,
+};
