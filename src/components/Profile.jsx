@@ -2,20 +2,44 @@ import React from "react";
 import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
 import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
 import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
+import { useForm } from "./FormProvider";
 
 function Profile() {
+  const { emissionTotal } = useForm();
+
+  // average 16 a year
+  let percent = "40%";
+  if (emissionTotal <= 16) {
+    percent = "80%";
+  } else if (emissionTotal < 19) {
+    percent = "70%";
+  } else if (emissionTotal <= 21) {
+    percent = "60%";
+  } else if (emissionTotal < 24) {
+    percent = "40%";
+  } else if (emissionTotal <= 26) {
+    percent = "20%";
+  } else if (emissionTotal >= 31) {
+    percent = "5%";
+  }
   return (
-    <div className="w-full flex items-center flex-col ">
+    <div className="w-full h-full flex items-center flex-col ">
       <div className="text-center m-1.7 ">
         <h3 className="text-2xl">JoeFink</h3>
         <p>Joefinkel12@gmail.com</p>
       </div>
-      <div className="bg-primary w-3/4 h-1/5 rounded-3xl mb-1.7">
-        <p className="p-4 text-lg pl-9">Your Emissions</p>
+      <div className="bg-primary w-3/4 h-2/5 rounded-3xl mb-1.7 ">
+        <div className="flex justify-around">
+          <p className="p-4 text-lg pl-9">Your Emissions </p>
+          <p className="p-4 text-lg pl-9 ">
+            Average: 16 Tons <br />
+            You Produce: {emissionTotal.toFixed(2)} Tons
+          </p>
+        </div>
         <div className="relative  left-[10%]">
-          <div className="bg-gradient-to-r from-red-600 via-yellow-400 to-green-600 rounded-full h-10 w-4/5 mt-1.7"></div>
+          <div className="bg-gradient-to-r from-red-600 via-yellow-400 to-green-600 rounded-full h-10 w-4/5 m-1.7"></div>
           <div
-            className="bg-black bottom-0 left-[60%] absolute h-10 mt-5"
+            className={`bg-black bottom-0 left-[${percent}] absolute h-10 mt-5`}
             style={{ width: "1%" }}
           ></div>
         </div>
