@@ -1,13 +1,41 @@
 import { useState, useEffect } from "react";
-import cities from "../data/cities";
+import { dataFetchingFunctions } from "../GetTables";
+const { GetCities } = dataFetchingFunctions;
 
 const SearchBar = (props) => {
   const [input, setInput] = useState("");
   const [Cities, setCities] = useState([]);
+  const [Filtered, setFiltered] = useState([]);
   const [chosenCity, setChosenCity] = useState("new york");
 
   useEffect(() => {
-    setCities(cities);
+    console.log(Filtered);
+  }, [Filtered]);
+
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const cities = await GetCities();
+        setCities(
+          cities.map(
+            (city) =>
+              city.CityName.charAt(0).toUpperCase() +
+              city.CityName.slice(1).toLowerCase()
+          )
+        );
+        setFiltered(
+          cities.map(
+            (city) =>
+              city.CityName.charAt(0).toUpperCase() +
+              city.CityName.slice(1).toLowerCase()
+          )
+        );
+      } catch (error) {
+        console.error("Error fetching cities: ", error);
+      }
+    };
+
+    fetchCities();
   }, []);
 
   useEffect(() => {
@@ -21,22 +49,23 @@ const SearchBar = (props) => {
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setInput(inputValue);
-
-    const filteredCitites = cities.filter((city) =>
+    console.log(input);
+    const filteredCitites = Cities.filter((city) =>
       city.toLowerCase().includes(inputValue.toLowerCase())
     );
 
-    setCities(filteredCitites);
+    setFiltered(filteredCitites);
   };
 
   const handleSubmit = async () => {
     if (input !== "") {
       setChosenCity(input);
       setInput("");
+      setFiltered(Cities);
     }
   };
 
-  const topFour = Cities.slice(0, 4);
+  const topFour = Filtered.slice(0, 4);
 
   return (
     <>

@@ -7,7 +7,6 @@ async function GetQuests() {
     return;
   }
 
-  
   const acceptedQuery = await supabase
     .from("Accepted")
     .select("questId")
@@ -18,12 +17,10 @@ async function GetQuests() {
     return [];
   }
 
-  const acceptedQuestIds = acceptedQuery.data.map(row => row.questId);
-  console.log("these are the accepted quest ids: ", acceptedQuestIds)
+  const acceptedQuestIds = acceptedQuery.data.map((row) => row.questId);
+  console.log("these are the accepted quest ids: ", acceptedQuestIds);
 
-    const questsQuery = await supabase
-    .from("Quests")
-    .select("*");
+  const questsQuery = await supabase.from("Quests").select("*");
 
   if (questsQuery.error) {
     console.error("Error fetching quests data: ", questsQuery.error);
@@ -31,11 +28,12 @@ async function GetQuests() {
   }
 
   const quests = questsQuery.data;
-  console.log("these are the quests coming in: ", quests)
+  console.log("these are the quests coming in: ", quests);
 
-
-  const filteredQuests = quests.filter(quest => !acceptedQuestIds.includes(quest.id));
-  console.log("these are coming in from the quest map:", filteredQuests)
+  const filteredQuests = quests.filter(
+    (quest) => !acceptedQuestIds.includes(quest.id)
+  );
+  console.log("these are coming in from the quest map:", filteredQuests);
 
   console.log("Data fetched: ", filteredQuests);
   return filteredQuests;
@@ -52,10 +50,19 @@ async function GetFacilities() {
   }
 }
 
-export const dataFetchingFunctions = { GetQuests, GetFacilities };
+async function GetCities() {
+  const { data, error } = await supabase
+    .from("Co2Emissions")
+    .select("CityName");
+  if (error) {
+    console.error("Error fetching data: ", error);
+  } else {
+    // console.log("Data fetched: ", data);
+    return data;
+  }
+}
 
-
-
+export const dataFetchingFunctions = { GetQuests, GetFacilities, GetCities };
 
 // async function FilterAcceptedQuests() {
 //   const user = await supabase.auth.getUser();
@@ -68,7 +75,6 @@ export const dataFetchingFunctions = { GetQuests, GetFacilities };
 //   .from("Quests")
 //   .select("*, Accepted!inner(*)")
 //     .neq("id", user.data.user.id)
-
 
 //   if (error) {
 //     console.error("Error fetching data: ", error);
