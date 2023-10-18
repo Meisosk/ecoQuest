@@ -16,7 +16,12 @@ export function FormProvider({ children }) {
 
   return (
     <FormContext.Provider
-      value={{ formVisible, toggleFormVisibility, setEmissionTotal }}
+      value={{
+        formVisible,
+        toggleFormVisibility,
+        setEmissionTotal,
+        emissionTotal,
+      }}
     >
       {children}
     </FormContext.Provider>
