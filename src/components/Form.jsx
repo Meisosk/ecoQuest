@@ -5,7 +5,7 @@ import { useForm } from "./FormProvider";
 function Form({ onSubmit }) {
   // State variables to store user inputs
 
-  const { setEmissionTotal, setFormData } = useForm();
+  const { setFormData } = useForm();
 
   const [carMilesDriven, setCarMilesDriven] = useState(null);
   const [electricityUsage, setElectricityUsage] = useState(null);
@@ -60,7 +60,6 @@ function Form({ onSubmit }) {
     if (throwsOutClothes) {
       total += (total / 100) * 3;
     }
-    setEmissionTotal(total);
     setTotalEmissions(total);
 
     setFormData(pieData);
