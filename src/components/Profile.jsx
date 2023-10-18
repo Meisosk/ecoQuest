@@ -2,10 +2,27 @@ import React from "react";
 import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
 import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
 import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
+import { useEffect, useState } from "react";
 import { useForm } from "./FormProvider";
+import { dataFetchingFunctions } from "../GetTables";
+import { supabase } from "../App";
+const { FilterAcceptedQuests } = dataFetchingFunctions;
 
 function Profile() {
+  const user = supabase.auth.getUser();
+
+  const [acceptedQuests, setAcceptedQuests] = useState([]);
+
   const { emissionTotal } = useForm();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await FilterAcceptedQuests();
+      setAcceptedQuests(data);
+      console.log("this is profile filtered data:", data);
+    };
+    fetchData();
+  }, []);
 
   // average 16 a year
   let percent = "40%";
@@ -45,7 +62,7 @@ function Profile() {
         </div>
       </div>
       <div className="flex justify-between w-3/4 h-3/4 mb-10">
-        <div className="h-full w-2/4 bg-primary text-center rounded-3xl m-2">
+        <div className="h-full w-2/4 bg-primary text-center rounded-3xl m-2 overflow-scroll">
           <p className="p-5 text-lg">Friends List:</p>
           <div>
             <div className="flex justify-center mt-5">
@@ -104,34 +121,20 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="h-full w-2/4 bg-primary text-center rounded-3xl m-2">
+        <div className="h-full w-2/4 bg-primary text-center rounded-3xl m-2 overflow-scroll">
           <p className="p-5 text-lg">Accepted Achievements</p>
           <div>
             <div className="flex justify-center flex-col">
-              <div className="mb-6">
-                <div className="flex justify-around items-center w-full ">
-                  <img className="h-16" src={achive1} alt="" />
-                  <p>Saved the Planet again</p>
+              {acceptedQuests.map((achievement, index) => (
+                <div key={index} className="mb-6">
+                  <div className="flex justify-between items-center w-full ">
+                    <img className="h-16" src={achive1} alt="" />
+                    <p>{achievement.text}</p>
+                  </div>
+                  <button className="bg-button mr-5 p-2 py-1">Completed</button>
+                  <button className="bg-red-700 mr-5 p-2 py-1">Delete</button>
                 </div>
-                <button className="bg-button mr-5 p-2 py-1">Completed</button>
-                <button className=" bg-red-700 mr-5 p-2 py-1">Delete</button>
-              </div>
-              <div className="mb-6">
-                <div className="flex justify-around items-center w-full">
-                  <img className="h-16" src={achive2} alt="" />
-                  <p>Plant a plant again</p>
-                </div>
-                <button className="bg-button mr-5 p-2 py-1">Completed</button>
-                <button className=" bg-red-700 mr-5 p-2 py-1">Delete</button>
-              </div>
-              <div className="mb-6">
-                <div className="flex justify-around items-center w-full">
-                  <img className="h-16" src={achive3} alt="" />
-                  <p>Take a shorter shower </p>
-                </div>
-                <button className="bg-button mr-5 p-2 py-1">Completed</button>
-                <button className=" bg-red-700 mr-5 p-2 py-1">Delete</button>
-              </div>
+              ))}
             </div>
           </div>
         </div>
