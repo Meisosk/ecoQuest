@@ -5,10 +5,7 @@ const FormContext = createContext();
 export function FormProvider({ children }) {
   const [formVisible, setFormVisible] = useState(true);
   const [emissionTotal, setEmissionTotal] = useState(0);
-
-  useEffect(() => {
-    console.log(emissionTotal);
-  }, [emissionTotal]);
+  const [formData, setFormData] = useState([]);
 
   const toggleFormVisibility = () => {
     setFormVisible((prevFormVisible) => !prevFormVisible);
@@ -21,6 +18,8 @@ export function FormProvider({ children }) {
         toggleFormVisibility,
         setEmissionTotal,
         emissionTotal,
+        setFormData,
+        formData,
       }}
     >
       {children}
