@@ -7,11 +7,11 @@ function Form({ onSubmit }) {
 
   const { setEmissionTotal } = useForm();
 
-  const [carMilesDriven, setCarMilesDriven] = useState(0);
-  const [electricityUsage, setElectricityUsage] = useState(0);
-  const [heatingOilConsumption, setHeatingOilConsumption] = useState(0);
+  const [carMilesDriven, setCarMilesDriven] = useState(null);
+  const [electricityUsage, setElectricityUsage] = useState(null);
+  const [heatingOilConsumption, setHeatingOilConsumption] = useState(null);
   const [dietType, setDietType] = useState("MeatMin");
-  const [totalEmissions, setTotalEmissions] = useState(0);
+  const [totalEmissions, setTotalEmissions] = useState(null);
   const [throwsOutClothes, setThrowsOutClothes] = useState(false);
   const [tops, setTops] = useState(0);
   const [dresses, setDresses] = useState(0);
@@ -105,8 +105,15 @@ function Form({ onSubmit }) {
               type="number"
               id="carMilesDriven"
               className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={carMilesDriven}
-              onChange={(e) => setCarMilesDriven(e.target.value)}
+              placeholder="Enter Miles"
+              value={carMilesDriven === null ? "" : carMilesDriven}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setCarMilesDriven(value);
+                }
+              }}
+              required
             />
           </div>
           <div className="mb-4 w-full flex">
@@ -138,8 +145,15 @@ function Form({ onSubmit }) {
                 type="number"
                 id="electricityUsage"
                 className="p-4 text-gray-900 border w-full border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-                value={electricityUsage}
-                onChange={(e) => setElectricityUsage(e.target.value)}
+                placeholder="Enter kWh"
+                value={electricityUsage === null ? "" : electricityUsage}
+                onChange={(e) => {
+                  const value = parseFloat(e.target.value);
+                  if (!isNaN(value) && value >= 0) {
+                    setElectricityUsage(value);
+                  }
+                }}
+                required
               />
             </div>
           </div>
@@ -172,8 +186,17 @@ function Form({ onSubmit }) {
                 type="number"
                 id="electricityUsage"
                 className="p-4 text-gray-900 border w-full border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-                value={heatingOilConsumption}
-                onChange={(e) => setHeatingOilConsumption(e.target.value)}
+                placeholder="Enter Gallons of Heating Oil"
+                value={
+                  heatingOilConsumption === null ? "" : heatingOilConsumption
+                }
+                onChange={(e) => {
+                  const value = parseFloat(e.target.value);
+                  if (!isNaN(value) && value >= 0) {
+                    setHeatingOilConsumption(value);
+                  }
+                }}
+                required
               />
             </div>
           </div>
