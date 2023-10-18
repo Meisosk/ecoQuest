@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import * as EmissionConstants from "../data/calculator";
 import { useForm } from "./FormProvider";
 
 function Form({ onSubmit }) {
   // State variables to store user inputs
 
-  const { setEmissionTotal } = useForm();
+  const { setEmissionTotal, setFormData } = useForm();
 
   const [carMilesDriven, setCarMilesDriven] = useState(null);
   const [electricityUsage, setElectricityUsage] = useState(null);
@@ -21,24 +21,33 @@ function Form({ onSubmit }) {
   const [skirts, setSkirts] = useState(0);
   const [jackets, setJackets] = useState(0);
 
+  const pieData = [];
   const calculateEmissions = (clothingTotal) => {
+    pieData.push(clothingTotal);
     const carEmissions =
       carMilesDriven * EmissionConstants.EMISSIONS_PER_MILE_CAR;
+    pieData.push(carEmissions);
     const electricityEmissions =
       electricityUsage * EmissionConstants.EMISSIONS_PER_KWH_ELECTRICITY;
+    pieData.push(electricityEmissions);
     const heatingOilEmissions =
       heatingOilConsumption *
       EmissionConstants.EMISSIONS_PER_GALLON_HEATING_OIL;
+    pieData.push(heatingOilEmissions);
 
     let dietEmissions = 0;
     if (dietType === "Vegetarian") {
       dietEmissions = EmissionConstants.EMISSIONS_PER_DIET_VEGETARIAN;
+      pieData.push(dietEmissions);
     } else if (dietType === "Pescatarian") {
       dietEmissions = EmissionConstants.EMISSIONS_PER_DIET_PESCATARIAN;
+      pieData.push(dietEmissions);
     } else if (dietType === "MeatMax") {
       dietEmissions = EmissionConstants.EMISSIONS_PER_DIET_MEAT_MAX;
+      pieData.push(dietEmissions);
     } else if (dietType === "MeatMin") {
       dietEmissions = EmissionConstants.EMISSIONS_PER_DIET_MEAT_MIN;
+      pieData.push(dietEmissions);
     }
 
     let total =
@@ -53,6 +62,8 @@ function Form({ onSubmit }) {
     }
     setEmissionTotal(total);
     setTotalEmissions(total);
+
+    setFormData(pieData);
   };
 
   // gives values to the dopdowns
@@ -127,7 +138,7 @@ function Form({ onSubmit }) {
               <select
                 id="houseSize"
                 className="p-4 text-gray-900 border border-gray-300 w-full rounded-lg sm:text-md dark:bg-gray-100"
-                onChange={(e) => handleHouseSizeChange(e.target.value)}
+                onClick={(e) => handleHouseSizeChange(e.target.value)}
               >
                 <option value="Small">Small</option>
                 <option value="Average">Average</option>
@@ -168,11 +179,11 @@ function Form({ onSubmit }) {
               <select
                 id="houseSize"
                 className="p-4 text-gray-900 border border-gray-300 w-full rounded-lg sm:text-md dark:bg-gray-100"
-                onChange={(e) => handleCityTempChange(e.target.value)}
+                onClick={(e) => handleCityTempChange(e.target.value)}
               >
-                <option value="Cold">Cold</option>
-                <option value="Average">Average</option>
                 <option value="Hot">Hot</option>
+                <option value="Average">Average</option>
+                <option value="Cold">Cold</option>
               </select>
             </div>
             <div className="w-5/6 pl-10">
@@ -250,7 +261,12 @@ function Form({ onSubmit }) {
               type="number"
               className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
               value={tops}
-              onChange={(e) => setTops(e.target.value)}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setTops(value);
+                }
+              }}
             />
             <label
               htmlFor="carMilesDriven"
@@ -262,7 +278,12 @@ function Form({ onSubmit }) {
               type="number"
               className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
               value={dresses}
-              onChange={(e) => setDresses(e.target.value)}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setDresses(value);
+                }
+              }}
             />
 
             <label
@@ -275,7 +296,12 @@ function Form({ onSubmit }) {
               type="number"
               className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
               value={tShirts}
-              onChange={(e) => setTshirts(e.target.value)}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setTshirts(value);
+                }
+              }}
             />
             <label
               htmlFor="carMilesDriven"
@@ -287,7 +313,12 @@ function Form({ onSubmit }) {
               type="number"
               className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
               value={jeans}
-              onChange={(e) => setJeans(e.target.value)}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setJeans(value);
+                }
+              }}
             />
             <label
               htmlFor="carMilesDriven"
@@ -299,7 +330,12 @@ function Form({ onSubmit }) {
               type="number"
               className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
               value={pants}
-              onChange={(e) => setPants(e.target.value)}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setPants(value);
+                }
+              }}
             />
             <label
               htmlFor="carMilesDriven"
@@ -311,7 +347,12 @@ function Form({ onSubmit }) {
               type="number"
               className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
               value={skirts}
-              onChange={(e) => setSkirts(e.target.value)}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setSkirts(value);
+                }
+              }}
             />
             <label
               htmlFor="carMilesDriven"
@@ -323,7 +364,12 @@ function Form({ onSubmit }) {
               type="number"
               className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
               value={jackets}
-              onChange={(e) => setJackets(e.target.value)}
+              onChange={(e) => {
+                const value = parseFloat(e.target.value);
+                if (!isNaN(value) && value >= 0) {
+                  setJackets(value);
+                }
+              }}
             />
           </div>
           <button

@@ -1,7 +1,9 @@
 import { supabase } from "./App";
 
 async function getUsers() {
-  const { data, error } = await supabase.from("Users").select();
+
+  
+  const { data, error } = await supabase.from("users").select();
   if (error) {
     console.error("Error fetching data: ", error);
   } else {
@@ -9,5 +11,6 @@ async function getUsers() {
     return data;
   }
 }
+
 
 export default getUsers;

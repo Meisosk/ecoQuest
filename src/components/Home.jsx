@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PieChart from "./PieChrat";
+import PieChart from "./PieChart";
 import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
 import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
 import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
