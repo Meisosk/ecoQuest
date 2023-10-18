@@ -8,7 +8,7 @@ const PieChart = () => {
   return (
     <Chart
       type="donut"
-      series={formData}
+      series={formData ? formData : []}
       width="100%"
       height="100%"
       options={{
