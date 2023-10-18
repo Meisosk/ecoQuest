@@ -16,6 +16,7 @@ async function GetQuests() {
     console.error("Error fetching accepted data: ", acceptedQuery.error);
     return [];
   }
+  
 
   const acceptedQuestIds = acceptedQuery.data.map((row) => row.questId);
   console.log("these are the accepted quest ids: ", acceptedQuestIds);
