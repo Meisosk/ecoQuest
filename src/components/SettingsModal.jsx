@@ -1,15 +1,43 @@
 import React from "react";
+import { supabase } from "../App";
+import { useState } from "react";
 
 function SettingsModal({ closeModal }) {
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const handleLogout = async () => {
+    if (isLoggingOut) {
+      return;
+    }
+    try {
+      setIsLoggingOut(true);
+      const { error } = await supabase.auth.signOut();
+      if (!error) {
+        console.log("User logged out successfully.");
+      } else {
+        console.error("Error signing out:", error.message);
+      }
+    } catch (error) {
+      console.error("Error signing out:", error.message);
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
+
+  const handleLogoutAndCloseModal = async () => {
+    await handleLogout();
+    closeModal();
+  };
+
   return (
-    <div className=" absolute ">
+    <div className=" absolute z-50">
       <div
         id="popup-modal"
         tabIndex="-1"
-        className=" relativez-50  p-2  md:inset-0 h-[calc(100%-1rem)] max-h-full"
+        className="z-50 relative p-2  md:inset-0 h-[calc(100%-1rem)] max-h-full "
       >
-        <div className="relative  top-[-80px] left-64 right-0 w-full max-w-md max-h-full">
-          <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <div className="relative z-50 top-[-80px] left-64 right-0 w-full max-w-md max-h-full">
+          <div className="relative rounded-lg shadow bg-gray-700">
             <div className="p-6  text-center flex flex-col">
               <h3 className="mb-7 text-lg font-normal text-gray-500 dark:text-gray-400">
                 Settings
@@ -18,6 +46,7 @@ function SettingsModal({ closeModal }) {
                 data-modal-hide="popup-modal"
                 type="button"
                 className=" mb-3 w-56 text-white bg-button hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm  items-center px-5 py-2.5 text-center mr-2"
+                onClick={handleLogoutAndCloseModal}
               >
                 Log Out
               </button>
@@ -31,7 +60,7 @@ function SettingsModal({ closeModal }) {
               <button
                 data-modal-hide="popup-modal"
                 type="button"
-                className="text-gray-500 w-56 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="text-gray-500 w-56 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
                 onClick={closeModal}
               >
                 Exit Settings
