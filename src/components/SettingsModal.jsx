@@ -32,8 +32,10 @@ function SettingsModal({ closeModal }) {
 
 
   const handleDeleteUser = async () => {
-    await deleteUser(); }
-
+    await deleteUser(); 
+    await handleLogout();
+    closeModal();
+  };
 
   return (
     <div className=" absolute z-50">

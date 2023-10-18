@@ -8,9 +8,9 @@ import { dataFetchingFunctions } from "../GetTables";
 import { supabase } from "../App";
 const { FilterAcceptedQuests } = dataFetchingFunctions;
 
-function Profile() {
-  const user = supabase.auth.getUser();
 
+
+function Profile() {
   const [acceptedQuests, setAcceptedQuests] = useState([]);
 
   const { emissionTotal } = useForm();
@@ -23,6 +23,8 @@ function Profile() {
     };
     fetchData();
   }, []);
+
+
 
   // average 16 a year
   let percent = "40%";
