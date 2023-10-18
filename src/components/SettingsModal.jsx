@@ -1,6 +1,7 @@
 import React from "react";
 import { supabase } from "../App";
 import { useState } from "react";
+import deleteUser from "../DeleteUser";
 
 function SettingsModal({ closeModal }) {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -29,6 +30,11 @@ function SettingsModal({ closeModal }) {
     closeModal();
   };
 
+
+  const handleDeleteUser = async () => {
+    await deleteUser(); }
+
+
   return (
     <div className=" absolute z-50">
       <div
@@ -54,6 +60,7 @@ function SettingsModal({ closeModal }) {
                 data-modal-hide="popup-modal"
                 type="button"
                 className=" mb-3 w-56 text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm items-center px-5 py-2.5 text-center mr-2"
+                onClick={handleDeleteUser}
               >
                 Delete Account
               </button>

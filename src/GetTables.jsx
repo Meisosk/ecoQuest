@@ -62,25 +62,27 @@ async function GetCities() {
   }
 }
 
-export const dataFetchingFunctions = { GetQuests, GetFacilities, GetCities };
+async function FilterAcceptedQuests() {
+  const user = await supabase.auth.getUser();
 
-// async function FilterAcceptedQuests() {
-//   const user = await supabase.auth.getUser();
+if (!user) {
+  return;
+}
 
-// if (!user) {
-//   return;
-// }
+  const { data, error } = await supabase
+  .from("Quests")
+  .select("*, Accepted!inner(*)")
+    .neq("id", user.data.user.id)
 
-//   const { data, error } = await supabase
-//   .from("Quests")
-//   .select("*, Accepted!inner(*)")
-//     .neq("id", user.data.user.id)
+  if (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  } else {
+    console.log("Data fetched: ", data);
+    return data;
+  }
+}
 
-//   if (error) {
-//     console.error("Error fetching data: ", error);
-//     return [];
-//   } else {
-//     console.log("Data fetched: ", data);
-//     return data;
-//   }
-// }
+export const dataFetchingFunctions = { GetQuests, GetFacilities, GetCities, FilterAcceptedQuests };
+
+

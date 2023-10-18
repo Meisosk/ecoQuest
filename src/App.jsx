@@ -17,7 +17,7 @@ function App() {
   }, []);
 
   async function getUsers() {
-    const { data } = await supabase.from("Users").select();
+    const { data } = await supabase.from("users").select();
     setUsers(data);
   }
 
