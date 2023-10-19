@@ -7,8 +7,7 @@ import { useForm } from "./FormProvider";
 import { dataFetchingFunctions } from "../GetTables";
 import { supabase } from "../App";
 import { friendFunctions } from "../GetFriends";
-import getUsers from "../GetUsers"
-
+import getUsers from "../GetUsers";
 
 const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
@@ -24,10 +23,6 @@ function Profile() {
 
   const { emissionTotal } = useForm();
 
-
-
-
-  
   useEffect(() => {
     const fetchFriendsData = async () => {
       const data = await getFriends();
@@ -36,7 +31,6 @@ function Profile() {
     };
     fetchFriendsData();
   }, []);
-
 
   useEffect(() => {
     const fetchFriendUsernames = async () => {
@@ -72,9 +66,6 @@ function Profile() {
     console.log(percent);
   }, [percent]);
 
-
-  
-
   useEffect(() => {
     if (emissionTotal <= 16) {
       setPercent("80%");
@@ -92,50 +83,53 @@ function Profile() {
   }, [emissionTotal]);
   // average 16 a year
 
-
   const handleFriendAddClick = () => {
     setShowUsernameInput(true);
   };
-
 
   const handleFriendAdd = async () => {
     if (!newFriendUsername) {
       setShowUsernameInput(false);
       setFriendRequestError("");
     } else {
-      const allUsers = await getUsers(); 
-      const friendToAdd = allUsers.find((user) => user.username === newFriendUsername);
-  
+      const allUsers = await getUsers();
+      const friendToAdd = allUsers.find(
+        (user) => user.username === newFriendUsername
+      );
+
       if (!friendToAdd) {
         setFriendRequestError("Invalid username, please try again.");
         return;
       }
-  
-      const friendId = friendToAdd.id; 
+
+      const friendId = friendToAdd.id;
       // console.log("this is what is being shown as the FRIENDID: ", friendId)
-  
+
       const user = await supabase.auth.getUser();
-  
+
       if (!user) {
         console.error("User is not logged in");
         return;
       }
-  
+
       const friendRecord = {
         userId: user.data.user.id,
         friendId: friendId,
       };
-  
+
       try {
         const { error: friendError } = await supabase
           .from("Friends")
           .insert(friendRecord);
-  
+
         if (friendError) {
-          console.error("Error inserting into friends table:", friendError.message);
+          console.error(
+            "Error inserting into friends table:",
+            friendError.message
+          );
           return;
         }
-  
+
         setShowUsernameInput(false);
         setFriendRequestError("");
         setFriends([...friends, friendToAdd]);
@@ -144,7 +138,7 @@ function Profile() {
       }
     }
   };
-  
+
   useEffect(() => {
     getFriends();
   }, [friends]);
