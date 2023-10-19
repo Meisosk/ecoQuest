@@ -13,7 +13,6 @@ export function FormProvider({ children }) {
   useEffect(() => {
     const fetchData = async () => {
       const form = await GetFormData();
-      console.log("exsisting form data", form);
       if (form && form[0] && form[0].FormData && form[0].FormData.length >= 1) {
         setExsistingFormData(form[0].FormData);
         setFormVisible(false);
@@ -30,7 +29,6 @@ export function FormProvider({ children }) {
     const updateFormData = async () => {
       if (formData && formData.length > 0) {
         AddFormData(formData);
-        console.log("new form data", formData);
         let total = 0;
         for (let i = 0; i < formData.length; i++) {
           total += formData[i];

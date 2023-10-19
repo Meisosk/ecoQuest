@@ -16,7 +16,6 @@ async function GetQuests() {
     console.error("Error fetching accepted data: ", acceptedQuery.error);
     return [];
   }
-  
 
   const acceptedQuestIds = acceptedQuery.data.map((row) => row.questId);
   console.log("these are the accepted quest ids: ", acceptedQuestIds);
@@ -114,14 +113,9 @@ async function GetFormData() {
     console.error("Error updating FormData: ", error);
     return null;
   }
-console.log("last signed in on: ", user.data.user.last_sign_in_at)
+  console.log("last signed in on: ", user.data.user.last_sign_in_at);
   return data;
 }
-
-
-
-
-
 
 export const dataFetchingFunctions = {
   GetQuests,
