@@ -1,13 +1,16 @@
 import { Helmet } from "react-helmet";
 import NavBar from "./NavBar";
+import MobileNav from "./MobileNav";
 import LandingPage from "./LandingPage";
+import "../App.css";
 
 const Layout = ({ children }) => {
   return (
     <>
       <LandingPage />
-      <div className="flex w-screen">
+      <div className="body-container flex w-screen">
         <NavBar />
+        <MobileNav />
         <div className="w-full flex justify-center">
           <Helmet>
             <link rel="preconnect" href="https://fonts.googleapis.com" />
