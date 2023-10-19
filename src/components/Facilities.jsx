@@ -16,13 +16,14 @@ function Facilities() {
   }, []);
 
   const handleFilterResults = (filteredResults) => {
+    console.log(filteredResults);
     setFilteredFacilities(filteredResults);
   };
 
   return (
     <div className=" w-full h-full">
       <div>
-        <SearchBar data={facilities} onFilterResults={handleFilterResults} />{" "}
+        <SearchBar data={facilities} onFilterResults={handleFilterResults} />
       </div>
       <div className="flex flex-col w-full h-full ">
         {filteredFacilities.map((facility, index) => (
