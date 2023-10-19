@@ -6,11 +6,9 @@ import { useEffect, useState } from "react";
 import { useForm } from "./FormProvider";
 import { dataFetchingFunctions } from "../GetTables";
 import { supabase } from "../App";
-import getMyUserData from "../GetMyUserData";
 import { friendFunctions } from "../GetFriends";
-import getUsers from "../GetUsers"
+import getUsers from "../GetUsers";
 
-const { getUsernames } = friendFunctions;
 const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
 
@@ -29,7 +27,7 @@ function Profile() {
     const fetchFriendsData = async () => {
       const data = await getFriends();
       setFriendsData(data);
-      console.log("data coming from SETFRIENDSDATA: ", data);
+      // console.log("data coming from SETFRIENDSDATA: ", data);
     };
     fetchFriendsData();
   }, []);
@@ -48,7 +46,7 @@ function Profile() {
         if (error) {
           console.error("Error fetching friend usernames", error);
         } else {
-          console.log("data going into SETFRIENDS: ", friendUsernames);
+          // console.log("data going into SETFRIENDS: ", friendUsernames);
           setFriends(friendUsernames);
         }
       }
@@ -85,59 +83,65 @@ function Profile() {
   }, [emissionTotal]);
   // average 16 a year
 
-
   const handleFriendAddClick = () => {
     setShowUsernameInput(true);
   };
-
 
   const handleFriendAdd = async () => {
     if (!newFriendUsername) {
       setShowUsernameInput(false);
       setFriendRequestError("");
     } else {
-      const allUsers = await getUsers(); 
-      const friendToAdd = allUsers.find((user) => user.username === newFriendUsername);
-  
+      const allUsers = await getUsers();
+      const friendToAdd = allUsers.find(
+        (user) => user.username === newFriendUsername
+      );
+
       if (!friendToAdd) {
         setFriendRequestError("Invalid username, please try again.");
         return;
       }
-  
-      const friendId = friendToAdd.id; 
-      console.log("this is what is being shown as the FRIENDID: ", friendId)
-  
+
+      const friendId = friendToAdd.id;
+      // console.log("this is what is being shown as the FRIENDID: ", friendId)
+
       const user = await supabase.auth.getUser();
-  
+
       if (!user) {
         console.error("User is not logged in");
         return;
       }
-  
+
       const friendRecord = {
         userId: user.data.user.id,
         friendId: friendId,
       };
-  
+
       try {
         const { error: friendError } = await supabase
           .from("Friends")
           .insert(friendRecord);
-  
+
         if (friendError) {
-          console.error("Error inserting into friends table:", friendError.message);
+          console.error(
+            "Error inserting into friends table:",
+            friendError.message
+          );
           return;
         }
-  
+
         setShowUsernameInput(false);
         setFriendRequestError("");
-        console.log("Friend request sent successfully.");
+        setFriends([...friends, friendToAdd]);
       } catch (error) {
         console.error("Error handling friend request:", error);
       }
     }
   };
-  
+
+  useEffect(() => {
+    getFriends();
+  }, [friends]);
 
   return (
     <div className="w-full h-full flex items-center flex-col ">
