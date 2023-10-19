@@ -16,8 +16,8 @@ function NavBar() {
 
   return (
     <>
-      <div className="h-screen">
-        <div className="rounded-r bg-secondary flex justify-center w-full p-6 items-center ">
+      <div className="navbar sticky top-0 h-screen">
+        <div className="rounded-r bg-secondary flex justify-center w-full p-2 items-center ">
           <img className="w-32" src={logo} alt="logo" />
         </div>
         <div
