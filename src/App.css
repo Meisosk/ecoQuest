@@ -14,4 +14,17 @@
   .mobilenav {
     display: flex;
   }
+
+  .landing-logo {
+    left: 33%;
+    top: 12vh;
+    width: 250px;
+  }
+}
+
+@media (max-width: 500px) {
+  .landing-logo {
+    left: 20%;
+    width: 200px;
+  }
 }
