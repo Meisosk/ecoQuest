@@ -6,11 +6,10 @@ import { useEffect, useState } from "react";
 import { useForm } from "./FormProvider";
 import { dataFetchingFunctions } from "../GetTables";
 import { supabase } from "../App";
-import getMyUserData from "../GetMyUserData";
 import { friendFunctions } from "../GetFriends";
 import getUsers from "../GetUsers"
 
-const { getUsernames } = friendFunctions;
+
 const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
 
@@ -25,14 +24,19 @@ function Profile() {
 
   const { emissionTotal } = useForm();
 
+
+
+
+  
   useEffect(() => {
     const fetchFriendsData = async () => {
       const data = await getFriends();
       setFriendsData(data);
-      console.log("data coming from SETFRIENDSDATA: ", data);
+      // console.log("data coming from SETFRIENDSDATA: ", data);
     };
     fetchFriendsData();
   }, []);
+
 
   useEffect(() => {
     const fetchFriendUsernames = async () => {
@@ -48,7 +52,7 @@ function Profile() {
         if (error) {
           console.error("Error fetching friend usernames", error);
         } else {
-          console.log("data going into SETFRIENDS: ", friendUsernames);
+          // console.log("data going into SETFRIENDS: ", friendUsernames);
           setFriends(friendUsernames);
         }
       }
@@ -67,6 +71,9 @@ function Profile() {
   useEffect(() => {
     console.log(percent);
   }, [percent]);
+
+
+  
 
   useEffect(() => {
     if (emissionTotal <= 16) {
@@ -105,7 +112,7 @@ function Profile() {
       }
   
       const friendId = friendToAdd.id; 
-      console.log("this is what is being shown as the FRIENDID: ", friendId)
+      // console.log("this is what is being shown as the FRIENDID: ", friendId)
   
       const user = await supabase.auth.getUser();
   
@@ -131,13 +138,16 @@ function Profile() {
   
         setShowUsernameInput(false);
         setFriendRequestError("");
-        console.log("Friend request sent successfully.");
+        setFriends([...friends, friendToAdd]);
       } catch (error) {
         console.error("Error handling friend request:", error);
       }
     }
   };
   
+  useEffect(() => {
+    getFriends();
+  }, [friends]);
 
   return (
     <div className="w-full h-full flex items-center flex-col ">
