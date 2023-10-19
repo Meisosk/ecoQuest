@@ -33,9 +33,9 @@ async function GetQuests() {
   const filteredQuests = quests.filter(
     (quest) => !acceptedQuestIds.includes(quest.id)
   );
-  console.log("these are coming in from the quest map:", filteredQuests);
+  // console.log("these are coming in from the quest map:", filteredQuests);
 
-  console.log("Data fetched: ", filteredQuests);
+  // console.log("Data fetched: ", filteredQuests);
   return filteredQuests;
 }
 
@@ -55,7 +55,7 @@ async function FilterAcceptedQuests() {
     console.error("Error fetching data: ", error);
     return [];
   } else {
-    console.log("Data fetched: ", data);
+    // console.log("Data fetched: ", data);
     return data;
   }
 }
