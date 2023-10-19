@@ -8,10 +8,9 @@ import { dataFetchingFunctions } from "../GetTables";
 import { supabase } from "../App";
 const { FilterAcceptedQuests } = dataFetchingFunctions;
 
-
-
 function Profile() {
   const [acceptedQuests, setAcceptedQuests] = useState([]);
+  const [percent, setPercent] = useState("40%");
 
   const { emissionTotal } = useForm();
 
@@ -19,28 +18,31 @@ function Profile() {
     const fetchData = async () => {
       const data = await FilterAcceptedQuests();
       setAcceptedQuests(data);
-      console.log("this is profile filtered data:", data);
+      // console.log("this is profile filtered data:", data);
     };
     fetchData();
   }, []);
 
+  useEffect(() => {
+    console.log(percent);
+  }, [percent]);
 
-
+  useEffect(() => {
+    if (emissionTotal <= 16) {
+      setPercent("80%");
+    } else if (emissionTotal < 19) {
+      setPercent("70%");
+    } else if (emissionTotal <= 21) {
+      setPercent("60%");
+    } else if (emissionTotal < 24) {
+      setPercent("40%");
+    } else if (emissionTotal <= 26) {
+      setPercent("20%");
+    } else if (emissionTotal >= 31) {
+      setPercent("5%");
+    }
+  }, [emissionTotal]);
   // average 16 a year
-  let percent = "40%";
-  if (emissionTotal <= 16) {
-    percent = "80%";
-  } else if (emissionTotal < 19) {
-    percent = "70%";
-  } else if (emissionTotal <= 21) {
-    percent = "60%";
-  } else if (emissionTotal < 24) {
-    percent = "40%";
-  } else if (emissionTotal <= 26) {
-    percent = "20%";
-  } else if (emissionTotal >= 31) {
-    percent = "5%";
-  }
   return (
     <div className="w-full h-full flex items-center flex-col ">
       <div className="text-center m-1.7 ">
@@ -58,13 +60,13 @@ function Profile() {
         <div className="relative  left-[10%]">
           <div className="bg-gradient-to-r from-red-600 via-yellow-400 to-green-600 rounded-full h-10 w-4/5 m-1.7"></div>
           <div
-            className={`bg-black bottom-0 left-[${percent}] absolute h-10 mt-5`}
-            style={{ width: "1%" }}
+            className={`bg-black bottom-0  absolute h-10 mt-5`}
+            style={{ width: "1%", left: percent }}
           ></div>
         </div>
       </div>
       <div className="flex justify-between w-3/4 h-3/4 mb-10">
-        <div className="h-full w-2/4 bg-primary text-center rounded-3xl m-2 overflow-scroll">
+        <div className="h-2/4 w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll">
           <p className="p-5 text-lg">Friends List:</p>
           <div>
             <div className="flex justify-center mt-5">
@@ -123,7 +125,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="h-full w-2/4 bg-primary text-center rounded-3xl m-2 overflow-scroll">
+        <div className="h-2/4 w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll">
           <p className="p-5 text-lg">Accepted Achievements</p>
           <div>
             <div className="flex justify-center flex-col">

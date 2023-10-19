@@ -30,9 +30,8 @@ function SettingsModal({ closeModal }) {
     closeModal();
   };
 
-
   const handleDeleteUser = async () => {
-    await deleteUser(); 
+    await deleteUser();
     await handleLogout();
     closeModal();
   };

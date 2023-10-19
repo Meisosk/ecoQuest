@@ -6,11 +6,7 @@ const SearchBar = (props) => {
   const [input, setInput] = useState("");
   const [Cities, setCities] = useState([]);
   const [Filtered, setFiltered] = useState([]);
-  const [chosenCity, setChosenCity] = useState("new york");
-
-  useEffect(() => {
-    console.log(Filtered);
-  }, [Filtered]);
+  const [chosenCity, setChosenCity] = useState("New york");
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -49,7 +45,6 @@ const SearchBar = (props) => {
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setInput(inputValue);
-    console.log(input);
     const filteredCitites = Cities.filter((city) =>
       city.toLowerCase().includes(inputValue.toLowerCase())
     );
@@ -57,7 +52,7 @@ const SearchBar = (props) => {
     setFiltered(filteredCitites);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (input !== "") {
       setChosenCity(input);
       setInput("");
@@ -77,7 +72,7 @@ const SearchBar = (props) => {
               type="text"
               value={input}
               onChange={handleInputChange}
-              placeholder="Enter city or state name..."
+              placeholder="Enter city name..."
             />
 
             <button
@@ -108,27 +103,5 @@ const SearchBar = (props) => {
     </>
   );
 };
-
-// .search-result-container {
-//   position: absolute;
-//   width: 250px;
-//   z-index: 2;
-// }
-// .search-result {
-//   background-color: aliceblue;
-//   color: black;
-//   display: flex;
-//   width: 96%;
-//   padding: 5px;
-//   position: relative;
-// }
-
-// .search-result:last-child {
-//   border-radius: 0px 0px 10px 10px;
-// }
-
-// .hidden {
-//   display: none !important;
-// }
 
 export default SearchBar;
