@@ -6,19 +6,58 @@ import { useEffect, useState } from "react";
 import { useForm } from "./FormProvider";
 import { dataFetchingFunctions } from "../GetTables";
 import { supabase } from "../App";
+import { friendFunctions } from "../GetFriends";
+import getUsers from "../GetUsers";
+
+const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
 
 function Profile() {
   const [acceptedQuests, setAcceptedQuests] = useState([]);
   const [percent, setPercent] = useState("40%");
+  const [friendsData, setFriendsData] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [newFriendUsername, setNewFriendUsername] = useState("");
+  const [showUsernameInput, setShowUsernameInput] = useState(false);
+  const [friendRequestError, setFriendRequestError] = useState("");
 
   const { emissionTotal } = useForm();
+
+  useEffect(() => {
+    const fetchFriendsData = async () => {
+      const data = await getFriends();
+      setFriendsData(data);
+      // console.log("data coming from SETFRIENDSDATA: ", data);
+    };
+    fetchFriendsData();
+  }, []);
+
+  useEffect(() => {
+    const fetchFriendUsernames = async () => {
+      if (friendsData.length > 0) {
+        const { data: friendUsernames, error } = await supabase
+          .from("users")
+          .select("id, username")
+          .in(
+            "id",
+            friendsData.map((friend) => friend.friendId)
+          );
+
+        if (error) {
+          console.error("Error fetching friend usernames", error);
+        } else {
+          // console.log("data going into SETFRIENDS: ", friendUsernames);
+          setFriends(friendUsernames);
+        }
+      }
+    };
+    fetchFriendUsernames();
+  }, [friendsData]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await FilterAcceptedQuests();
       setAcceptedQuests(data);
-      // console.log("this is profile filtered data:", data);
     };
     fetchData();
   }, []);
@@ -43,10 +82,71 @@ function Profile() {
     }
   }, [emissionTotal]);
   // average 16 a year
+
+  const handleFriendAddClick = () => {
+    setShowUsernameInput(true);
+  };
+
+  const handleFriendAdd = async () => {
+    if (!newFriendUsername) {
+      setShowUsernameInput(false);
+      setFriendRequestError("");
+    } else {
+      const allUsers = await getUsers();
+      const friendToAdd = allUsers.find(
+        (user) => user.username === newFriendUsername
+      );
+
+      if (!friendToAdd) {
+        setFriendRequestError("Invalid username, please try again.");
+        return;
+      }
+
+      const friendId = friendToAdd.id;
+      // console.log("this is what is being shown as the FRIENDID: ", friendId)
+
+      const user = await supabase.auth.getUser();
+
+      if (!user) {
+        console.error("User is not logged in");
+        return;
+      }
+
+      const friendRecord = {
+        userId: user.data.user.id,
+        friendId: friendId,
+      };
+
+      try {
+        const { error: friendError } = await supabase
+          .from("Friends")
+          .insert(friendRecord);
+
+        if (friendError) {
+          console.error(
+            "Error inserting into friends table:",
+            friendError.message
+          );
+          return;
+        }
+
+        setShowUsernameInput(false);
+        setFriendRequestError("");
+        setFriends([...friends, friendToAdd]);
+      } catch (error) {
+        console.error("Error handling friend request:", error);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getFriends();
+  }, [friends]);
+
   return (
     <div className="w-full h-full flex items-center flex-col ">
       <div className="text-center m-1.7 ">
-        <h3 className="text-2xl">JoeFink</h3>
+        <h3 className="text-2xl">Username of signed in</h3>
         <p>Joefinkel12@gmail.com</p>
       </div>
       <div className="bg-primary w-3/4 h-2/5 rounded-3xl mb-1.7 ">
@@ -83,46 +183,54 @@ function Profile() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="bg-secondary border-b dark:border-gray-700">
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    {friends.map((friend, index) => (
+                      <tr
+                        key={index}
+                        className="bg-secondary border-b dark:border-gray-700"
                       >
-                        Joe
-                      </th>
-                      <td className="px-6 py-4">Signed In</td>
-                    </tr>
-                    <tr className="bg-secondary border-b dark:border-gray-700">
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      >
-                        Bob
-                      </th>
-                      <td className="px-6 py-4">Signed Out</td>
-                    </tr>
-                    <tr className="bg-secondary border-b dark:border-gray-700">
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      >
-                        Hank
-                      </th>
-                      <td className="px-6 py-4">Signed In</td>
-                    </tr>
-                    <tr className="bg-secondary border-b dark:border-gray-700">
-                      <th
-                        scope="row"
-                        className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                      >
-                        Rob
-                      </th>
-                      <td className="px-6 py-4">Signed In</td>
-                    </tr>
+                        <th
+                          scope="row"
+                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                          {friend.username}
+                        </th>
+                        <td className="px-6 py-4">Signed In</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
             </div>
+            {showUsernameInput ? (
+              <div>
+                {/* Input field for entering a new friend's username */}
+                <input
+                  type="text"
+                  placeholder="Enter friend's username"
+                  value={newFriendUsername}
+                  onChange={(e) => setNewFriendUsername(e.target.value)}
+                  className="mt-3 p-2"
+                />
+                {/* Button to add a new friend */}
+                <button
+                  onClick={handleFriendAdd}
+                  className="bg-button mt-3 w-2/4"
+                >
+                  Add Friend
+                </button>
+                {/* Error message for invalid username */}
+                {friendRequestError && (
+                  <p className="text-red-500">{friendRequestError}</p>
+                )}
+              </div>
+            ) : (
+              <button
+                onClick={handleFriendAddClick}
+                className="bg-button mt-8 w-2/4"
+              >
+                Add Friend
+              </button>
+            )}
           </div>
         </div>
         <div className="h-2/4 w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll">
