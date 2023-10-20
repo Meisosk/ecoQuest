@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function NavModal({ closeModal }) {
   return (
     <div className="fixed inset-0 overflow-y-auto bg-gray-800 bg-opacity-50 z-10">
-      <div className="bg-primary p-10 relative top-64 left-1/4 w-2/4 rounded-3xl">
+      <div className="bg-primary text-center p-10 relative top-64 left-1/4 w-2/4 rounded-3xl nav-modal-size">
         <div className="w-full h-full flex flex-col items-center">
           <h3 className="mb-7 text-lg font-normal text-gray-500 dark:text-gray-400">
             Nav Options
@@ -169,7 +169,7 @@ function NavModal({ closeModal }) {
           <button
             data-modal-hide="popup-modal"
             type="button"
-            className="text-gray-500 w-56 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900  dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+            className="flex justify-around items-center space-x-6  text-gray-400 px-3 py-8 rounded-none text-lg w-full md:w-52 bg-transparent"
             onClick={closeModal}
           >
             Exit Settings

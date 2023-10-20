@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import "./input.css";
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Profile from "./components/Profile.jsx";
 import Home from "./components/Home.jsx";
 import Layout from "./components/Layout.jsx";

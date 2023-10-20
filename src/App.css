@@ -20,11 +20,29 @@
     top: 12vh;
     width: 250px;
   }
+
+  .quest-card {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .card {
+    width: 8rem;
+  }
 }
 
 @media (max-width: 500px) {
   .landing-logo {
     left: 20%;
     width: 200px;
+  }
+}
+
+@media (max-width: 400px) {
+  .nav-modal-size {
+    left: 15%;
+    width: 75%;
   }
 }
