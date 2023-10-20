@@ -10,7 +10,6 @@ async function getUsers() {
   if (error) {
     console.error("Error fetching data: ", error);
   } else {
-    // console.log("Data fetched: ", data);
     return data;
   }
 }

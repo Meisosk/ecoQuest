@@ -2,13 +2,16 @@ import React from "react";
 import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
 import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
 import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useForm } from "./FormProvider";
 import { dataFetchingFunctions } from "../GetTables";
 import { supabase } from "../App";
 import { friendFunctions } from "../GetFriends";
 import getUsers from "../GetUsers";
+import { useUser } from "../UserNameAndEmail";
 
+const { GetFormData } = dataFetchingFunctions;
 const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
 
@@ -20,6 +23,15 @@ function Profile() {
   const [newFriendUsername, setNewFriendUsername] = useState("");
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [friendRequestError, setFriendRequestError] = useState("");
+  const [signedInStatus, setSignedInStatus] = useState(null);
+
+  const { username } = useUser();
+  const { email } = useUser();
+
+//     moment formula  const formattedDate = moment(lastSignInDate).format("MMM DD, YYYY");
+
+
+
 
   const { emissionTotal } = useForm();
 
@@ -46,7 +58,6 @@ function Profile() {
         if (error) {
           console.error("Error fetching friend usernames", error);
         } else {
-          // console.log("data going into SETFRIENDS: ", friendUsernames);
           setFriends(friendUsernames);
         }
       }
@@ -102,13 +113,17 @@ function Profile() {
         return;
       }
 
-      const friendId = friendToAdd.id;
-      // console.log("this is what is being shown as the FRIENDID: ", friendId)
-
       const user = await supabase.auth.getUser();
 
       if (!user) {
         console.error("User is not logged in");
+        return;
+      }
+
+      const friendId = friendToAdd.id;
+
+      if (friendId === user.data.user.id) {
+        setFriendRequestError("You cannot add yourself as a friend");
         return;
       }
 
@@ -146,8 +161,8 @@ function Profile() {
   return (
     <div className="w-full h-full flex items-center flex-col ">
       <div className="text-center m-1.7 ">
-        <h3 className="text-2xl">Username of signed in</h3>
-        <p>Joefinkel12@gmail.com</p>
+        <h3 className="text-2xl">{username}</h3>
+        <p>{email}</p>
       </div>
       <div className="bg-primary w-3/4 h-2/5 rounded-3xl mb-1.7 ">
         <div className="flex justify-around">
@@ -178,7 +193,7 @@ function Profile() {
                         Name
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        Status
+                        Last Login
                       </th>
                     </tr>
                   </thead>
@@ -194,7 +209,7 @@ function Profile() {
                         >
                           {friend.username}
                         </th>
-                        <td className="px-6 py-4">Signed In</td>
+                        <td className="px-6 py-4">{signedInStatus}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -202,8 +217,7 @@ function Profile() {
               </div>
             </div>
             {showUsernameInput ? (
-              <div>
-                {/* Input field for entering a new friend's username */}
+              <div className="flex flex-col items-center">
                 <input
                   type="text"
                   placeholder="Enter friend's username"
@@ -211,14 +225,12 @@ function Profile() {
                   onChange={(e) => setNewFriendUsername(e.target.value)}
                   className="mt-3 p-2"
                 />
-                {/* Button to add a new friend */}
                 <button
                   onClick={handleFriendAdd}
                   className="bg-button mt-3 w-2/4"
                 >
                   Add Friend
                 </button>
-                {/* Error message for invalid username */}
                 {friendRequestError && (
                   <p className="text-red-500">{friendRequestError}</p>
                 )}
@@ -234,7 +246,7 @@ function Profile() {
           </div>
         </div>
         <div className="h-2/4 w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll">
-          <p className="p-5 text-lg">Accepted Achievements</p>
+          <p className="p-5 text-lg">Accepted Quests</p>
           <div>
             <div className="flex justify-center flex-col">
               {acceptedQuests.map((achievement, index) => (
@@ -244,6 +256,7 @@ function Profile() {
                     <p>{achievement.text}</p>
                   </div>
                   <button className="bg-button mr-5 p-2 py-1">Completed</button>
+
                   <button className="bg-red-700 mr-5 p-2 py-1">Delete</button>
                 </div>
               ))}

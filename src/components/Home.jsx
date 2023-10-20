@@ -1,13 +1,29 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import PieChart from "./PieChart";
 import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
 import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
 import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
 import Form from "./Form";
 import { useForm } from "./FormProvider";
+import { dataFetchingFunctions } from "../GetTables";
 
 function Home() {
+  const { FilterCompletedQuests } = dataFetchingFunctions;
   const { formVisible, toggleFormVisibility } = useForm();
+
+  const [completedQuests, setCompletedQuests] = useState([])
+
+  useEffect(() => {
+    const fetchCompletedQuests = async () => {
+      const quests = await FilterCompletedQuests();
+      setCompletedQuests(quests);
+      console.log("Completed quests on Home Page: ", quests);
+    };
+  
+    fetchCompletedQuests();
+  }, []);
+
+
 
   function onSubmit(e) {
     e.preventDefault();
@@ -40,20 +56,18 @@ function Home() {
             </p>
           </div>
           <div className="flex flex-col w-6/12">
-            <div className="h-35  bg-primary mt-1.7 rounded-3xl">
+            <div className="h-35  bg-primary mt-1.7 rounded-3xl overflow-y-scroll">
               <p className="text-center text-xl p-2">Recent Achievements</p>
               <div className="flex justify-center flex-col">
                 <div className="flex justify-around items-center w-full ">
+                  <div>
+                {completedQuests.map((achievement, index) => (
+                    <div key={index} class>
                   <img className="h-16" src={achive1} alt="" />
-                  <p>Saved the Planet</p>
+                  <p>{achievement.text}</p>
+                  </div>
+                  ))}
                 </div>
-                <div className="flex justify-around items-center w-full">
-                  <img className="h-16" src={achive2} alt="" />
-                  <p>Plant a plant</p>
-                </div>
-                <div className="flex justify-around items-center w-full">
-                  <img className="h-16" src={achive3} alt="" />
-                  <p>Took shorter shower</p>
                 </div>
               </div>
             </div>

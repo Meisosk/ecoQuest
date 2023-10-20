@@ -18,7 +18,6 @@ async function GetQuests() {
   }
 
   const acceptedQuestIds = acceptedQuery.data.map((row) => row.questId);
-  console.log("these are the accepted quest ids: ", acceptedQuestIds);
 
   const questsQuery = await supabase.from("Quests").select("*");
 
@@ -28,36 +27,12 @@ async function GetQuests() {
   }
 
   const quests = questsQuery.data;
-  console.log("these are the quests coming in: ", quests);
 
   const filteredQuests = quests.filter(
     (quest) => !acceptedQuestIds.includes(quest.id)
   );
-  // console.log("these are coming in from the quest map:", filteredQuests);
 
-  // console.log("Data fetched: ", filteredQuests);
   return filteredQuests;
-}
-
-async function FilterAcceptedQuests() {
-  const user = await supabase.auth.getUser();
-
-  if (!user) {
-    return;
-  }
-
-  const { data, error } = await supabase
-    .from("Quests")
-    .select("*, Accepted!inner(*)")
-    .neq("id", user.data.user.id);
-
-  if (error) {
-    console.error("Error fetching data: ", error);
-    return [];
-  } else {
-    // console.log("Data fetched: ", data);
-    return data;
-  }
 }
 
 async function GetFacilities() {
@@ -117,6 +92,47 @@ async function GetFormData() {
   return data;
 }
 
+async function FilterAcceptedQuests() {
+  const user = await supabase.auth.getUser();
+
+  if (!user) {
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("Quests")
+    .select("*, Accepted!inner(*)")
+    .neq("id", user.data.user.id);
+
+  if (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  } else {
+    return data;
+  }
+}
+
+async function FilterCompletedQuests() {
+  const user = await supabase.auth.getUser();
+
+  if (!user) {
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("Quests")
+    .select("*, CompletedQuests!inner(*)")
+    .neq("id", user.data.user.id);
+
+  if (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  } else {
+    console.log("These are the completed quests: ", data);
+    return data;
+  }
+}
+
 export const dataFetchingFunctions = {
   GetQuests,
   GetFacilities,
@@ -124,4 +140,5 @@ export const dataFetchingFunctions = {
   AddFormData,
   GetFormData,
   FilterAcceptedQuests,
+  FilterCompletedQuests,
 };

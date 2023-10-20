@@ -25,7 +25,6 @@ function QuestsPage() {
 
   const handleChoice = async (questId) => {
     const user = await supabase.auth.getUser();
-    console.log("this is the supabase auth uuid showing:", user.data.user.id)
 
     if (!user) {
       console.error("User is not logged in");
@@ -52,7 +51,6 @@ function QuestsPage() {
       const { error } = await supabase
         .from("Accepted")
         .insert([{ userId: user.data.user.id, questId: questId }]);
-        console.log("inserted values: ", user.data.user.id, questId)
        
 
       if (error) {
