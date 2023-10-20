@@ -2,8 +2,8 @@ import React from "react";
 
 function Donation() {
   return (
-    <div className="grid grid-cols-3">
-      <div className="h-3/4 w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+    <div className="grid grid-cols-3 mt-10 mb-10 justify-items-center donate-col">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -13,23 +13,23 @@ function Donation() {
             Cool Earth
           </a>
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-sm p-3 ">
           Cool Earth, boasting a perfect 100% Charity Navigator score, partners
           with indigenous communities to safeguard endangered rainforests,
           making a significant impact in the fight against climate change.
         </p>
       </div>
-      <div className="h-3/4 w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className=" w-4/5 bg-primary rounded-3xl m-1.7 p-4">
         <p className="text-center p-5">
           <a
-            className="text-slate-200 text-4xl "
+            className="text-slate-200 text-3xl "
             target="#"
             href="https://www.catf.us/support/"
           >
             Clean Air Task Force
           </a>
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-sm p-3">
           The Clean Air Task Force is a highly esteemed organization dedicated
           to addressing the critical issue of air pollution and climate change.
           The group has earned an impressive 99% rating on Charity Navigator,
@@ -37,7 +37,7 @@ function Donation() {
           solutions for cleaner air and a healthier planet.
         </p>
       </div>
-      <div className="h-3/4 w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -47,14 +47,14 @@ function Donation() {
             Carbon180
           </a>
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-sm p-3">
           Carbon180 is reversing two centuries of carbon emissions. They work
           with policymakers, entrepreneurs, and peer organizations across the US
           to design policies that will bring necessary carbon removal solutions
           to gigaton scale.
         </p>
       </div>
-      <div className="h-3/4 w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -64,7 +64,7 @@ function Donation() {
             Earth Island
           </a>
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-sm p-3">
           Earth Island is a leading nonprofit organization that champions
           environmental sustainability and grassroots initiatives globally.
           Known for its exceptional commitment to fostering positive change,
@@ -72,7 +72,7 @@ function Donation() {
           the environment and empowering communities.
         </p>
       </div>
-      <div className="h-3/4 w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -82,7 +82,7 @@ function Donation() {
             EarthJustice
           </a>
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-sm p-3">
           Earthjustice is a renowned nonprofit legal organization dedicated to
           protecting our environment and public health through the power of the
           law. With a steadfast commitment to ensuring a just and sustainable
@@ -91,7 +91,7 @@ function Donation() {
           its inhabitants.
         </p>
       </div>
-      <div className="h-3/4 w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -101,7 +101,7 @@ function Donation() {
             TerraPraxis
           </a>
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-sm p-3">
           Powered by philanthropy, Terra Praxis designs transformative
           strategies to address the most significant risks to the energy
           transition mapping uncharted decarbonization territory.
