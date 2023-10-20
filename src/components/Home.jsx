@@ -4,18 +4,18 @@ import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
 import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
 import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
 import Form from "./Form";
-import {supabase} from "../App"
+import { supabase } from "../App";
 import { useForm } from "./FormProvider";
 import { useUser } from "../UserNameAndEmail";
 import { dataFetchingFunctions } from "../GetTables";
 import { friendFunctions } from "../GetFriends";
 
 function Home() {
-  const {getFriends} = friendFunctions
+  const { getFriends } = friendFunctions;
   const { FilterCompletedQuests } = dataFetchingFunctions;
   const { formVisible, toggleFormVisibility } = useForm();
-  const {username} = useUser()
-  const {level} = useUser()
+  const { username } = useUser();
+  const { level } = useUser();
 
   const [completedQuests, setCompletedQuests] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -31,11 +31,10 @@ function Home() {
   }, []);
 
   const getRandomImage = () => {
-    const randomIndex = Math.floor(Math.random() * 3); 
+    const randomIndex = Math.floor(Math.random() * 3);
     const randomImages = [achive1, achive2, achive3];
     return randomImages[randomIndex];
   };
-
 
   useEffect(() => {
     const fetchFriendsData = async () => {
@@ -47,18 +46,18 @@ function Home() {
           "id",
           friendIds.map((friend) => friend.friendId)
         );
-  
+
       if (error) {
         console.error("Error fetching friend usernames", error);
       } else {
-        const sortedFriends = friendUsersAndLevels.sort((a, b) => b.level - a.level);
+        const sortedFriends = friendUsersAndLevels.sort(
+          (a, b) => b.level - a.level
+        );
         setFriends(sortedFriends);
       }
     };
     fetchFriendsData();
   }, []);
- 
-
 
   function onSubmit(e) {
     e.preventDefault();
@@ -131,18 +130,21 @@ function Home() {
                       </tr>
                     </thead>
                     <tbody>
-                    {friends.map((friend, index) => (
-                      <tr key={friend.id} className="bg-secondary border-b dark:border-gray-700">
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      {friends.map((friend, index) => (
+                        <tr
+                          key={friend.id}
+                          className="bg-secondary border-b dark:border-gray-700"
                         >
-                          {index + 1} 
-                        </th>
-                        <td className="px-6 py-4">{friend.username}</td>
-                        <td className="px-6 py-4">{friend.level}</td>
-                      </tr>
-                    ))}
+                          <th
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            {index + 1}
+                          </th>
+                          <td className="px-6 py-4">{friend.username}</td>
+                          <td className="px-6 py-4">{friend.level}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
