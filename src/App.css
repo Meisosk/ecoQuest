@@ -35,6 +35,18 @@
   .search-bar {
     width: 50vw;
   }
+
+  .home-bot {
+    flex-direction: column;
+  }
+  .home-container {
+    width: 90vw;
+    margin-bottom: 30px;
+  }
+
+  .bot {
+    padding: 2rem;
+  }
 }
 
 @media (max-width: 500px) {
@@ -48,5 +60,8 @@
   .nav-modal-size {
     left: 15%;
     width: 75%;
+  }
+  .bot {
+    padding: 1rem;
   }
 }
