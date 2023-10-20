@@ -10,10 +10,13 @@ import { supabase } from "../App";
 import { friendFunctions } from "../GetFriends";
 import getUsers from "../GetUsers";
 import { useUser } from "../UserNameAndEmail";
+import { data } from "autoprefixer";
 
 const { GetFormData } = dataFetchingFunctions;
 const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
+const { FilterCompletedQuests } = dataFetchingFunctions;
+const {PureAccepted} = dataFetchingFunctions
 
 function Profile() {
   const [acceptedQuests, setAcceptedQuests] = useState([]);
@@ -24,16 +27,20 @@ function Profile() {
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [friendRequestError, setFriendRequestError] = useState("");
   const [signedInStatus, setSignedInStatus] = useState(null);
+  const [completedQuests, setCompletedQuests] = useState([]);
+
 
   const { username } = useUser();
   const { email } = useUser();
 
-//     moment formula  const formattedDate = moment(lastSignInDate).format("MMM DD, YYYY");
-
-
-
+  //     moment formula  const formattedDate = moment(lastSignInDate).format("MMM DD, YYYY");
 
   const { emissionTotal } = useForm();
+
+  const fetchUpdatedAcceptedQuests = async () => {
+    const data = await FilterAcceptedQuests(); // Replace with your data-fetching function
+    setAcceptedQuests(data);
+  };
 
   useEffect(() => {
     const fetchFriendsData = async () => {
@@ -158,6 +165,98 @@ function Profile() {
     getFriends();
   }, [friends]);
 
+
+  const insertCompletedQuest = async (questId) => {
+    const user = await supabase.auth.getUser();
+  
+    if (!user) {
+      console.error("User is not logged in");
+      return;
+    }
+  
+    const userId = user.data.user.id
+  
+    const { data, error } = await supabase
+      .from("CompletedQuests")
+      .upsert([
+        {
+          userId: userId,
+          questId: questId,
+        },
+      ]);
+  
+    if (error) {
+      console.error("Error inserting completed quest:", error);
+    } else {
+      setCompletedQuests([...completedQuests, { userId, questId }]);
+    }
+  };
+  
+  const handleCompleteClick = async (questId) => {
+    insertCompletedQuest(questId);
+
+    const user = await supabase.auth.getUser();
+  
+    if (!user) {
+      console.error("User is not logged in");
+      return;
+    }
+    
+    const userId = user.data.user.id;
+    
+    try {
+      const { error } = await supabase
+        .from("Accepted")
+        .delete()
+        .eq("userId", userId)
+        .eq("questId", questId);
+    
+        if (error) {
+          console.error("Error deleting from acceptedIds:", error.message);
+          return;
+        }
+  
+        // After successfully deleting, fetch updated accepted quests
+        await fetchUpdatedAcceptedQuests();
+      } catch (error) {
+        console.error("Error handling delete:", error);
+      }
+    };
+
+
+  const handleDeleteClick = async (achievementId) => {
+    const updatedAcceptedQuests = acceptedQuests.filter(
+      (achievement) => achievement.id !== achievementId
+    );
+  
+    setAcceptedQuests(updatedAcceptedQuests);
+  
+    const user = await supabase.auth.getUser();
+  
+    if (!user) {
+      console.error("User is not logged in");
+      return;
+    }
+  
+    const userId = user.data.user.id;
+  
+    try {
+      const { error } = await supabase
+        .from("Accepted")
+        .delete()
+        .eq("userId", userId)
+        .eq("questId", achievementId);
+  
+      if (error) {
+        console.error("Error deleting from acceptedIds:", error.message);
+        return;
+      }
+    } catch (error) {
+      console.error("Error handling delete:", error);
+    }
+  };
+
+
   return (
     <div className="w-full h-full flex items-center flex-col ">
       <div className="text-center m-1.7 ">
@@ -255,9 +354,16 @@ function Profile() {
                     <img className="h-16" src={achive1} alt="" />
                     <p>{achievement.text}</p>
                   </div>
-                  <button className="bg-button mr-5 p-2 py-1">Completed</button>
+                  <button
+                    className="bg-button mr-5 p-2 py-1"
+                    onClick={() => handleCompleteClick(achievement.id)}
+                  >
+                    Completed
+                  </button>
 
-                  <button className="bg-red-700 mr-5 p-2 py-1">Delete</button>
+                  <button 
+                  className="bg-red-700 mr-5 p-2 py-1"
+                  onClick={()=> handleDeleteClick(achievement.id)}>Delete</button>
                 </div>
               ))}
             </div>
