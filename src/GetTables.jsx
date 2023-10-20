@@ -92,46 +92,69 @@ async function GetFormData() {
   return data;
 }
 
+// async function FilterAcceptedQuests() {
+//   const user = await supabase.auth.getUser();
+
+//   if (!user) {
+//     return;
+//   }
+
+//   const { data, error } = await supabase
+//     .from("Quests")
+//     .select("*, Accepted!inner(*)")
+//     .neq("id", user.data.user.id);
+
+//   if (error) {
+//     console.error("Error fetching data: ", error);
+//     return [];
+//   } else {
+//     return data;
+//   }
+// }
+
 async function FilterAcceptedQuests() {
   const user = await supabase.auth.getUser();
 
   if (!user) {
-    return;
+    return [];
   }
 
+  const userId = user.data.user.id;
+
   const { data, error } = await supabase
-    .from("Quests")
-    .select("*, Accepted!inner(*)")
-    .neq("id", user.data.user.id);
+    .from("Accepted")
+    .select("*, quest:Quests(*)")
+    .eq("userId", userId);
 
   if (error) {
     console.error("Error fetching data: ", error);
     return [];
   } else {
-    return data;
+    return data.map(entry => entry.quest);
   }
 }
+
 
 async function FilterCompletedQuests() {
   const user = await supabase.auth.getUser();
 
   if (!user) {
-    return;
+    return[];
   }
+  const userId = user.data.user.id;
 
   const { data, error } = await supabase
-    .from("Quests")
-    .select("*, CompletedQuests!inner(*)")
-    .neq("id", user.data.user.id);
+    .from("CompletedQuests")
+    .select("*, quest:Quests(*)")
+    .eq("userId", userId);
 
-  if (error) {
-    console.error("Error fetching data: ", error);
-    return [];
-  } else {
-    console.log("These are the completed quests: ", data);
-    return data;
+    if (error) {
+      console.error("Error fetching data: ", error);
+      return [];
+    } else {
+      return data.map(entry => entry.quest);
+    }
   }
-}
 
 async function PureAccepted() {
   const { data, error } = await supabase
