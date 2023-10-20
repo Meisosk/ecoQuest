@@ -12,11 +12,8 @@ import getUsers from "../GetUsers";
 import { useUser } from "../UserNameAndEmail";
 import { data } from "autoprefixer";
 
-const { GetFormData } = dataFetchingFunctions;
 const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
-const { FilterCompletedQuests } = dataFetchingFunctions;
-const {PureAccepted} = dataFetchingFunctions
 
 function Profile() {
   const [acceptedQuests, setAcceptedQuests] = useState([]);
@@ -35,18 +32,13 @@ function Profile() {
 
   //     moment formula  const formattedDate = moment(lastSignInDate).format("MMM DD, YYYY");
 
-  const { emissionTotal } = useForm();
 
-  const fetchUpdatedAcceptedQuests = async () => {
-    const data = await FilterAcceptedQuests(); // Replace with your data-fetching function
-    setAcceptedQuests(data);
-  };
+  const { emissionTotal } = useForm();
 
   useEffect(() => {
     const fetchFriendsData = async () => {
       const data = await getFriends();
       setFriendsData(data);
-      // console.log("data coming from SETFRIENDSDATA: ", data);
     };
     fetchFriendsData();
   }, []);
@@ -76,6 +68,7 @@ function Profile() {
     const fetchData = async () => {
       const data = await FilterAcceptedQuests();
       setAcceptedQuests(data);
+      console.log("this is the acceptedQuests data", data)
     };
     fetchData();
   }, []);
@@ -192,6 +185,11 @@ function Profile() {
     }
   };
   
+  const fetchUpdatedAcceptedQuests = async () => {
+    const data = await FilterAcceptedQuests(); 
+    setAcceptedQuests(data);
+  };
+
   const handleCompleteClick = async (questId) => {
     insertCompletedQuest(questId);
 

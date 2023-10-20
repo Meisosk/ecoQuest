@@ -10,7 +10,7 @@ const PieChart = () => {
       type="donut"
       series={formData ? formData : []}
       width="100%"
-      height="100%"
+      height="90%"
       options={{
         labels: ["Clothes", "Car", "Electricity", "Heating", "Diet"],
         title: {
