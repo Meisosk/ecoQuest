@@ -47,6 +47,7 @@ async function getFriends() {
       console.error("Error fetching data: ", error);
       return null;
     } else {
+     //the raw data is a friendsId array
       return data;
     }
   } catch (error) {

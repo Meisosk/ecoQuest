@@ -10,7 +10,6 @@ import { supabase } from "../App";
 import { friendFunctions } from "../GetFriends";
 import getUsers from "../GetUsers";
 import { useUser } from "../UserNameAndEmail";
-import { data } from "autoprefixer";
 
 const { getFriends } = friendFunctions;
 const { FilterAcceptedQuests } = dataFetchingFunctions;
@@ -39,6 +38,7 @@ function Profile() {
     const fetchFriendsData = async () => {
       const data = await getFriends();
       setFriendsData(data);
+      //this is just friendsId
     };
     fetchFriendsData();
   }, []);
@@ -48,7 +48,7 @@ function Profile() {
       if (friendsData.length > 0) {
         const { data: friendUsernames, error } = await supabase
           .from("users")
-          .select("id, username")
+          .select("id, username, level")
           .in(
             "id",
             friendsData.map((friend) => friend.friendId)
@@ -58,6 +58,7 @@ function Profile() {
           console.error("Error fetching friend usernames", error);
         } else {
           setFriends(friendUsernames);
+          //friend is id, username, level
         }
       }
     };
