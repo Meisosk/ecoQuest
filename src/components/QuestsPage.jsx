@@ -5,7 +5,6 @@ const { GetQuests } = dataFetchingFunctions;
 
 function QuestsPage() {
   const [quests, setQuests] = useState([]);
-  const [filteredQuests, setFilteredQuests] = useState([]);
 
   function capitalizeWords(str) {
     return str
@@ -31,19 +30,19 @@ function QuestsPage() {
       return;
     }
 
-    const { data: existingAccepted, error: existingError} = await supabase
-    .from("Accepted")
-    .select("*")
-    .eq("userId", user.data.user.id)
-    .eq("questId", questId)
+    const { data: existingAccepted, error: existingError } = await supabase
+      .from("Accepted")
+      .select("*")
+      .eq("userId", user.data.user.id)
+      .eq("questId", questId);
 
     if (existingError) {
-      console.error("Error", existingError.message)
+      console.error("Error", existingError.message);
       return;
     }
 
-    if (existingAccepted && existingAccepted.length > 0 ) {
-      console.log("User already has this quest")
+    if (existingAccepted && existingAccepted.length > 0) {
+      console.log("User already has this quest");
       return;
     }
 
@@ -51,42 +50,32 @@ function QuestsPage() {
       const { error } = await supabase
         .from("Accepted")
         .insert([{ userId: user.data.user.id, questId: questId }]);
-       
 
       if (error) {
         console.error("Error inserting into Accepted table:", error.message);
         return;
       }
 
-      const updatedQuests = quests.map((quest) => {
-        if (quest.id === questId) {
-          return { ...quest, status: "accepted" };
-        }
-        return quest;
-      });
-
+      const updatedQuests = quests.filter((quest) => quest.id !== questId);
       setQuests(updatedQuests);
     } catch (error) {
       console.error("Error handling quest choice:", error);
     }
   };
 
-
-
-  
   return (
     <>
       <div className="ml-5 mt-10 w-70 ">
-        <div className="flex justify-even gap-5 flex-wrap rounded-3xl">
+        <div className="flex justify-evenly gap-5 flex-wrap rounded-3xl">
           {quests.map((quest) => (
             <div
-              className=" bg-primary rounded-3xl flex flex-col p-5 shadow-2xl"
+              className=" bg-primary rounded-3xl flex flex-col p-5 shadow-2xl quest-card"
               key={quest.id}
             >
               <div>
                 <h2 className="self-start">Difficulty Level: {quest.level}</h2>
               </div>
-              <div className="w-60">
+              <div className="w-60 card">
                 <p className="bg-primary max-w-sm mt-4 mb-4 ">
                   {capitalizeWords(quest.text)}
                 </p>
