@@ -5,7 +5,7 @@ async function deleteUser() {
     if (error) {
       console.error('Error calling the deleteUser function:', error);
     } else {
-      console.log('User deleted:', data);
+     return
     }
   }
 
