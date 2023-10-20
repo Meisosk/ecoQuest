@@ -17,30 +17,31 @@ import AddUserToDatabase from "./AddUserToDatabase.jsx";
 import Login from "./components/FakeSignIn.jsx";
 import { FormProvider } from "./components/FormProvider.jsx";
 import { UserProvider } from "./UserNameAndEmail.jsx";
+import AuthRoute from "./components/AuthRoute.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+    <AuthProvider>
     <FormProvider>
-      <AuthProvider>
         <UserProvider>
           <Router>
             <Layout>
               <Routes>
-                <Route exact path="/" element={<Home />} />
-                <Route path="/facilities" element={<Facilities />} />
+             <Route path="/profile" element={<AuthRoute><Profile /></AuthRoute>} />
                 <Route path="/donate" element={<Donation />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/facilities" element={<Facilities />} />
                 <Route path="/quests" element={<QuestsPage />} />
+                
+                <Route path="/" element={<Home />} />
                 <Route path="/fakesignup" element={<Register />} />
                 <Route path="/fakesignin" element={<Login />} />
-                <Route path="/test" element={<AddUserToDatabase />} />
               </Routes>
             </Layout>
           </Router>
         </UserProvider>
+        </FormProvider>
       </AuthProvider>
-    </FormProvider>
   </React.StrictMode>
 );
 
