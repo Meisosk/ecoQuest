@@ -1,10 +1,14 @@
-import React, { useState } from "react";
 import logo from "../assets/ecoquestlogo.png";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useUser } from "../UserNameAndEmail";
 import SettingsModal from "./SettingsModal";
 
 function NavBar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { username } = useUser();
+  const { email } = useUser();
 
   function openModal() {
     setIsModalOpen(true);
@@ -165,10 +169,10 @@ function NavBar() {
                 <div></div>
                 <div className="flex justify-start flex-col items-start ">
                   <p className="cursor-pointer text-sm leading-5 text-white p-1">
-                    JoeFink
+                    {username}
                   </p>
                   <p className="cursor-pointer text-xs leading-3 text-gray-300">
-                    joefinkel12@gmail.com
+                    {email}
                   </p>
                 </div>
               </div>
