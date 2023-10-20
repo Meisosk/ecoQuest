@@ -25,12 +25,10 @@ function Profile() {
   const [signedInStatus, setSignedInStatus] = useState(null);
   const [completedQuests, setCompletedQuests] = useState([]);
 
-
   const { username } = useUser();
   const { email } = useUser();
 
   //     moment formula  const formattedDate = moment(lastSignInDate).format("MMM DD, YYYY");
-
 
   const { emissionTotal } = useForm();
 
@@ -69,7 +67,7 @@ function Profile() {
     const fetchData = async () => {
       const data = await FilterAcceptedQuests();
       setAcceptedQuests(data);
-      console.log("this is the acceptedQuests data", data)
+      console.log("this is the acceptedQuests data", data);
     };
     fetchData();
   }, []);
@@ -80,7 +78,7 @@ function Profile() {
 
   useEffect(() => {
     if (emissionTotal <= 16) {
-      setPercent("80%");
+      setPercent("78%");
     } else if (emissionTotal < 19) {
       setPercent("70%");
     } else if (emissionTotal <= 21) {
@@ -90,7 +88,7 @@ function Profile() {
     } else if (emissionTotal <= 26) {
       setPercent("20%");
     } else if (emissionTotal >= 31) {
-      setPercent("5%");
+      setPercent("8%");
     }
   }, [emissionTotal]);
   // average 16 a year
@@ -159,35 +157,32 @@ function Profile() {
     getFriends();
   }, [friends]);
 
-
   const insertCompletedQuest = async (questId) => {
     const user = await supabase.auth.getUser();
-  
+
     if (!user) {
       console.error("User is not logged in");
       return;
     }
-  
-    const userId = user.data.user.id
-  
-    const { data, error } = await supabase
-      .from("CompletedQuests")
-      .upsert([
-        {
-          userId: userId,
-          questId: questId,
-        },
-      ]);
-  
+
+    const userId = user.data.user.id;
+
+    const { data, error } = await supabase.from("CompletedQuests").upsert([
+      {
+        userId: userId,
+        questId: questId,
+      },
+    ]);
+
     if (error) {
       console.error("Error inserting completed quest:", error);
     } else {
       setCompletedQuests([...completedQuests, { userId, questId }]);
     }
   };
-  
+
   const fetchUpdatedAcceptedQuests = async () => {
-    const data = await FilterAcceptedQuests(); 
+    const data = await FilterAcceptedQuests();
     setAcceptedQuests(data);
   };
 
@@ -195,57 +190,56 @@ function Profile() {
     insertCompletedQuest(questId);
 
     const user = await supabase.auth.getUser();
-  
+
     if (!user) {
       console.error("User is not logged in");
       return;
     }
-    
+
     const userId = user.data.user.id;
-    
+
     try {
       const { error } = await supabase
         .from("Accepted")
         .delete()
         .eq("userId", userId)
         .eq("questId", questId);
-    
-        if (error) {
-          console.error("Error deleting from acceptedIds:", error.message);
-          return;
-        }
-  
-        // After successfully deleting, fetch updated accepted quests
-        await fetchUpdatedAcceptedQuests();
-      } catch (error) {
-        console.error("Error handling delete:", error);
-      }
-    };
 
+      if (error) {
+        console.error("Error deleting from acceptedIds:", error.message);
+        return;
+      }
+
+      // After successfully deleting, fetch updated accepted quests
+      await fetchUpdatedAcceptedQuests();
+    } catch (error) {
+      console.error("Error handling delete:", error);
+    }
+  };
 
   const handleDeleteClick = async (achievementId) => {
     const updatedAcceptedQuests = acceptedQuests.filter(
       (achievement) => achievement.id !== achievementId
     );
-  
+
     setAcceptedQuests(updatedAcceptedQuests);
-  
+
     const user = await supabase.auth.getUser();
-  
+
     if (!user) {
       console.error("User is not logged in");
       return;
     }
-  
+
     const userId = user.data.user.id;
-  
+
     try {
       const { error } = await supabase
         .from("Accepted")
         .delete()
         .eq("userId", userId)
         .eq("questId", achievementId);
-  
+
       if (error) {
         console.error("Error deleting from acceptedIds:", error.message);
         return;
@@ -255,7 +249,6 @@ function Profile() {
     }
   };
 
-
   return (
     <div className="w-full h-full flex items-center flex-col ">
       <div className="text-center m-1.7 ">
@@ -263,23 +256,28 @@ function Profile() {
         <p>{email}</p>
       </div>
       <div className="bg-primary w-3/4 h-2/5 rounded-3xl mb-1.7 ">
-        <div className="flex justify-around">
+        <div className="flex justify-around text-center">
           <p className="p-4 text-lg pl-9">Your Emissions </p>
-          <p className="p-4 text-lg pl-9 ">
-            Average: 16 Tons <br />
-            You Produce: {emissionTotal.toFixed(2)} Tons
+          <p className="p-4 text-lg pl-9  explaining-text">
+            Average:{" "}
+            <span className=" text-[20px] explaining-text-lg">16 Tons </span>
+            <br />
+            You Produce:{" "}
+            <span className="explaining-text-lg text-[20px]">
+              {emissionTotal.toFixed(2)} Tons
+            </span>
           </p>
         </div>
         <div className="relative  left-[10%]">
           <div className="bg-gradient-to-r from-red-600 via-yellow-400 to-green-600 rounded-full h-10 w-4/5 m-1.7"></div>
           <div
-            className={`bg-black bottom-0  absolute h-10 mt-5`}
+            className="bg-black bottom-0  absolute h-10 mt-5 pointer"
             style={{ width: "1%", left: percent }}
           ></div>
         </div>
       </div>
-      <div className="flex justify-between w-3/4 h-3/4 mb-10">
-        <div className="h-2/4 w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll">
+      <div className="flex justify-between w-3/4 mb-10 profile-container">
+        <div className="h-[60vh] w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll about-text">
           <p className="p-5 text-lg">Friends List:</p>
           <div>
             <div className="flex justify-center mt-5">
@@ -343,12 +341,12 @@ function Profile() {
             )}
           </div>
         </div>
-        <div className="h-2/4 w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll">
+        <div className="h-[60vh] w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll about-text">
           <p className="p-5 text-lg">Accepted Quests</p>
           <div>
             <div className="flex justify-center flex-col">
               {acceptedQuests.map((achievement, index) => (
-                <div key={index} className="mb-6">
+                <div key={index} className="mb-6 p-3">
                   <div className="flex justify-between items-center w-full ">
                     <img className="h-16" src={achive1} alt="" />
                     <p>{achievement.text}</p>
@@ -360,9 +358,12 @@ function Profile() {
                     Completed
                   </button>
 
-                  <button 
-                  className="bg-red-700 mr-5 p-2 py-1"
-                  onClick={()=> handleDeleteClick(achievement.id)}>Delete</button>
+                  <button
+                    className="bg-red-700 mr-5 p-2 py-1"
+                    onClick={() => handleDeleteClick(achievement.id)}
+                  >
+                    Delete
+                  </button>
                 </div>
               ))}
             </div>
