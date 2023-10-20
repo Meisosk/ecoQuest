@@ -102,12 +102,12 @@ function Form({ onSubmit }) {
 
   return (
     <div className="absolute w-screen inset-x-0 h-screen bg-gray-800 bg-opacity-50 z-10">
-      <div className="bg-gray-300 p-10 relative top-64 left-1/4 w-2/4 rounded-3xl">
+      <div className="bg-gray-300 p-10 relative top-64 left-1/4 w-2/4 rounded-3xl form">
         <form onSubmit={(e) => onSubmit(e)}>
           <div className="mb-4">
             <label
               htmlFor="carMilesDriven"
-              className="block mb-2 text-lg font-medium pl-1 text-gray-900"
+              className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text "
             >
               Miles Driven by Car (Yearly):
             </label>
@@ -126,17 +126,17 @@ function Form({ onSubmit }) {
               required
             />
           </div>
-          <div className="mb-4 w-full flex">
-            <div className="w-1/6">
+          <div className="mb-4 w-full flex select-container items-end">
+            <div className="w-1/6 full-width">
               <label
                 htmlFor="houseSize"
-                className="block mb-2  text-lg font-medium pl-1 text-gray-900"
+                className="block mb-2  text-lg font-medium pl-1 text-gray-900 label-text"
               >
                 House Size:
               </label>
               <select
                 id="houseSize"
-                className="p-4 text-gray-900 border border-gray-300 w-full rounded-lg sm:text-md dark:bg-gray-100"
+                className="p-4 text-gray-900 border border-gray-300 w-full rounded-lg sm:text-md dark:bg-gray-100 form-selector"
                 onClick={(e) => handleHouseSizeChange(e.target.value)}
               >
                 <option value="Small">Small</option>
@@ -144,10 +144,10 @@ function Form({ onSubmit }) {
                 <option value="Large">Large</option>
               </select>
             </div>
-            <div className="w-5/6 pl-10">
+            <div className="w-5/6 pl-10 no-p">
               <label
                 htmlFor="houseSize"
-                className="block mb-2 text-lg font-medium pl-1 text-gray-900"
+                className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
               >
                 Electricity Usage (kWh):
               </label>
@@ -167,17 +167,17 @@ function Form({ onSubmit }) {
               />
             </div>
           </div>
-          <div className="mb-4 w-full flex">
-            <div className="w-1/6">
+          <div className="mb-4 w-full flex select-container items-end">
+            <div className="w-1/6 full-width">
               <label
                 htmlFor="houseSize"
-                className="block mb-2  text-lg font-medium pl-1 text-gray-900"
+                className="block mb-2  text-lg font-medium pl-1 text-gray-900 label-text"
               >
                 City Temp:
               </label>
               <select
                 id="houseSize"
-                className="p-4 text-gray-900 border border-gray-300 w-full rounded-lg sm:text-md dark:bg-gray-100"
+                className="p-4 text-gray-900 border border-gray-300 w-full rounded-lg sm:text-md dark:bg-gray-100 form-selector"
                 onClick={(e) => handleCityTempChange(e.target.value)}
               >
                 <option value="Hot">Hot</option>
@@ -185,10 +185,10 @@ function Form({ onSubmit }) {
                 <option value="Cold">Cold</option>
               </select>
             </div>
-            <div className="w-5/6 pl-10">
+            <div className="w-5/6 pl-10 no-p">
               <label
                 htmlFor="houseSize"
-                className="block mb-2 text-lg font-medium pl-1 text-gray-900"
+                className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
               >
                 Heating Oil Consumption (gallons):
               </label>
@@ -213,13 +213,13 @@ function Form({ onSubmit }) {
           <div className="mb-4">
             <label
               htmlFor="dietType"
-              className="block mb-2 text-lg font-medium pl-1 text-gray-900"
+              className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
             >
               Diet Type:
             </label>
             <select
               id="dietType"
-              className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+              className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100 "
               value={dietType}
               onChange={(e) => setDietType(e.target.value)}
             >
@@ -232,7 +232,7 @@ function Form({ onSubmit }) {
           <div className="mb-4">
             <label
               htmlFor="throwsOutClothes"
-              className="block mb-2 text-lg font-medium pl-1 text-gray-900"
+              className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
             >
               What do you do with old clothes:
             </label>
@@ -247,129 +247,148 @@ function Form({ onSubmit }) {
             </select>
           </div>
           <div className="mb-4">
-            <p className="text-black text-xl text-center pb-2">
+            <p className="text-black text-xl text-center pb-2 clothes-title">
               Amount of clothes purchaed yearly:
             </p>
-            <label
-              htmlFor="carMilesDriven"
-              className=" mb-2 text-lg font-medium pl-1 text-gray-900"
-            >
-              Tops:
-            </label>
-            <input
-              type="number"
-              className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={tops}
-              onChange={(e) => {
-                const value = parseFloat(e.target.value);
-                if (!isNaN(value) && value >= 0) {
-                  setTops(value);
-                }
-              }}
-            />
-            <label
-              htmlFor="carMilesDriven"
-              className=" mb-2 text-lg font-medium pl-1 text-gray-900"
-            >
-              Dresses:
-            </label>
-            <input
-              type="number"
-              className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={dresses}
-              onChange={(e) => {
-                const value = parseFloat(e.target.value);
-                if (!isNaN(value) && value >= 0) {
-                  setDresses(value);
-                }
-              }}
-            />
-
-            <label
-              htmlFor="carMilesDriven"
-              className=" mb-2 text-lg font-medium pl-1 text-gray-900"
-            >
-              T-shirts:
-            </label>
-            <input
-              type="number"
-              className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={tShirts}
-              onChange={(e) => {
-                const value = parseFloat(e.target.value);
-                if (!isNaN(value) && value >= 0) {
-                  setTshirts(value);
-                }
-              }}
-            />
-            <label
-              htmlFor="carMilesDriven"
-              className=" mb-2 text-lg font-medium pl-1 text-gray-900"
-            >
-              Jeans:
-            </label>
-            <input
-              type="number"
-              className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={jeans}
-              onChange={(e) => {
-                const value = parseFloat(e.target.value);
-                if (!isNaN(value) && value >= 0) {
-                  setJeans(value);
-                }
-              }}
-            />
-            <label
-              htmlFor="carMilesDriven"
-              className=" mb-2 text-lg font-medium pl-1 text-gray-900"
-            >
-              Pants:
-            </label>
-            <input
-              type="number"
-              className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={pants}
-              onChange={(e) => {
-                const value = parseFloat(e.target.value);
-                if (!isNaN(value) && value >= 0) {
-                  setPants(value);
-                }
-              }}
-            />
-            <label
-              htmlFor="carMilesDriven"
-              className=" mb-2 text-lg font-medium pl-1 text-gray-900"
-            >
-              Skirts:
-            </label>
-            <input
-              type="number"
-              className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={skirts}
-              onChange={(e) => {
-                const value = parseFloat(e.target.value);
-                if (!isNaN(value) && value >= 0) {
-                  setSkirts(value);
-                }
-              }}
-            />
-            <label
-              htmlFor="carMilesDriven"
-              className=" mb-2 text-lg font-medium pl-1 text-gray-900"
-            >
-              Jackets:
-            </label>
-            <input
-              type="number"
-              className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
-              value={jackets}
-              onChange={(e) => {
-                const value = parseFloat(e.target.value);
-                if (!isNaN(value) && value >= 0) {
-                  setJackets(value);
-                }
-              }}
-            />
+            <div className="flex justify-evenly items-center">
+              <div className="clothes-amount">
+                <label
+                  htmlFor="carMilesDriven"
+                  className=" mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
+                >
+                  Tops:
+                </label>
+                <input
+                  type="number"
+                  className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+                  value={tops}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (!isNaN(value) && value >= 0) {
+                      setTops(value);
+                    }
+                  }}
+                />
+              </div>
+              <div className="clothes-amount">
+                <label
+                  htmlFor="carMilesDriven"
+                  className=" mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
+                >
+                  Dresses:
+                </label>
+                <input
+                  type="number"
+                  className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+                  value={dresses}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (!isNaN(value) && value >= 0) {
+                      setDresses(value);
+                    }
+                  }}
+                />
+              </div>
+              <div className="clothes-amount">
+                <label
+                  htmlFor="carMilesDriven"
+                  className=" mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
+                >
+                  T-shirts:
+                </label>
+                <input
+                  type="number"
+                  className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+                  value={tShirts}
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (!isNaN(value) && value >= 0) {
+                      setTshirts(value);
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-evenly items-center">
+            <div className="clothes-amount">
+              <label
+                htmlFor="carMilesDriven"
+                className=" mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
+              >
+                Jeans:
+              </label>
+              <input
+                type="number"
+                className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+                value={jeans}
+                onChange={(e) => {
+                  const value = parseFloat(e.target.value);
+                  if (!isNaN(value) && value >= 0) {
+                    setJeans(value);
+                  }
+                }}
+              />
+            </div>
+            <div className="clothes-amount">
+              <label
+                htmlFor="carMilesDriven"
+                className=" mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
+              >
+                Pants:
+              </label>
+              <input
+                type="number"
+                className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+                value={pants}
+                onChange={(e) => {
+                  const value = parseFloat(e.target.value);
+                  if (!isNaN(value) && value >= 0) {
+                    setPants(value);
+                  }
+                }}
+              />
+            </div>
+            <div className="clothes-amount">
+              <label
+                htmlFor="carMilesDriven"
+                className=" mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
+              >
+                Skirts:
+              </label>
+              <input
+                type="number"
+                className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+                value={skirts}
+                onChange={(e) => {
+                  const value = parseFloat(e.target.value);
+                  if (!isNaN(value) && value >= 0) {
+                    setSkirts(value);
+                  }
+                }}
+              />
+            </div>
+          </div>
+          <div className="flex justify-start items-center">
+            <div className="clothes-amount">
+              <label
+                htmlFor="carMilesDriven"
+                className=" mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
+              >
+                Jackets:
+              </label>
+              <input
+                type="number"
+                className=" w-1/6 p-4 text-gray-900 border border-gray-300 rounded-lg sm:text-md dark:bg-gray-100"
+                value={jackets}
+                onChange={(e) => {
+                  const value = parseFloat(e.target.value);
+                  if (!isNaN(value) && value >= 0) {
+                    setJackets(value);
+                  }
+                }}
+              />
+            </div>
           </div>
           <button
             onClick={calculateClothingEmissions}
