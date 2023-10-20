@@ -7,6 +7,49 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
+  .about-body {
+    flex-direction: column;
+  }
+
+  .mission-contain-1 {
+    height: 75vh;
+    margin: 0px;
+  }
+
+  .mission-contain-2 {
+    height: 65vh;
+  }
+
+  .animal-group {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .about-text {
+    width: 100%;
+  }
+
+  .top-pic {
+    margin: 0px;
+  }
+
+  .img-size {
+    height: 100px;
+    width: auto;
+  }
+
+  .translation {
+    transform: translateX(0.5rem) rotate(7deg);
+  }
+
+  .body-text {
+    font-size: 1rem;
+  }
+
+  .heading-text {
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 850px) {
@@ -22,7 +65,7 @@
   }
 
   .navbar {
-    display: none; /* Hide the NavBar on screens less than 168px wide */
+    display: none;
   }
 
   .mobilenav {
@@ -66,6 +109,22 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
+
+  .animal-group {
+    display: none;
+  }
+
+  .mission-contain-1 {
+    height: 100vh;
+  }
+
+  .mission-contain-2 {
+    height: 90vh;
+  }
+
+  .about-body {
+    width: 95vw;
+  }
 }
 
 @media (max-width: 550px) {
@@ -82,6 +141,16 @@
   }
 }
 
+@media (max-width: 450px) {
+  .mission-contain-1 {
+    height: 130vh;
+  }
+
+  .mission-contain-2 {
+    height: 120vh;
+  }
+}
+
 @media (max-width: 400px) {
   .nav-modal-size {
     left: 15%;
@@ -89,5 +158,28 @@
   }
   .bot {
     padding: 1rem;
+  }
+
+  .body-text {
+    font-size: 0.9rem;
+  }
+
+  .heading-text {
+    font-size: 1.6rem;
+  }
+
+  .about-body {
+    width: 100vw;
+  }
+}
+
+@media (max-width: 320px) {
+  .body-text {
+    font-size: 0.66rem;
+    text-align: center;
+  }
+
+  .heading-text {
+    font-size: 1.5rem;
   }
 }
