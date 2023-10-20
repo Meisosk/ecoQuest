@@ -11,7 +11,7 @@ function Home() {
   const { FilterCompletedQuests } = dataFetchingFunctions;
   const { formVisible, toggleFormVisibility } = useForm();
 
-  const [completedQuests, setCompletedQuests] = useState([])
+  const [completedQuests, setCompletedQuests] = useState([]);
 
   useEffect(() => {
     const fetchCompletedQuests = async () => {
@@ -19,11 +19,9 @@ function Home() {
       setCompletedQuests(quests);
       console.log("Completed quests on Home Page: ", quests);
     };
-  
+
     fetchCompletedQuests();
   }, []);
-
-
 
   function onSubmit(e) {
     e.preventDefault();
@@ -61,13 +59,13 @@ function Home() {
               <div className="flex justify-center flex-col">
                 <div className="flex justify-around items-center w-full ">
                   <div>
-                {completedQuests.map((achievement, index) => (
-                    <div key={index} class>
-                  <img className="h-16" src={achive1} alt="" />
-                  <p>{achievement.text}</p>
+                    {completedQuests.map((achievement, index) => (
+                      <div key={index}>
+                        <img className="h-16" src={achive1} alt="" />
+                        <p>{achievement.text}</p>
+                      </div>
+                    ))}
                   </div>
-                  ))}
-                </div>
                 </div>
               </div>
             </div>
