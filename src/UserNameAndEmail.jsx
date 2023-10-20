@@ -12,6 +12,7 @@ export const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
+  const [level, setLevel] = useState(null)
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -27,13 +28,14 @@ export const UserProvider = ({ children }) => {
 
         if (!userError) {
           setUsername(userData.username);
+          setLevel(userData.level)
         } else {
           console.error("Error fetching username:", userError);
         }
 
         const { data: emailData, error: emailError } = await supabase
           .from("users")
-          .select("email")
+          .select("email, level")
           .eq("id", user.data.user.id)
           .single();
 
@@ -48,7 +50,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ username, email }}>
+    <UserContext.Provider value={{ username, email, level }}>
       {children}
     </UserContext.Provider>
   );

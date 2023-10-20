@@ -4,14 +4,21 @@ import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
 import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
 import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
 import Form from "./Form";
+import { supabase } from "../App";
 import { useForm } from "./FormProvider";
+import { useUser } from "../UserNameAndEmail";
 import { dataFetchingFunctions } from "../GetTables";
+import { friendFunctions } from "../GetFriends";
 
 function Home() {
+  const { getFriends } = friendFunctions;
   const { FilterCompletedQuests } = dataFetchingFunctions;
   const { formVisible, toggleFormVisibility } = useForm();
+  const { username } = useUser();
+  const { level } = useUser();
 
   const [completedQuests, setCompletedQuests] = useState([]);
+  const [friends, setFriends] = useState([]);
 
   useEffect(() => {
     const fetchCompletedQuests = async () => {
@@ -21,6 +28,35 @@ function Home() {
     };
 
     fetchCompletedQuests();
+  }, []);
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * 3);
+    const randomImages = [achive1, achive2, achive3];
+    return randomImages[randomIndex];
+  };
+
+  useEffect(() => {
+    const fetchFriendsData = async () => {
+      const friendIds = await getFriends();
+      const { data: friendUsersAndLevels, error } = await supabase
+        .from("users")
+        .select("id, username, level")
+        .in(
+          "id",
+          friendIds.map((friend) => friend.friendId)
+        );
+
+      if (error) {
+        console.error("Error fetching friend usernames", error);
+      } else {
+        const sortedFriends = friendUsersAndLevels.sort(
+          (a, b) => b.level - a.level
+        );
+        setFriends(sortedFriends);
+      }
+    };
+    fetchFriendsData();
   }, []);
 
   function onSubmit(e) {
@@ -66,7 +102,7 @@ function Home() {
                         key={index}
                         className="flex justify-between pl-9 pr-9 pb-3 items-center"
                       >
-                        <img className="h-16" src={achive1} alt="" />
+                        <img className="h-16" src={getRandomImage()} alt="" />
                         <p>{achievement.text}</p>
                       </div>
                     ))}
@@ -94,46 +130,21 @@ function Home() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="bg-secondary border-b dark:border-gray-700">
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      {friends.map((friend, index) => (
+                        <tr
+                          key={friend.id}
+                          className="bg-secondary border-b dark:border-gray-700"
                         >
-                          1
-                        </th>
-                        <td className="px-6 py-4">Joe</td>
-                        <td className="px-6 py-4">99</td>
-                      </tr>
-                      <tr className="bg-secondary border-b dark:border-gray-700">
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        >
-                          2
-                        </th>
-                        <td className="px-6 py-4">Bob</td>
-                        <td className="px-6 py-4">5</td>
-                      </tr>
-                      <tr className="bg-secondary border-b dark:border-gray-700">
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        >
-                          3
-                        </th>
-                        <td className="px-6 py-4">Hank</td>
-                        <td className="px-6 py-4">4</td>
-                      </tr>
-                      <tr className="bg-secondary border-b dark:border-gray-700">
-                        <th
-                          scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                        >
-                          4
-                        </th>
-                        <td className="px-6 py-4">Rob</td>
-                        <td className="px-6 py-4">2</td>
-                      </tr>
+                          <th
+                            scope="row"
+                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            {index + 1}
+                          </th>
+                          <td className="px-6 py-4">{friend.username}</td>
+                          <td className="px-6 py-4">{friend.level}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>

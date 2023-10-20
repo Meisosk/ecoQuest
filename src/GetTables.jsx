@@ -88,7 +88,6 @@ async function GetFormData() {
     console.error("Error updating FormData: ", error);
     return null;
   }
-  console.log("last signed in on: ", user.data.user.last_sign_in_at);
   return data;
 }
 
