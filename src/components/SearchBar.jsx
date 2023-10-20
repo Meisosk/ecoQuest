@@ -64,11 +64,11 @@ const SearchBar = (props) => {
 
   return (
     <>
-      <div className="m-5 flex justify-center">
-        <div className="submit-area">
+      <div className="m-10 flex justify-center ">
+        <div>
           <div className="felx ">
             <input
-              className="p-3 w-60"
+              className="p-3 w-[20vw] rounded-l-2xl search-bar"
               type="text"
               value={input}
               onChange={handleInputChange}
@@ -77,7 +77,7 @@ const SearchBar = (props) => {
 
             <button
               onClick={handleSubmit}
-              className=" h-12 bg-button"
+              className=" h-12 bg-button rounded-r-xl rounded-l-none p-1"
               type="submit"
             >
               Submit
