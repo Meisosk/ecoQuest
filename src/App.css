@@ -31,6 +31,10 @@
   .card {
     width: 8rem;
   }
+
+  .search-bar {
+    width: 50vw;
+  }
 }
 
 @media (max-width: 500px) {
