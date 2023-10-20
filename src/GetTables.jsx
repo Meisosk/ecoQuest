@@ -133,6 +133,19 @@ async function FilterCompletedQuests() {
   }
 }
 
+async function PureAccepted() {
+  const { data, error } = await supabase
+  .from("Accepted")
+  .select("*");
+  if (error) {
+    console.error("Error fetching data for PureAccepted: ", error);
+  } else {
+    return data;
+  }
+}
+
+
+
 export const dataFetchingFunctions = {
   GetQuests,
   GetFacilities,
@@ -141,4 +154,5 @@ export const dataFetchingFunctions = {
   GetFormData,
   FilterAcceptedQuests,
   FilterCompletedQuests,
+  PureAccepted,
 };
