@@ -12,12 +12,12 @@ function LandingPage() {
         alt=""
       />
       <div className="flex justify-end mr-10 pt-5">
-        <Link to="/fakesignup">
+        <Link to="/signup">
           <button className=" bg-transparent text-black px-2 py-1 text-xl">
             Sign Up
           </button>
         </Link>
-        <Link to="/fakesignin">
+        <Link to="/signin">
           <button className="px-2 py-1 text-xl text-stone-100">Sign In</button>
         </Link>
       </div>

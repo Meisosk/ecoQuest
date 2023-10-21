@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { supabase } from "../App";
+import { Navigate } from "react-router-dom";
 import "./signin.css";
 
 const FakeRegister = () => {
@@ -35,29 +36,54 @@ const FakeRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      !passwordRef.current?.value ||
-      !emailRef.current?.value ||
-      !confirmPasswordRef.current?.value ||
-      !usernameRef.current?.value ||
-      !locationRef.current?.value
-    ) {
+
+    // Get user inputs
+    const email = emailRef.current?.value ?? "";
+    const password = passwordRef.current?.value ?? "";
+    const confirmPassword = confirmPasswordRef.current?.value ?? "";
+    const username = usernameRef.current?.value ?? "";
+    const location = locationRef.current?.value ?? "";
+
+    // Check if any required fields are empty
+    if (!email || !password || !confirmPassword || !username || !location) {
       setErrorMsg("Please fill out all the fields");
       return;
     }
-    if (passwordRef.current.value !== confirmPasswordRef.current.value) {
-      setErrorMsg("Passwords doesn't match");
+
+    // Check if passwords match
+    if (password !== confirmPassword) {
+      setErrorMsg("Passwords don't match");
       return;
     }
+
+    // Check password requirements
+    if (!/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!?$]).{8,}$/.test(password)) {
+      setErrorMsg(
+        <div className="text-center text-red-600">
+          <p>Password must meet the following requirements:</p>
+          <ul>
+            <li>At least one:</li>
+            <li>number</li>
+            <li>uppercase letter</li>
+            <li>lowercase letter</li>
+            <li>special character (!, ?, $)</li>
+            <li>And be 8 or more</li>
+            <li>characters in length</li>
+          </ul>
+        </div>
+      );
+      return;
+    }
+
+    // Continue with registration
     try {
       setErrorMsg("");
       setLoading(true);
       const { data, error } = await register();
       console.log(data);
       if (!error && data) {
-        setMsg(
-          "Registration Successful. Check your email to confirm your account"
-        );
+        setMsg("Registration Successful!");
+        setIsRegistered(true);
       }
     } catch (error) {
       setErrorMsg("Error in Creating Account");
@@ -110,6 +136,7 @@ const FakeRegister = () => {
                 {msg}
               </div>
             )}
+            {isRegistered && <Navigate to="/profile" />}
             <div className="text-center mt-20 mb-20">
               <button
                 disabled={loading}
