@@ -15,9 +15,6 @@ function QuestsPage() {
       .join(" "); //if you don't put a space in here, it will not put spaces between the rejoined words
   }
 
-  useEffect(() => {
-    console.log("user", user);
-  }, [user]);
 
   useEffect(() => {
     const userLoggedIn = async () => {
@@ -27,8 +24,6 @@ function QuestsPage() {
         console.error("User is not logged in");
         return;
       }
-
-      console.log("User is logged in:", user);
 
       return user;
     };
@@ -70,7 +65,6 @@ function QuestsPage() {
     }
 
     if (existingAccepted && existingAccepted.length > 0) {
-      console.log("User already has this quest");
       return;
     }
 

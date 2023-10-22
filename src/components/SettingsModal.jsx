@@ -14,7 +14,6 @@ function SettingsModal({ closeModal }) {
       setIsLoggingOut(true);
       const { error } = await supabase.auth.signOut();
       if (!error) {
-        console.log("User logged out successfully.");
         localStorage.removeItem("accessToken");
         window.location.reload();
       } else {

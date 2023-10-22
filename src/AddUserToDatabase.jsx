@@ -33,12 +33,6 @@ function AddUserToDatabase() {
     if (error) {
       console.error("Error inserting data: ", error);
     } else {
-      console.log("Data inserted: ", {
-        email: email,
-        username: username,
-        password: password,
-        location: location,
-      });
       const userData = await getUsers();
       setUsers(userData);
     }
@@ -53,7 +47,6 @@ function AddUserToDatabase() {
     if (error) {
       console.error("Error updating username: ", error);
     } else {
-      console.log("Username updated: ", { username: newUsername });
       const userData = await getUsers();
       setUsers(userData);
     }
