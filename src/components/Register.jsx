@@ -3,7 +3,7 @@ import { supabase } from "../App";
 import { Navigate } from "react-router-dom";
 import "./signin.css";
 
-const FakeRegister = () => {
+const Register = () => {
   const signInSectionRef = useRef(null);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
@@ -13,6 +13,7 @@ const FakeRegister = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false); // disabling multiple clicks
+  const [isRegistered, setIsRegistered] = useState(false);
 
   //using refs avoids unnecessary re-renders whenever we enter the input
 
@@ -153,4 +154,4 @@ const FakeRegister = () => {
   );
 };
 
-export default FakeRegister;
+export default Register;
