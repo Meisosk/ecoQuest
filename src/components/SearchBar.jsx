@@ -1,12 +1,32 @@
 import { useState, useEffect } from "react";
+import { supabase } from "../App";
+
 import { dataFetchingFunctions } from "../GetTables";
-const { GetCities } = dataFetchingFunctions;
+const { GetCities, GetLocation } = dataFetchingFunctions;
 
 const SearchBar = (props) => {
   const [input, setInput] = useState("");
   const [Cities, setCities] = useState([]);
   const [Filtered, setFiltered] = useState([]);
   const [chosenCity, setChosenCity] = useState("New york");
+
+  useEffect(() => {
+    const location = async () => {
+      const user = await supabase.auth.getUser();
+
+      if (!user) {
+        console.error("User is not logged in");
+        return;
+      }
+
+      const userId = user.data.user.id;
+      const locationPromise = GetLocation(userId);
+      const locationData = await locationPromise;
+
+      setChosenCity(locationData[0].location);
+    };
+    location();
+  }, []);
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -40,7 +60,7 @@ const SearchBar = (props) => {
       facility.CityName.toLowerCase().includes(chosenCityLower)
     );
     props.onFilterResults(filteredResults);
-  }, [chosenCity]);
+  }, [chosenCity, props.data]);
 
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
