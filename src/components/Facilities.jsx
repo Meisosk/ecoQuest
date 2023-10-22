@@ -16,6 +16,9 @@ function Facilities() {
   }, []);
 
   const handleFilterResults = (filteredResults) => {
+    const sortedResults = filteredResults.sort((a, b) =>
+      a.STATE.localeCompare(b.STATE)
+    )
     setFilteredFacilities(filteredResults);
   };
 
