@@ -14,12 +14,13 @@ function NavBar() {
     setIsModalOpen(true);
   }
 
-  function closeModal() {
+  function closeSettingsModal() {
     setIsModalOpen(false);
   }
 
   return (
     <>
+      {isModalOpen && <SettingsModal closeModal={closeSettingsModal} />}
       <div className="navbar sticky top-0 h-screen">
         <div className="rounded-r bg-secondary flex justify-center w-full p-2 items-center ">
           <img className="w-32" src={logo} alt="logo" />
@@ -201,7 +202,6 @@ function NavBar() {
                   />
                 </svg>
               </button>
-              {isModalOpen && <SettingsModal closeModal={closeModal} />}
             </div>
           </div>
         </div>
