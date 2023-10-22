@@ -133,15 +133,21 @@ function Home() {
               <div className="flex justify-center flex-col">
                 <div className="flex justify-around items-center w-full ">
                   <div>
-                    {completedQuests.map((achievement, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between pl-9 pr-9 pb-3 items-center"
-                      >
-                        <img className="h-16" src={getRandomImage()} alt="" />
-                        <p>{achievement.text}</p>
+                    {!completedQuests ? (
+                      completedQuests.map((achievement, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between pl-9 pr-9 pb-3 items-center"
+                        >
+                          <img className="h-16" src={getRandomImage()} alt="" />
+                          <p>{achievement.text}</p>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="text-center mt-10 text-gray-400 ">
+                        No Completed Quests
                       </div>
-                    ))}
+                    )}
                   </div>
                 </div>
               </div>
@@ -165,23 +171,29 @@ function Home() {
                         </th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {friends.map((friend, index) => (
-                        <tr
-                          key={friend.id}
-                          className="bg-secondary border-b dark:border-gray-700"
-                        >
-                          <th
-                            scope="row"
-                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    {friends && friends.length > 0 ? (
+                      <tbody>
+                        {friends.map((friend, index) => (
+                          <tr
+                            key={friend.id}
+                            className="bg-secondary border-b dark:border-gray-700"
                           >
-                            {index + 1}
-                          </th>
-                          <td className="px-6 py-4">{friend.username}</td>
-                          <td className="px-6 py-4">{friend.level}</td>
-                        </tr>
-                      ))}
-                    </tbody>
+                            <th
+                              scope="row"
+                              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >
+                              {index + 1}
+                            </th>
+                            <td className="px-6 py-4">{friend.username}</td>
+                            <td className="px-6 py-4">{friend.level}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    ) : (
+                      <div className="text-center mt-10 text-gray-400 text-xl">
+                        No Friends
+                      </div>
+                    )}
                   </table>
                 </div>
               </div>
