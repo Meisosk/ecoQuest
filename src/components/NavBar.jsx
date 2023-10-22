@@ -166,17 +166,22 @@ function NavBar() {
                   <circle cx="12" cy="12" r="10" />
                 </svg>
               </Link>
-              <div className="flex justify-center items-center  space-x-2">
-                <div></div>
-                <div className="flex justify-start flex-col items-start ">
-                  <p className="cursor-pointer text-sm leading-5 text-white p-1">
-                    {username}
-                  </p>
-                  <p className="cursor-pointer text-xs leading-3 text-gray-300">
-                    {email}
-                  </p>
+              <Link
+                to="/profile"
+                className="text-base leading-4 text-gray-300 "
+              >
+                <div className="flex justify-center items-center  space-x-2">
+                  <div></div>
+                  <div className="flex justify-start flex-col items-start ">
+                    <p className="cursor-pointer text-sm leading-5 text-white p-1">
+                      {username}
+                    </p>
+                    <p className="cursor-pointer text-xs leading-3 text-gray-300">
+                      {email}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </Link>
               <button className="bg-transparent" onClick={openModal}>
                 <svg
                   className="cursor-pointer"

@@ -352,27 +352,33 @@ function Profile() {
           <p className="p-5 text-lg">Accepted Quests</p>
           <div>
             <div className="flex justify-center flex-col">
-              {acceptedQuests.map((achievement, index) => (
-                <div key={index} className="mb-6 p-3">
-                  <div className="flex justify-between items-center w-full ">
-                    <img className="h-16" src={achive1} alt="" />
-                    <p>{achievement.text}</p>
-                  </div>
-                  <button
-                    className="bg-button mr-5 p-2 py-1"
-                    onClick={() => handleCompleteClick(achievement.id)}
-                  >
-                    Completed
-                  </button>
+              {acceptedQuests.length > 0 ? (
+                acceptedQuests.map((achievement, index) => (
+                  <div key={index} className="mb-6 p-3">
+                    <div className="flex justify-between items-center w-full">
+                      <img className="h-16" src={achive1} alt="" />
+                      <p>{achievement.text}</p>
+                    </div>
+                    <button
+                      className="bg-button mr-5 p-2 py-1"
+                      onClick={() => handleCompleteClick(achievement.id)}
+                    >
+                      Completed
+                    </button>
 
-                  <button
-                    className="bg-red-700 mr-5 p-2 py-1"
-                    onClick={() => handleDeleteClick(achievement.id)}
-                  >
-                    Delete
-                  </button>
+                    <button
+                      className="bg-red-700 mr-5 p-2 py-1"
+                      onClick={() => handleDeleteClick(achievement.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div className="text-center mt-10 text-gray-400 text-xl">
+                  No accepted quests
                 </div>
-              ))}
+              )}
             </div>
           </div>
         </div>
