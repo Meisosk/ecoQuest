@@ -62,6 +62,13 @@ const Login = () => {
                 {errorMsg}
               </div>
             )}
+            <p className="text-center text-zinc-300">
+              Don't yet have an account?{" "}
+              <Link to="/signup" className="text-button">
+                {" "}
+                Click Here!
+              </Link>
+            </p>
             <div className="text-center mt-20">
               <button
                 disabled={loading}
