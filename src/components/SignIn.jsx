@@ -11,14 +11,16 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [loggedIn, setLoggedIn] = useState(false);
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setErrorMsg("");
+      setErrorMsg('');
       setLoading(true);
       if (!passwordRef.current?.value || !emailRef.current?.value) {
-        setErrorMsg("Please fill in the fields");
+        setErrorMsg('Please fill in the fields');
         return;
       }
 
@@ -26,10 +28,17 @@ const Login = () => {
         data: { user, session },
         error,
       } = await login(emailRef.current.value, passwordRef.current.value);
-      if (error) setErrorMsg(error.message);
-      if (user && session) navigate("/");
+      if (error) {
+        setErrorMsg(error.message);
+      } else if (user && session) {
+        setLoggedIn(true);
+          setTimeout(() => {
+            navigate('/profile');
+            window.location.reload();
+          }, 1000); 
+        }
     } catch (error) {
-      setErrorMsg("Email or Password Incorrect");
+      setErrorMsg('Email or Password Incorrect');
     }
     setLoading(false);
   };
@@ -40,6 +49,8 @@ const Login = () => {
     }
   }, []);
 
+
+ 
   return (
     <>
       <div
