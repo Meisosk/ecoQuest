@@ -16,7 +16,6 @@ const login = (email, password) =>
     const checkAccessToken = () => {
       const accessToken = localStorage.getItem('accessToken');
       if (accessToken) {
-        // Set the user and authentication state
         setUser(supabase.auth.getUser());
         setAuth(true);
       }
@@ -27,7 +26,6 @@ const login = (email, password) =>
   
       const { data } = supabase.auth.onAuthStateChange((event, session) => {
         if (event === "SIGNED_IN") {
-          // Store the access token in localStorage
           localStorage.setItem('accessToken', session.access_token);
   
           setUser(session.user);
