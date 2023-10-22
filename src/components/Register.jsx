@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { supabase } from "../App";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import "./signin.css";
 
 const Register = () => {
@@ -137,6 +137,14 @@ const Register = () => {
                 {msg}
               </div>
             )}
+            <p className="text-center text-zinc-300">
+              All ready have an account?{" "}
+              <Link to="/signin" className="text-button">
+                {" "}
+                Click Here!
+              </Link>
+            </p>
+
             {isRegistered && <Navigate to="/profile" />}
             <div className="text-center mt-20 mb-20">
               <button
@@ -155,3 +163,87 @@ const Register = () => {
 };
 
 export default Register;
+
+// <form onSubmit={handleSubmit} className="text-gray-100">
+//             <div className="mb-4">
+//               <label htmlFor="username">Username::</label>
+//               <input
+//                 type="text"
+//                 id="username"
+//                 ref={usernameRef}
+//                 required
+//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+//                 placeholder="Enter Username"
+//               />
+//             </div>
+//             <div className="mb-4">
+//               <label htmlFor="location">Location:</label>
+//               <input
+//                 type="text"
+//                 id="location"
+//                 ref={locationRef}
+//                 required
+//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+//                 placeholder="Enter Location"
+//               />
+//             </div>
+//             <div className="mb-4">
+//               <label htmlFor="email">Email:</label>
+//               <input
+//                 type="email"
+//                 id="email"
+//                 ref={emailRef}
+//                 required
+//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+//                 placeholder="Enter Email"
+//               />
+//             </div>
+//             <div className="mb-4">
+//               <label htmlFor="password">Password:</label>
+//               <input
+//                 type="password"
+//                 id="password"
+//                 ref={passwordRef}
+//                 required
+//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+//                 placeholder="Enter Password"
+//               />
+//             </div>
+//             <div className="mb-4">
+//               <label htmlFor="confirm-password">Confirm Password:</label>
+//               <input
+//                 type="password"
+//                 id="confirm-password"
+//                 ref={confirmPasswordRef}
+//                 required
+//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+//                 placeholder="Confirm Password"
+//               />
+//             </div>
+//             {errorMsg && (
+//               <div className="alert alert-danger" role="alert">
+//                 {errorMsg}
+//               </div>
+//             )}
+//             {msg && (
+//               <div className="alert alert-success" role="alert">
+//                 {msg}
+//               </div>
+//             )}
+//             <p className="text-center text-zinc-300">
+//               Already have an account?{" "}
+//               <Link to="/signin" className="text-button">
+//                 Click Here!
+//               </Link>
+//             </p>
+//             {isRegistered && <Navigate to="/profile" />}
+//             <div className="text-center mt-20 mb-20">
+//               <button
+//                 disabled={loading}
+//                 type="submit"
+//                 className="w-full bg-button"
+//               >
+//                 SIGN UP
+//               </button>
+//             </div>
+//           </form>
