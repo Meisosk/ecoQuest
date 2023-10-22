@@ -151,6 +151,10 @@
     left: 30vw;
     top: 10vh;
   }
+
+  .sign-container {
+    width: 90%;
+  }
 }
 
 @media (max-width: 550px) {
