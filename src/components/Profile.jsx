@@ -12,7 +12,8 @@ import getUsers from "../GetUsers";
 import { useUser } from "../UserNameAndEmail";
 
 const { getFriends } = friendFunctions;
-const { FilterAcceptedQuests } = dataFetchingFunctions;
+const { FilterAcceptedQuests, GetQuestPoints, getUsersPoints, UpdatePoints } =
+  dataFetchingFunctions;
 
 function Profile() {
   const [acceptedQuests, setAcceptedQuests] = useState([]);
@@ -67,14 +68,9 @@ function Profile() {
     const fetchData = async () => {
       const data = await FilterAcceptedQuests();
       setAcceptedQuests(data);
-      console.log("this is the acceptedQuests data", data);
     };
     fetchData();
   }, []);
-
-  useEffect(() => {
-    console.log(percent);
-  }, [percent]);
 
   useEffect(() => {
     if (emissionTotal <= 16) {
@@ -199,6 +195,17 @@ function Profile() {
     const userId = user.data.user.id;
 
     try {
+      const pointsPromise = GetQuestPoints(questId); // Get the promise
+      const pointsData = await pointsPromise; // Wait for the promise to resolve
+      const points = pointsData[0].xp;
+
+      const userPromise = getUsersPoints(userId);
+      const userData = await userPromise; // Wait for the promise to resolve
+      const userCurrentPoints = userData[0].points;
+      const updatedpoints = userCurrentPoints + points;
+
+      UpdatePoints(userId, updatedpoints);
+
       const { error } = await supabase
         .from("Accepted")
         .delete()

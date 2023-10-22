@@ -16,7 +16,6 @@ function Facilities() {
   }, []);
 
   const handleFilterResults = (filteredResults) => {
-    console.log(filteredResults);
     setFilteredFacilities(filteredResults);
   };
 
