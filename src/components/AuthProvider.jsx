@@ -8,27 +8,41 @@ export const useAuth = () => useContext(AuthContext);
 const login = (email, password) =>
   supabase.auth.signInWithPassword({ email, password });
 
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [auth, setAuth] = useState(false);
-
-  useEffect(() => {
-    const { data } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === "SIGNED_IN") {
-        setUser(session.user);
+  const AuthProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const [auth, setAuth] = useState(false);
+  
+    // Function to check for an access token in localStorage
+    const checkAccessToken = () => {
+      const accessToken = localStorage.getItem('accessToken');
+      if (accessToken) {
+        setUser(supabase.auth.getUser());
         setAuth(true);
       }
-    });
-    return () => {
-      data.subscription.unsubscribe();
     };
-  }, []);
-
-  return (
-    <AuthContext.Provider value={{ user, login }}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+  
+    useEffect(() => {
+      checkAccessToken();
+  
+      const { data } = supabase.auth.onAuthStateChange((event, session) => {
+        if (event === "SIGNED_IN") {
+          localStorage.setItem('accessToken', session.access_token);
+  
+          setUser(session.user);
+          setAuth(true);
+        }
+      });
+  
+      return () => {
+        data.subscription.unsubscribe();
+      };
+    }, []);
+  
+    return (
+      <AuthContext.Provider value={{ user, login }}>
+        {children}
+      </AuthContext.Provider>
+    );
+  };
 
 export default AuthProvider;
