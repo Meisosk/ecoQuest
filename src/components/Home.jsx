@@ -76,7 +76,7 @@ function Home() {
 
       const userId = user.data.user.id;
       const userPromise = getUsersPoints(userId);
-      const userData = await userPromise; // Wait for the promise to resolve
+      const userData = await userPromise;
       const userCurrentPoints = userData[0].points;
       const level = Math.floor(userCurrentPoints / 100);
       setLevel(level);

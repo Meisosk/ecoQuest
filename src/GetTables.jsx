@@ -133,6 +133,18 @@ async function UpdatePoints(userId, updatedpoints) {
   return data;
 }
 
+async function GetLocation(userId) {
+  const { data, error } = await supabase
+    .from("users")
+    .select("location")
+    .eq("id", userId);
+  if (error) {
+    console.error("Error updating FormData: ", error);
+    return null;
+  }
+  return data;
+}
+
 // async function FilterAcceptedQuests() {
 //   const user = await supabase.auth.getUser();
 
@@ -217,4 +229,5 @@ export const dataFetchingFunctions = {
   GetQuestPoints,
   getUsersPoints,
   UpdatePoints,
+  GetLocation,
 };
