@@ -25,8 +25,11 @@ function Facilities() {
         <SearchBar data={facilities} onFilterResults={handleFilterResults} />
       </div>
       <div className="flex flex-col w-full h-full ">
-        {filteredFacilities.map((facility, index) => (
+      {filteredFacilities.length === 0 ? ( <p className="text-center">Please find a city nearest you</p>
+        ) : (
+        filteredFacilities.map((facility, index) => (
           <div key={index} className="flex w-3/4 mb-1.7 ml-1.7">
+          
             <div className="bg-primary flex flex-col w-full rounded-3xl p-5 mb-1.7">
               <p className="mb-3">
                 Name:&nbsp;&nbsp;&nbsp;
@@ -42,7 +45,8 @@ function Facilities() {
               </p>
             </div>
           </div>
-        ))}
+        ))
+        )}
       </div>
     </div>
   );
