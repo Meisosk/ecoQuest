@@ -91,6 +91,48 @@ async function GetFormData() {
   return data;
 }
 
+async function GetQuestPoints(questId) {
+  const { data, error } = await supabase
+    .from("Quests")
+    .select("xp")
+    .eq("id", questId);
+
+  if (error) {
+    console.error("Error deleting from acceptedIds:", error.message);
+    return;
+  }
+
+  return data;
+}
+
+async function getUsersPoints(userId) {
+  const { data, error } = await supabase
+    .from("users")
+    .select("points")
+    .eq("id", userId);
+
+  if (error) {
+    console.error("Error deleting from acceptedIds:", error.message);
+    return;
+  }
+
+  return data;
+}
+
+async function UpdatePoints(userId, updatedpoints) {
+  const { data, error } = await supabase
+    .from("users")
+    .update({ points: updatedpoints })
+    .eq("id", userId);
+
+  if (error) {
+    console.error("Error deleting from acceptedIds:", error.message);
+    return;
+  }
+
+  return data;
+}
+
 // async function FilterAcceptedQuests() {
 //   const user = await supabase.auth.getUser();
 
@@ -129,16 +171,15 @@ async function FilterAcceptedQuests() {
     console.error("Error fetching data: ", error);
     return [];
   } else {
-    return data.map(entry => entry.quest);
+    return data.map((entry) => entry.quest);
   }
 }
-
 
 async function FilterCompletedQuests() {
   const user = await supabase.auth.getUser();
 
   if (!user) {
-    return[];
+    return [];
   }
   const userId = user.data.user.id;
 
@@ -147,26 +188,22 @@ async function FilterCompletedQuests() {
     .select("*, quest:Quests(*)")
     .eq("userId", userId);
 
-    if (error) {
-      console.error("Error fetching data: ", error);
-      return [];
-    } else {
-      return data.map(entry => entry.quest);
-    }
+  if (error) {
+    console.error("Error fetching data: ", error);
+    return [];
+  } else {
+    return data.map((entry) => entry.quest);
   }
+}
 
 async function PureAccepted() {
-  const { data, error } = await supabase
-  .from("Accepted")
-  .select("*");
+  const { data, error } = await supabase.from("Accepted").select("*");
   if (error) {
     console.error("Error fetching data for PureAccepted: ", error);
   } else {
     return data;
   }
 }
-
-
 
 export const dataFetchingFunctions = {
   GetQuests,
@@ -177,4 +214,7 @@ export const dataFetchingFunctions = {
   FilterAcceptedQuests,
   FilterCompletedQuests,
   PureAccepted,
+  GetQuestPoints,
+  getUsersPoints,
+  UpdatePoints,
 };

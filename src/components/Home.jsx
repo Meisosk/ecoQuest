@@ -9,22 +9,24 @@ import { useForm } from "./FormProvider";
 import { useUser } from "../UserNameAndEmail";
 import { dataFetchingFunctions } from "../GetTables";
 import { friendFunctions } from "../GetFriends";
+import { getCurrentName } from "../data/levelNames";
 
 function Home() {
   const { getFriends } = friendFunctions;
-  const { FilterCompletedQuests } = dataFetchingFunctions;
+  const { FilterCompletedQuests, getUsersPoints } = dataFetchingFunctions;
   const { formVisible, toggleFormVisibility } = useForm();
   const { username } = useUser();
-  const { level } = useUser();
 
   const [completedQuests, setCompletedQuests] = useState([]);
   const [friends, setFriends] = useState([]);
+  const [userCurrentPoints, setUserCurrentPoints] = useState(0);
+  const [level, setLevel] = useState(0);
+  const [levelName, setLevelName] = useState("EcoBeginner");
 
   useEffect(() => {
     const fetchCompletedQuests = async () => {
       const quests = await FilterCompletedQuests();
       setCompletedQuests(quests);
-      console.log("Completed quests on Home Page: ", quests);
     };
 
     fetchCompletedQuests();
@@ -35,6 +37,10 @@ function Home() {
     const randomImages = [achive1, achive2, achive3];
     return randomImages[randomIndex];
   };
+
+  useEffect(() => {
+    setLevelName(getCurrentName(level));
+  }, [level]);
 
   useEffect(() => {
     const fetchFriendsData = async () => {
@@ -59,6 +65,27 @@ function Home() {
     fetchFriendsData();
   }, []);
 
+  useEffect(() => {
+    const xpBar = async () => {
+      const user = await supabase.auth.getUser();
+
+      if (!user) {
+        console.error("User is not logged in");
+        return;
+      }
+
+      const userId = user.data.user.id;
+      const userPromise = getUsersPoints(userId);
+      const userData = await userPromise; // Wait for the promise to resolve
+      const userCurrentPoints = userData[0].points;
+      const level = Math.floor(userCurrentPoints / 100);
+      setLevel(level);
+      setUserCurrentPoints(userCurrentPoints % 100);
+    };
+
+    xpBar();
+  }, []);
+
   function onSubmit(e) {
     e.preventDefault();
     toggleFormVisibility();
@@ -71,11 +98,20 @@ function Home() {
         <div className="flex flex-col justify-between bg-primary rounded-3xl w-full p-8 pb-12 home-container">
           <div className="flex justify-around p-2">
             <div>Experience</div>
-            <div>Lv. 1 Eco Beginner</div>
+            <div>
+              Lv. {level} {levelName}
+            </div>
           </div>
+
           <div>
             <div className="w-full h-10 bg-gray-200 rounded-full dark:bg-gray-700">
-              <div className="h-10 bg-xp rounded-full  w-2/4"></div>
+              {/* not sure why you need both the class name and style tag but won't work with only one */}
+              <div
+                className={`h-10 bg-xp rounded-full  w-[${
+                  userCurrentPoints % 100
+                }%]`}
+                style={{ width: `${userCurrentPoints}%` }}
+              ></div>
             </div>
           </div>
         </div>

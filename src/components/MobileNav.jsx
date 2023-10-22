@@ -5,10 +5,6 @@ import NavModal from "./NavModal";
 function MobileNav() {
   const [navOptions, setnavOptions] = useState(false);
 
-  useEffect(() => {
-    console.log(navOptions);
-  }, [navOptions]);
-
   function openModal() {
     setnavOptions(true);
   }
