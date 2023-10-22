@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as EmissionConstants from "../data/calculator";
 import { useForm } from "./FormProvider";
+import { Link } from "react-router-dom";
 
 function Form({ onSubmit }) {
   // State variables to store user inputs
@@ -104,6 +105,13 @@ function Form({ onSubmit }) {
     <div className="absolute w-screen inset-x-0 h-screen bg-gray-800 bg-opacity-50 z-10">
       <div className="bg-gray-300 p-10 relative top-64 left-1/4 w-2/4 rounded-3xl form">
         <form onSubmit={(e) => onSubmit(e)}>
+          <p className="text-gray-900 text-center">
+            This information will only save if you are{" "}
+            <Link to="/signin" className="underline text-button ">
+              signed in!
+            </Link>
+          </p>
+          <br />
           <div className="mb-4">
             <label
               htmlFor="carMilesDriven"
