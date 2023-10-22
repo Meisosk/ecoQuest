@@ -8,7 +8,8 @@ const SearchBar = (props) => {
   const [input, setInput] = useState("");
   const [Cities, setCities] = useState([]);
   const [Filtered, setFiltered] = useState([]);
-  const [chosenCity, setChosenCity] = useState("New york");
+  const [chosenCity, setChosenCity] = useState("Nothing");
+  
 
   useEffect(() => {
     const location = async () => {
@@ -65,17 +66,22 @@ const SearchBar = (props) => {
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setInput(inputValue);
-    const filteredCitites = Cities.filter((city) =>
-      city.toLowerCase().includes(inputValue.toLowerCase())
-    );
+   const filteredCities = [...new Set(Cities.filter((city) =>
+    city.toLowerCase().includes(inputValue.toLowerCase())
+  ))];
 
-    setFiltered(filteredCitites);
+    setFiltered(filteredCities);
   };
 
   const handleSubmit = () => {
     if (input !== "") {
       setChosenCity(input);
       setInput("");
+  
+      props.onFilterResults(props.data.filter((facility) =>
+        facility.CityName.toLowerCase().includes(input.toLowerCase())
+      ));
+  
       setFiltered(Cities);
     }
   };
@@ -104,13 +110,11 @@ const SearchBar = (props) => {
             </button>
           </div>
           <div className="relative">
-            <div className="search-result-container absolute w-250 z-10">
+            <div className={`search-result-container absolute w-250 z-10 ${input === '' ? 'hidden' : ''}`}>
               {topFour.map((res, index) => (
                 <div
                   key={index}
-                  className={`bg-slate-300 text-black flex w-[330px] p-5 relative ${
-                    input === "" ? "hidden" : ""
-                  } ${index === topFour.length - 1 ? "rounded-b-3xl" : ""}`}
+                  className={`bg-slate-300 text-black flex w-[330px] p-5 relative ${index === topFour.length - 1 ? 'rounded-b-3xl' : ''}`}
                   onClick={() => setInput(res)}
                 >
                   {res}
