@@ -133,7 +133,7 @@ function Home() {
               <div className="flex justify-center flex-col">
                 <div className="flex justify-around items-center w-full ">
                   <div>
-                    {!completedQuests ? (
+                    {completedQuests.length > 0 ? (
                       completedQuests.map((achievement, index) => (
                         <div
                           key={index}
