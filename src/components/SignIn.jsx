@@ -44,18 +44,32 @@ const Login = () => {
     <>
       <div
         ref={loginSectionRef}
-        className="bg-primary w-3/5 rounded-3xl flex justify-center mt-24 mb-24"
+        className="bg-primary w-3/5 rounded-3xl flex justify-center mt-24 mb-24 p-5 sign-container"
       >
         <div>
           <h2 className="text-center mb-20 text-6xl mt-16">Sign In</h2>
           <form onSubmit={handleSubmit}>
-            <div id="email" className="flex">
-              <label>Email</label>
-              <input type="email" ref={emailRef} required />
+            <div className="mb-4">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                ref={emailRef}
+                required
+                className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+                placeholder="Enter Email"
+              />
             </div>
-            <div id="password" className="flex">
-              <label>Password</label>
-              <input type="password" ref={passwordRef} required />
+            <div className="mb-4">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                ref={passwordRef}
+                required
+                className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+                placeholder="Enter Password"
+              />
             </div>
             {errorMsg && (
               <div className="alert alert-danger" role="alert">
@@ -73,7 +87,7 @@ const Login = () => {
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full shadow-xl bg-button"
+                className="w-full shadow-xl bg-button mb-8"
               >
                 SIGN IN
               </button>

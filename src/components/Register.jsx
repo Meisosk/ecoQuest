@@ -102,30 +102,66 @@ const Register = () => {
     <>
       <div
         ref={signInSectionRef}
-        className="bg-primary w-3/5 rounded-3xl flex justify-center mt-24 mb-24"
+        className="bg-primary w-3/5 rounded-3xl flex justify-center mt-24 mb-24 p-5 sign-container"
       >
         <div>
           <h2 className="text-center mb-20 text-6xl mt-16">Sign Up</h2>
-          <form onSubmit={handleSubmit}>
-            <div id="username" className="flex">
-              <label>Username</label>
-              <input type="username" ref={usernameRef} required />
+
+          <form onSubmit={handleSubmit} className="text-gray-100">
+            <div className="mb-4">
+              <label htmlFor="username">Username:</label>
+              <input
+                type="text"
+                id="username"
+                ref={usernameRef}
+                required
+                className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+                placeholder="Enter Username"
+              />
             </div>
-            <div id="location" className="flex">
-              <label>Location</label>
-              <input type="text" ref={locationRef} required />
+            <div className="mb-4">
+              <label htmlFor="location">Location:</label>
+              <input
+                type="text"
+                id="location"
+                ref={locationRef}
+                required
+                className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+                placeholder="Enter Location"
+              />
             </div>
-            <div id="email" className="flex">
-              <label>Email</label>
-              <input type="email" ref={emailRef} required />
+            <div className="mb-4">
+              <label htmlFor="email">Email:</label>
+              <input
+                type="email"
+                id="email"
+                ref={emailRef}
+                required
+                className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+                placeholder="Enter Email"
+              />
             </div>
-            <div id="password" className="flex">
-              <label>Password</label>
-              <input type="password" ref={passwordRef} required />
+            <div className="mb-4">
+              <label htmlFor="password">Password:</label>
+              <input
+                type="password"
+                id="password"
+                ref={passwordRef}
+                required
+                className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+                placeholder="Enter Password"
+              />
             </div>
-            <div id="confirm-password" className="flex">
-              <label>Confirm Password</label>
-              <input type="password" ref={confirmPasswordRef} required />
+            <div className="mb-4">
+              <label htmlFor="confirm-password">Confirm Password:</label>
+              <input
+                type="password"
+                id="confirm-password"
+                ref={confirmPasswordRef}
+                required
+                className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
+                placeholder="Confirm Password"
+              />
             </div>
             {errorMsg && (
               <div className="alert alert-danger" role="alert">
@@ -138,13 +174,11 @@ const Register = () => {
               </div>
             )}
             <p className="text-center text-zinc-300">
-              All ready have an account?{" "}
+              Already have an account?{" "}
               <Link to="/signin" className="text-button">
-                {" "}
                 Click Here!
               </Link>
             </p>
-
             {isRegistered && <Navigate to="/profile" />}
             <div className="text-center mt-20 mb-20">
               <button
@@ -163,87 +197,3 @@ const Register = () => {
 };
 
 export default Register;
-
-// <form onSubmit={handleSubmit} className="text-gray-100">
-//             <div className="mb-4">
-//               <label htmlFor="username">Username::</label>
-//               <input
-//                 type="text"
-//                 id="username"
-//                 ref={usernameRef}
-//                 required
-//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
-//                 placeholder="Enter Username"
-//               />
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="location">Location:</label>
-//               <input
-//                 type="text"
-//                 id="location"
-//                 ref={locationRef}
-//                 required
-//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
-//                 placeholder="Enter Location"
-//               />
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="email">Email:</label>
-//               <input
-//                 type="email"
-//                 id="email"
-//                 ref={emailRef}
-//                 required
-//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
-//                 placeholder="Enter Email"
-//               />
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="password">Password:</label>
-//               <input
-//                 type="password"
-//                 id="password"
-//                 ref={passwordRef}
-//                 required
-//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
-//                 placeholder="Enter Password"
-//               />
-//             </div>
-//             <div className="mb-4">
-//               <label htmlFor="confirm-password">Confirm Password:</label>
-//               <input
-//                 type="password"
-//                 id="confirm-password"
-//                 ref={confirmPasswordRef}
-//                 required
-//                 className="w-full border-b-2 px-3 py-2 mt-1 focus:border-transparent bg-transparent"
-//                 placeholder="Confirm Password"
-//               />
-//             </div>
-//             {errorMsg && (
-//               <div className="alert alert-danger" role="alert">
-//                 {errorMsg}
-//               </div>
-//             )}
-//             {msg && (
-//               <div className="alert alert-success" role="alert">
-//                 {msg}
-//               </div>
-//             )}
-//             <p className="text-center text-zinc-300">
-//               Already have an account?{" "}
-//               <Link to="/signin" className="text-button">
-//                 Click Here!
-//               </Link>
-//             </p>
-//             {isRegistered && <Navigate to="/profile" />}
-//             <div className="text-center mt-20 mb-20">
-//               <button
-//                 disabled={loading}
-//                 type="submit"
-//                 className="w-full bg-button"
-//               >
-//                 SIGN UP
-//               </button>
-//             </div>
-//           </form>

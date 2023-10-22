@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { supabase } from "../App";
 import deleteUser from "../DeleteUser";
 
 function SettingsModal({ closeModal }) {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+
 
   const handleLogout = async () => {
     if (isLoggingOut) {
@@ -15,6 +16,7 @@ function SettingsModal({ closeModal }) {
       if (!error) {
         console.log("User logged out successfully.");
         localStorage.removeItem("accessToken");
+        window.location.reload();
       } else {
         console.error("Error signing out:", error.message);
       }
