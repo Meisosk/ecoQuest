@@ -5,6 +5,7 @@ const { GetQuests } = dataFetchingFunctions;
 
 function QuestsPage() {
   const [quests, setQuests] = useState([]);
+  const [user, setUser] = useState([]);
 
   function capitalizeWords(str) {
     return str
@@ -13,6 +14,33 @@ function QuestsPage() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" "); //if you don't put a space in here, it will not put spaces between the rejoined words
   }
+
+  useEffect(() => {
+    console.log("user", user);
+  }, [user]);
+
+  useEffect(() => {
+    const userLoggedIn = async () => {
+      const user = await supabase.auth.getUser();
+
+      if (!user) {
+        console.error("User is not logged in");
+        return;
+      }
+
+      console.log("User is logged in:", user);
+
+      return user;
+    };
+
+    const userData = async () => {
+      const userPromise = userLoggedIn();
+      const userData = await userPromise;
+
+      setUser(userData);
+    };
+    userData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,32 +93,40 @@ function QuestsPage() {
 
   return (
     <>
-      <div className="ml-5 mt-10 w-70 ">
-        <div className="flex justify-evenly gap-5 flex-wrap rounded-3xl">
-          {quests.map((quest) => (
-            <div
-              className=" bg-primary rounded-3xl flex flex-col p-5 shadow-2xl quest-card"
-              key={quest.id}
-            >
-              <div>
-                <h2 className="self-start">Difficulty Level: {quest.level}</h2>
+      <div className="ml-5 mt-10 w-70">
+        {user && user.data && user.data.user !== null ? (
+          <div className="flex justify-evenly gap-5 flex-wrap rounded-3xl">
+            {quests.map((quest) => (
+              <div
+                className="bg-primary rounded-3xl flex flex-col p-5 shadow-2xl quest-card"
+                key={quest.id}
+              >
+                <div>
+                  <h2 className="self-start">
+                    Difficulty Level: {quest.level}
+                  </h2>
+                </div>
+                <div className="w-60 card">
+                  <p className="bg-primary max-w-sm mt-4 mb-4 ">
+                    {capitalizeWords(quest.text)}
+                  </p>
+                </div>
+                <div className="flex flex-col justify-between text-center mt-auto">
+                  <button
+                    className="bg-button p-1 shadow-xl w-auto"
+                    onClick={() => handleChoice(quest.id)}
+                  >
+                    ACCEPT THIS QUEST
+                  </button>
+                </div>
               </div>
-              <div className="w-60 card">
-                <p className="bg-primary max-w-sm mt-4 mb-4 ">
-                  {capitalizeWords(quest.text)}
-                </p>
-              </div>
-              <div className="flex flex-col justify-between text-center mt-auto">
-                <button
-                  className="bg-button p-1 shadow-xl w-auto"
-                  onClick={() => handleChoice(quest.id)}
-                >
-                  ACCEPT THIS QUEST
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center mt-10 text-gray-600">
+            Sign in to view quests.
+          </div>
+        )}
       </div>
     </>
   );
