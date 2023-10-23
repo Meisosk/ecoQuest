@@ -1,11 +1,32 @@
 import logo from "../assets/ecoquestlogo.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {supabase} from "../App"
 import { Link } from "react-router-dom";
 import { useUser } from "../UserNameAndEmail";
 import SettingsModal from "./SettingsModal";
 
 function NavBar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+const [user, setUser] = useState([])
+
+  useEffect(() => {
+    const userLoggedIn = async () => {
+      const user = await supabase.auth.getUser();
+
+      if (!user) {
+        return;
+      }
+      return user;
+    };
+
+    const userData = async () => {
+      const userPromise = userLoggedIn();
+      const userData = await userPromise;
+
+      setUser(userData);
+    };
+    userData();
+  }, []);
 
   const { username } = useUser();
   const { email } = useUser();
@@ -182,7 +203,7 @@ function NavBar() {
                   </div>
                 </div>
               </Link>
-              <button className="bg-transparent" onClick={openModal}>
+              <button className="bg-transparent" onClick={user && user.data && user.data.user !== null ? openModal : null}>
                 <svg
                   className="cursor-pointer"
                   width="24"

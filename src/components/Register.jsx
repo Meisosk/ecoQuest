@@ -22,12 +22,6 @@ const Register = () => {
     let password = passwordRef.current?.value ?? "";
     let username = usernameRef.current?.value ?? "";
     let location = locationRef.current?.value ?? "";
-    console.log("this is the data going in", {
-      email,
-      password,
-      username,
-      location,
-    });
     return supabase.auth.signUp({
       email,
       password,
@@ -81,7 +75,6 @@ const Register = () => {
       setErrorMsg("");
       setLoading(true);
       const { data, error } = await register();
-      console.log(data);
       if (!error && data) {
         setMsg("Registration Successful!");
         setIsRegistered(true);
