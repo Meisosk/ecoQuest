@@ -16,7 +16,6 @@ const Register = () => {
 
   const navigate = useNavigate();
 
-
   //using refs avoids unnecessary re-renders whenever we enter the input
 
   const register = () => {
@@ -80,7 +79,7 @@ const Register = () => {
       if (!error && data) {
         setMsg("Registration Successful!");
         setTimeout(() => {
-          navigate('/profile');
+          navigate("/profile");
           window.location.reload();
         }, 1000);
         setIsRegistered(true);
@@ -90,7 +89,7 @@ const Register = () => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   useEffect(() => {
     if (signInSectionRef.current) {
@@ -105,9 +104,11 @@ const Register = () => {
         className="bg-primary w-3/5 rounded-3xl flex justify-center mt-24 mb-24 p-5 sign-container"
       >
         <div>
-          <h2 className="text-center mb-20 text-6xl mt-16">Sign Up</h2>
+          <h2 className="text-center text-words mb-20 text-6xl mt-16">
+            Sign Up
+          </h2>
 
-          <form onSubmit={handleSubmit} className="text-gray-100">
+          <form onSubmit={handleSubmit} className="text-words">
             <div className="mb-4">
               <label htmlFor="username">Username:</label>
               <input
@@ -179,7 +180,7 @@ const Register = () => {
                 Click Here!
               </Link>
             </p>
-        
+
             <div className="text-center mt-20 mb-20">
               <button
                 disabled={loading}

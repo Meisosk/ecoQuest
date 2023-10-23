@@ -56,7 +56,7 @@ function NavBar() {
               className="flex justify-start  flex-col w-full md:w-auto items-start  pb-1 "
             >
               <Link to="/" className="text-base leading-4 text-gray-300  ">
-                <button className="flex justify-around items-center space-x-6 hover:text-white  focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full md:w-52">
+                <button className="flex justify-around items-center space-x-6 hover:text-white  focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full bg-navBtn md:w-52">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -78,7 +78,7 @@ function NavBar() {
                 to="/quests"
                 className="text-base leading-4 text-gray-300  "
               >
-                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full md:w-52">
+                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full bg-navBtn md:w-52">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -100,7 +100,7 @@ function NavBar() {
                 to="/facilities"
                 className="text-base leading-4 text-gray-300  "
               >
-                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none w-full md:w-52">
+                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none w-full bg-navBtn md:w-52">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -123,7 +123,7 @@ function NavBar() {
                 to="/donate"
                 className="text-base leading-4 text-gray-300  "
               >
-                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full md:w-52">
+                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full bg-navBtn md:w-52">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -142,7 +142,7 @@ function NavBar() {
                 </button>
               </Link>
               <Link to="/about" className="text-base leading-4 text-gray-300 ">
-                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full md:w-52">
+                <button className="flex justify-around items-center space-x-6 hover:text-white focus:bg-gray-700 focus:text-white hover:bg-gray-700 text-gray-400 px-3 py-8 rounded-none  w-full bg-navBtn md:w-52">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
