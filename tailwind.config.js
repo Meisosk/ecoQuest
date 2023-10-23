@@ -27,6 +27,7 @@ export default {
         button: "#F18320",
         landbg: "#5B805F",
         words: "#FAF9F6",
+        navBtn: "#1b1b1b",
       },
     },
   },

@@ -12,15 +12,13 @@ const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
 
- 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setErrorMsg('');
+      setErrorMsg("");
       setLoading(true);
       if (!passwordRef.current?.value || !emailRef.current?.value) {
-        setErrorMsg('Please fill in the fields');
+        setErrorMsg("Please fill in the fields");
         return;
       }
 
@@ -31,13 +29,13 @@ const Login = () => {
       if (error) {
         setErrorMsg(error.message);
       } else if (user && session) {
-          setTimeout(() => {
-            navigate('/profile');
-            window.location.reload();
-          }, 1000); 
-        }
+        setTimeout(() => {
+          navigate("/profile");
+          window.location.reload();
+        }, 1000);
+      }
     } catch (error) {
-      setErrorMsg('Email or Password Incorrect');
+      setErrorMsg("Email or Password Incorrect");
     }
     setLoading(false);
   };
@@ -48,8 +46,6 @@ const Login = () => {
     }
   }, []);
 
-
- 
   return (
     <>
       <div
@@ -57,8 +53,10 @@ const Login = () => {
         className="bg-primary w-3/5 rounded-3xl flex justify-center mt-24 mb-24 p-5 sign-container"
       >
         <div>
-          <h2 className="text-center mb-20 text-6xl mt-16">Sign In</h2>
-          <form onSubmit={handleSubmit}>
+          <h2 className="text-center mb-20 text-6xl mt-16 text-words">
+            Sign In
+          </h2>
+          <form onSubmit={handleSubmit} className="text-words">
             <div className="mb-4">
               <label htmlFor="email">Email:</label>
               <input
