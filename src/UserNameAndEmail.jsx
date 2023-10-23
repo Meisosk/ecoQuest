@@ -36,7 +36,7 @@ export const UserProvider = ({ children }) => {
 
         const { data: emailData, error: emailError } = await supabase
           .from("users")
-          .select("email, level")
+          .select("email, username")
           .eq("id", user.data.user.id)
           .single();
 
