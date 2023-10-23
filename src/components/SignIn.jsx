@@ -11,7 +11,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
-  const [loggedIn, setLoggedIn] = useState(false);
+
  
 
   const handleSubmit = async (e) => {
@@ -31,7 +31,6 @@ const Login = () => {
       if (error) {
         setErrorMsg(error.message);
       } else if (user && session) {
-        setLoggedIn(true);
           setTimeout(() => {
             navigate('/profile');
             window.location.reload();
