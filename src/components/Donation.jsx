@@ -13,7 +13,7 @@ function Donation() {
             Cool Earth
           </a>
         </p>
-        <p className="text-center text-sm p-3 ">
+        <p className="text-center text-sm p-3  text-words">
           Cool Earth, boasting a perfect 100% Charity Navigator score, partners
           with indigenous communities to safeguard endangered rainforests,
           making a significant impact in the fight against climate change.
@@ -29,7 +29,7 @@ function Donation() {
             Clean Air Task Force
           </a>
         </p>
-        <p className="text-center text-sm p-3">
+        <p className="text-center text-sm p-3 text-words">
           The Clean Air Task Force is a highly esteemed organization dedicated
           to addressing the critical issue of air pollution and climate change.
           The group has earned an impressive 99% rating on Charity Navigator,
@@ -47,7 +47,7 @@ function Donation() {
             Carbon180
           </a>
         </p>
-        <p className="text-center text-sm p-3">
+        <p className="text-center text-sm p-3 text-words">
           Carbon180 is reversing two centuries of carbon emissions. They work
           with policymakers, entrepreneurs, and peer organizations across the US
           to design policies that will bring necessary carbon removal solutions
@@ -64,7 +64,7 @@ function Donation() {
             Earth Island
           </a>
         </p>
-        <p className="text-center text-sm p-3">
+        <p className="text-center text-sm p-3 text-words">
           Earth Island is a leading nonprofit organization that champions
           environmental sustainability and grassroots initiatives globally.
           Known for its exceptional commitment to fostering positive change,
@@ -82,7 +82,7 @@ function Donation() {
             EarthJustice
           </a>
         </p>
-        <p className="text-center text-sm p-3">
+        <p className="text-center text-sm p-3 text-words">
           Earthjustice is a renowned nonprofit legal organization dedicated to
           protecting our environment and public health through the power of the
           law. With a steadfast commitment to ensuring a just and sustainable
@@ -101,7 +101,7 @@ function Donation() {
             TerraPraxis
           </a>
         </p>
-        <p className="text-center text-sm p-3">
+        <p className="text-center text-sm p-3 text-words">
           Powered by philanthropy, Terra Praxis designs transformative
           strategies to address the most significant risks to the energy
           transition mapping uncharted decarbonization territory.

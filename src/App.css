@@ -144,7 +144,7 @@
 
   .form {
     width: 80vw;
-    left: 10%;
+    left: 5%;
   }
 
   .settings-mobile {
@@ -217,6 +217,10 @@
   .label-text {
     font-size: 14px;
   }
+
+  .form {
+    left: 1%;
+  }
 }
 
 @media (max-width: 400px) {
@@ -262,5 +266,9 @@
 
   .clothes-title {
     font-size: 15px;
+  }
+
+  .form {
+    left: -5%;
   }
 }

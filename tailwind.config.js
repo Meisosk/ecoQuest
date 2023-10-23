@@ -26,6 +26,7 @@ export default {
         xp: "#4F741F",
         button: "#F18320",
         landbg: "#5B805F",
+        words: "#FAF9F6",
       },
     },
   },
