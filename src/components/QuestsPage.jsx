@@ -92,7 +92,7 @@ function QuestsPage() {
           <div className="flex justify-evenly gap-5 flex-wrap rounded-3xl">
             {quests.map((quest) => (
               <div
-                className="bg-primary rounded-3xl flex flex-col p-5 shadow-2xl quest-card"
+                className="bg-primary rounded-3xl flex flex-col p-5 shadow-2xl quest-card text-words"
                 key={quest.id}
               >
                 <div>

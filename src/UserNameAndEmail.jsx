@@ -12,11 +12,12 @@ export const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
-  const [level, setLevel] = useState(null)
+  const [level, setLevel] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
       const user = await getMyUserData();
+
       if (user) {
         setUserData(user);
 
@@ -28,7 +29,7 @@ export const UserProvider = ({ children }) => {
 
         if (!userError) {
           setUsername(userData.username);
-          setLevel(userData.level)
+          setLevel(userData.level);
         } else {
           console.error("Error fetching username:", userError);
         }

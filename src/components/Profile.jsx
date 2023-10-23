@@ -257,7 +257,7 @@ function Profile() {
   };
 
   return (
-    <div className="w-full h-full flex items-center flex-col ">
+    <div className="w-full h-full flex items-center flex-col text-words">
       <div className="text-center m-1.7 ">
         <h3 className="text-2xl">{username}</h3>
         <p>{email}</p>
