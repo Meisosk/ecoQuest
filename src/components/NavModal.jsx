@@ -175,7 +175,7 @@ function NavModal({ closeModal }) {
                 <circle cx="12" cy="10" r="3" />
                 <circle cx="12" cy="12" r="10" />
               </svg>
-              Proflie
+              Profile
             </button>
             <hr />
           </Link>

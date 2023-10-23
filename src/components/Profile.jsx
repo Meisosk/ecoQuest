@@ -149,7 +149,7 @@ function Profile() {
 
   useEffect(() => {
     getFriends();
-  }, [friends]);
+  }, []);
 
   const insertCompletedQuest = async (questId) => {
     const user = await supabase.auth.getUser();
@@ -175,11 +175,7 @@ function Profile() {
     }
   };
 
-  const getRandomImage = () => {
-    const randomIndex = Math.floor(Math.random() * 3);
-    const randomImages = [achive1, achive2, achive3];
-    return randomImages[randomIndex];
-  };
+
 
   const fetchUpdatedAcceptedQuests = async () => {
     const data = await FilterAcceptedQuests();
@@ -267,6 +263,12 @@ function Profile() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" "); //if you don't put a space in here, it will not put spaces between the rejoined words
   }
+
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * 3);
+    const randomImages = [achive1, achive2, achive3];
+    return randomImages[randomIndex];
+  };
 
   return (
     <div className="w-full h-full flex items-center flex-col text-words">
