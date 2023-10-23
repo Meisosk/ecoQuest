@@ -37,7 +37,6 @@ function Profile() {
     const fetchFriendsData = async () => {
       const data = await getFriends();
       setFriendsData(data);
-      //this is just friendsId
     };
     fetchFriendsData();
   }, []);
@@ -47,7 +46,7 @@ function Profile() {
       if (friendsData.length > 0) {
         const { data: friendUsernames, error } = await supabase
           .from("users")
-          .select("id, username, level, created_at")
+          .select("id, username, created_at")
           .in(
             "id",
             friendsData.map((friend) => friend.friendId)
@@ -57,7 +56,6 @@ function Profile() {
           console.error("Error fetching friend usernames", error);
         } else {
           setFriends(friendUsernames);
-          //friend is id, username, level
         }
       }
     };
