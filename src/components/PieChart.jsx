@@ -14,7 +14,7 @@ const PieChart = () => {
       options={{
         labels: ["Clothes", "Car", "Electricity", "Heating", "Diet"],
         title: {
-          text: "Breakdown by Equipment",
+          text: "Breakdown by Category",
           align: "center",
           style: {
             color: "#FAF9F6",
