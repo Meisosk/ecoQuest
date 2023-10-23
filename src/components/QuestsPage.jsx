@@ -1,11 +1,14 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../App";
 import { dataFetchingFunctions } from "../GetTables";
+import { Link } from "react-router-dom";
+
 const { GetQuests } = dataFetchingFunctions;
 
 function QuestsPage() {
   const [quests, setQuests] = useState([]);
   const [user, setUser] = useState([]);
+  const [questAccepted, setQuestAccepted] = useState(false);
 
   function capitalizeWords(str) {
     return str
@@ -14,7 +17,6 @@ function QuestsPage() {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" "); //if you don't put a space in here, it will not put spaces between the rejoined words
   }
-
 
   useEffect(() => {
     const userLoggedIn = async () => {
@@ -37,7 +39,7 @@ function QuestsPage() {
     userData();
   }, []);
 
-const compareQuestsLevel = (a, b) => a.level - b.level
+  const compareQuestsLevel = (a, b) => a.level - b.level;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,6 +57,8 @@ const compareQuestsLevel = (a, b) => a.level - b.level
       console.error("User is not logged in");
       return;
     }
+
+    setQuestAccepted(true);
 
     const { data: existingAccepted, error: existingError } = await supabase
       .from("Accepted")
@@ -90,7 +94,15 @@ const compareQuestsLevel = (a, b) => a.level - b.level
 
   return (
     <>
-      <div className="ml-5 mt-10 w-70">
+      <div className="ml-5 mt-10 w-70 flex items-center flex-col">
+        {questAccepted ? (
+          <div className=" text-center  bg-primary rounded-3xl m-3 mb-10 w-4/5 p-7 text-xl ">
+            Accepted Quests are found{" "}
+            <Link to="/profile" className="text-button">
+              Here
+            </Link>
+          </div>
+        ) : null}
         {user && user.data && user.data.user !== null ? (
           <div className="flex justify-evenly gap-5 flex-wrap rounded-3xl">
             {quests.map((quest) => (

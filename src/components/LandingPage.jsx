@@ -5,23 +5,19 @@ import factories from "../assets/Vector (1).png";
 import { Link } from "react-router-dom";
 
 function LandingPage() {
-  const [treeDivHeight, setTreeDivHeight] = useState(275); // Initial height for the tree-div
+  const [treeDivHeight, setTreeDivHeight] = useState(37);
 
   useEffect(() => {
-    // Add an event listener to track the scroll position
     window.addEventListener("scroll", parallaxEffect);
     return () => {
-      // Remove the event listener when the component unmounts
       window.removeEventListener("scroll", parallaxEffect);
     };
   }, []);
 
   const parallaxEffect = () => {
-    // Calculate the scroll position
     const scrollPosition = window.scrollY;
 
-    // Adjust the position and height of the tree-div
-    const newHeight = Math.max(273 + scrollPosition, 0); // Minimum height of 0
+    const newHeight = Math.max(37 + scrollPosition * 0.15, 0);
     setTreeDivHeight(newHeight);
   };
 
@@ -55,7 +51,7 @@ function LandingPage() {
         <div
           className="w-screen bg-secondary tree-div overflow-hidden z-10"
           style={{
-            maxHeight: `${treeDivHeight}px`,
+            maxHeight: `${treeDivHeight}vh`,
             width: "100%",
             position: "relative",
           }}
