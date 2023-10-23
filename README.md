@@ -1,13 +1,13 @@
 <p align="center">
-  <a href="" rel="" target="_blank"><img width="150" src="https://github.com/brittani-ericksen/SquadMate-Frontend/blob/main/public/squadmatelogo.png" alt="SquadMate Logo"></a></p>
+  <a href="" rel="" target="_blank"><img width="150" src="./src/assets/ecoquestlogo.png" alt="SquadMate Logo"></a></p>
 </p>
 
 <h1 align="center">EcoQuest</h1>
 <h2 align="center">Your Planet, Your Quest</h2>
 </div>
 
- EcoQuest is the beginning of the vision to empower individuals with tangible, impactful actions they can take to reduce their carbon footprint. Rather than inundating users with impractical solutions or urging them to perform actions that may be out of their control, EcoQuest focuses on the power of accessible, achievable change.
-But EcoQuest doesn't stop at individual action. One of its most compelling features is the ability to uncover the truth about major polluting facilities in your area. By providing access to crucial information, the app empowers users to become advocates for change in their communities and hold big businesses accountable for their environmental impact.
+ <p>EcoQuest is the beginning of the vision to empower individuals with tangible, impactful actions they can take to reduce their carbon footprint. Rather than inundating users with impractical solutions or urging them to perform actions that may be out of their control, EcoQuest focuses on the power of accessible, achievable change.</p></br>
+<p>But EcoQuest doesn't stop at individual action. One of its most compelling features is the ability to uncover the truth about major polluting facilities in your area. By providing access to crucial information, the app empowers users to become advocates for change in their communities and hold big businesses accountable for their environmental impact.</p>
 
  
 ## Demo
@@ -53,7 +53,7 @@ To install EcoQuest use *npm install*:
 Deployed@**[EcoQuest](https://eco-quest.netlify.app/)**
 
 ## Usage
-Click the Sign Up button top right of the landing and it will smoothly bring you down to the registration form to sign up. Use a strong password. When you successfully register, you will be taken to your profile page (denoted by the small person icon on the lefthand side of the website view). You can add a friend by clicked add friend and typing in their username. You will start with no quests and no carbon footprint. Go to home to enter your data into the carbon calculator. This information will populate into a category breakdown. Go to Quests to accept some quests. Now you have accepted quests in your profile. When you complete them, they will add experience and completed status to your home page. When you add friends, you will see their levels on your home page. 
+<p>Click the Sign Up button top right of the landing and it will smoothly bring you down to the registration form to sign up. Use a strong password.</p></br> <p>When you successfully register, you will be taken to your profile page (denoted by the small person icon on the lefthand side of the website view). </p></br><p>You can add a friend by clicked add friend and typing in their username.</p> <p>You will start with no quests and no carbon footprint. Go to home to enter your data into the carbon calculator. </p> </br><p>This information will populate into a category breakdown. Go to Quests to accept some quests. Now you have accepted quests in your profile.</p></br> <p>When you complete them, they will add experience and completed status to your home page. When you add friends, you will see their levels on your home page. </p>
 
 
 ## Stretch Goals

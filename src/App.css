@@ -2,6 +2,10 @@
   display: none;
 }
 
+button {
+  background-color: #1b1b1b;
+}
+
 .form-selector {
   min-width: 100px;
 }
@@ -202,6 +206,10 @@
 
   .settings-button {
     width: 8rem;
+  }
+
+  .tree-div {
+    height: 250px;
   }
 }
 
