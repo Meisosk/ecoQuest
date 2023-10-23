@@ -102,8 +102,8 @@ function Form({ onSubmit }) {
   };
 
   return (
-    <div className="absolute w-screen inset-x-0 h-screen bg-gray-800 bg-opacity-50 z-10">
-      <div className="bg-gray-300 p-10 relative top-64 left-1/4 w-2/4 rounded-3xl form">
+    <div className="absolute w-screen inset-x-0 h-auto bg-gray-800 bg-opacity-50 z-10 p-10">
+      <div className="bg-gray-300 p-10 relative left-1/4 w-2/4 rounded-3xl form">
         <form onSubmit={(e) => onSubmit(e)}>
           <p className="text-gray-900 text-center">
             This information will only save if you are{" "}
@@ -377,7 +377,7 @@ function Form({ onSubmit }) {
               />
             </div>
           </div>
-          <div className="flex justify-start items-center">
+          <div className="flex justify-center items-center m-5">
             <div className="clothes-amount">
               <label
                 htmlFor="carMilesDriven"

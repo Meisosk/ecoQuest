@@ -14,22 +14,22 @@ const PieChart = () => {
       options={{
         labels: ["Clothes", "Car", "Electricity", "Heating", "Diet"],
         title: {
-          text: "Breakdown by ment",
+          text: "Breakdown by Equipment",
           align: "center",
           style: {
-            color: "#ffffff",
+            color: "#FAF9F6",
             fontSize: "20px",
             fontFamily: "'Lato', sans-serif",
           },
         },
         colors: ["#EDA408", "#874210", "#4F741F", "#95D329", "#d3891a"],
         style: {
-          colors: "#ffffff",
+          colors: "#FAF9F6",
         },
         legend: {
           position: "bottom",
           labels: {
-            colors: "#fffff",
+            colors: "#FAF9F6",
           },
         },
       }}

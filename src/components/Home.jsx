@@ -96,7 +96,7 @@ function Home() {
       {formVisible && <Form onSubmit={onSubmit} />}
       <div className="p-8 w-full bot">
         <div className="flex flex-col justify-between bg-primary rounded-3xl w-full p-8 pb-12 home-container">
-          <div className="flex justify-around p-2">
+          <div className="flex justify-around p-2 text-words">
             <div>Experience</div>
             <div>
               Lv. {level} {levelName}
@@ -127,7 +127,7 @@ function Home() {
           </div>
           <div className="flex flex-col w-6/12 ">
             <div className=" bg-primary mt-1.7 rounded-3xl overflow-y-scroll h-[30vh] home-container">
-              <p className="text-center text-2xl p-2 pb-5">
+              <p className="text-center text-2xl p-2 pb-5 text-words">
                 Recent Achievements
               </p>
               <div className="flex justify-center flex-col">
@@ -137,7 +137,7 @@ function Home() {
                       completedQuests.map((achievement, index) => (
                         <div
                           key={index}
-                          className="flex justify-between pl-9 pr-9 pb-3 items-center"
+                          className="flex justify-between pl-9 pr-9 pb-3 items-center text-words"
                         >
                           <img className="h-16" src={getRandomImage()} alt="" />
                           <p>{achievement.text}</p>
@@ -153,7 +153,7 @@ function Home() {
               </div>
             </div>
             <div className=" bg-primary mt-1.7 rounded-3xl  h-[35vh] overflow-y-scroll pb-5 home-container">
-              <p className="text-center text-xl  p-2 ">Leaderboard</p>
+              <p className="text-center text-xl  p-2 text-words">Leaderboard</p>
               {/* leaderboard */}
               <div className="flex justify-center mt-5">
                 <div className="relative overflow-x-auto w-4/6">

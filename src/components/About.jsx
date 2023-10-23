@@ -11,7 +11,7 @@ function About() {
             <h1 className="text-slate-200 text-5xl mt-4 heading-text">
               Our Mission
             </h1>
-            <p className="text-xl mt-[.5rem] w-80 about-text body-text">
+            <p className="text-xl mt-[.5rem] w-80 about-text body-text text-words">
               At EcoQuest, we empower individuals to make sustainable choices
               for a healthier planet. Our mission is to provide users with
               tools, knowledge, and inspiration to reduce their carbon
