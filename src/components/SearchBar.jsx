@@ -9,15 +9,13 @@ const SearchBar = (props) => {
   const [Cities, setCities] = useState([]);
   const [Filtered, setFiltered] = useState([]);
   const [chosenCity, setChosenCity] = useState("Nothing");
-  
 
   useEffect(() => {
     const location = async () => {
       const user = await supabase.auth.getUser();
 
-      if (!user) {
-        console.error("User is not logged in");
-        return;
+      if (!user.data.user) {
+        return null;
       }
 
       const userId = user.data.user.id;
@@ -66,9 +64,13 @@ const SearchBar = (props) => {
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
     setInput(inputValue);
-   const filteredCities = [...new Set(Cities.filter((city) =>
-    city.toLowerCase().includes(inputValue.toLowerCase())
-  ))];
+    const filteredCities = [
+      ...new Set(
+        Cities.filter((city) =>
+          city.toLowerCase().includes(inputValue.toLowerCase())
+        )
+      ),
+    ];
 
     setFiltered(filteredCities);
   };
@@ -77,11 +79,13 @@ const SearchBar = (props) => {
     if (input !== "") {
       setChosenCity(input);
       setInput("");
-  
-      props.onFilterResults(props.data.filter((facility) =>
-        facility.CityName.toLowerCase().includes(input.toLowerCase())
-      ));
-  
+
+      props.onFilterResults(
+        props.data.filter((facility) =>
+          facility.CityName.toLowerCase().includes(input.toLowerCase())
+        )
+      );
+
       setFiltered(Cities);
     }
   };
@@ -110,11 +114,17 @@ const SearchBar = (props) => {
             </button>
           </div>
           <div className="relative">
-            <div className={`search-result-container absolute w-250 z-10 ${input === '' ? 'hidden' : ''}`}>
+            <div
+              className={`search-result-container absolute w-250 z-10 ${
+                input === "" ? "hidden" : ""
+              }`}
+            >
               {topFour.map((res, index) => (
                 <div
                   key={index}
-                  className={`bg-slate-300 text-black flex w-[330px] p-5 relative ${index === topFour.length - 1 ? 'rounded-b-3xl' : ''}`}
+                  className={`bg-slate-300 text-black flex w-[330px] p-5 relative ${
+                    index === topFour.length - 1 ? "rounded-b-3xl" : ""
+                  }`}
                   onClick={() => setInput(res)}
                 >
                   {res}

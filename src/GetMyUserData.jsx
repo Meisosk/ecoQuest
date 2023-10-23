@@ -1,12 +1,16 @@
 import { supabase } from "./App";
 
 async function getMyUserData() {
-  const user = await supabase.auth.getUser();
-  if (user) {
-    return user;
+  try {
+    const user = await supabase.auth.getUser();
+    if (!user.data.user) {
+      return null;
+    } else {
+      return user;
+    }
+  } catch (error) {
+    return null;
   }
-
-  return null;
 }
 
 export default getMyUserData;

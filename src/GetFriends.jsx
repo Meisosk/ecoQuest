@@ -2,9 +2,7 @@ import { supabase } from "./App";
 
 async function getUsernames() {
   try {
-    const { data, error } = await supabase
-    .from("users")
-    .select("username");
+    const { data, error } = await supabase.from("users").select("username");
 
     if (error) {
       console.error("Error fetching data: ", error);
@@ -36,6 +34,9 @@ async function getUserIds() {
 
 async function getFriends() {
   const user = await supabase.auth.getUser();
+  if (!user.data.user) {
+    return null;
+  }
 
   try {
     const { data, error } = await supabase
@@ -47,7 +48,6 @@ async function getFriends() {
       console.error("Error fetching data: ", error);
       return null;
     } else {
-     //the raw data is a friendsId array
       return data;
     }
   } catch (error) {
