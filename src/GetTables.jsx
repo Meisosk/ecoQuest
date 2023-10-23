@@ -2,9 +2,8 @@ import { supabase } from "./App";
 
 async function GetQuests() {
   const user = await supabase.auth.getUser();
-
-  if (!user) {
-    return;
+  if (!user.data.user) {
+    return null;
   }
 
   const acceptedQuery = await supabase
@@ -57,8 +56,8 @@ async function GetCities() {
 
 async function AddFormData(formDataArray) {
   const user = await supabase.auth.getUser();
-  if (!user) {
-    return;
+  if (!user.data.user) {
+    return [];
   }
 
   const { error } = await supabase
@@ -67,6 +66,7 @@ async function AddFormData(formDataArray) {
       FormData: formDataArray,
     })
     .eq("id", user.data.user.id);
+
   if (error) {
     console.error("Error updating FormData: ", error);
     return null;
@@ -76,14 +76,14 @@ async function AddFormData(formDataArray) {
 
 async function GetFormData() {
   const user = await supabase.auth.getUser();
-  if (!user) {
-    return;
+  if (!user.data.user) {
+    return null;
   }
-
   const { data, error } = await supabase
     .from("users")
     .select("FormData")
     .eq("id", user.data.user.id);
+
   if (error) {
     console.error("Error updating FormData: ", error);
     return null;
@@ -145,30 +145,10 @@ async function GetLocation(userId) {
   return data;
 }
 
-// async function FilterAcceptedQuests() {
-//   const user = await supabase.auth.getUser();
-
-//   if (!user) {
-//     return;
-//   }
-
-//   const { data, error } = await supabase
-//     .from("Quests")
-//     .select("*, Accepted!inner(*)")
-//     .neq("id", user.data.user.id);
-
-//   if (error) {
-//     console.error("Error fetching data: ", error);
-//     return [];
-//   } else {
-//     return data;
-//   }
-// }
-
 async function FilterAcceptedQuests() {
   const user = await supabase.auth.getUser();
 
-  if (!user) {
+  if (!user.data.user) {
     return [];
   }
 
@@ -189,10 +169,10 @@ async function FilterAcceptedQuests() {
 
 async function FilterCompletedQuests() {
   const user = await supabase.auth.getUser();
-
-  if (!user) {
+  if (!user.data.user) {
     return [];
   }
+
   const userId = user.data.user.id;
 
   const { data, error } = await supabase
