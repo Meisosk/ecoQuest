@@ -111,13 +111,16 @@ function Form({ onSubmit }) {
               signed in!
             </Link>
           </p>
+          <p className="text-gray-900 text-center text-xl pt-5">
+            Please input your yearly usage of the following:
+          </p>
           <br />
           <div className="mb-4">
             <label
               htmlFor="carMilesDriven"
               className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text "
             >
-              Miles Driven by Car (Yearly):
+              Miles Driven by Car:
             </label>
             <input
               type="number"
@@ -158,6 +161,9 @@ function Form({ onSubmit }) {
                 className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
               >
                 Electricity Usage (kWh):
+                <p className="text-sm text-gray-500">
+                  If unsure click your house size
+                </p>
               </label>
               <input
                 type="number"
@@ -199,6 +205,9 @@ function Form({ onSubmit }) {
                 className="block mb-2 text-lg font-medium pl-1 text-gray-900 label-text"
               >
                 Heating Oil Consumption (gallons):
+                <p className="text-sm text-gray-500 ">
+                  If unsure click your city temp
+                </p>
               </label>
               <input
                 type="number"

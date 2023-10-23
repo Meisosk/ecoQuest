@@ -40,7 +40,9 @@ function Facilities() {
                 </p>
                 <p className="mb-3">
                   GHG QUANTITY (METRIC TONS CO2e):&nbsp;&nbsp;&nbsp;
-                  <span className=" text-2xl">{facility.Emissions}</span>
+                  <span className=" text-2xl">
+                    {facility.Emissions.toLocaleString()}
+                  </span>
                 </p>
                 <p className="mb-3">
                   Location:&nbsp;&nbsp;
