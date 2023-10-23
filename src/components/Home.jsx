@@ -47,7 +47,7 @@ function Home() {
       const friendIds = await getFriends();
       const { data: friendUsersAndLevels, error } = await supabase
         .from("users")
-        .select("id, username, level")
+        .select("id, username, points")
         .in(
           "id",
           friendIds.map((friend) => friend.friendId)
@@ -57,7 +57,7 @@ function Home() {
         console.error("Error fetching friend usernames", error);
       } else {
         const sortedFriends = friendUsersAndLevels.sort(
-          (a, b) => b.level - a.level
+          (a, b) => b.points - a.points
         );
         setFriends(sortedFriends);
       }
@@ -94,7 +94,7 @@ function Home() {
     <>
       {formVisible && <Form onSubmit={onSubmit} />}
       <div className="p-8 w-full bot">
-        <div className="flex flex-col justify-between bg-primary rounded-3xl w-full p-8 pb-12 home-container">
+        <div className="flex flex-col justify-between bg-primary rounded-3xl w-full p-8 pb-12 home-container shadow-md">
           <div className="flex justify-around p-2 text-words">
             <div>Experience</div>
             <div>
@@ -115,7 +115,7 @@ function Home() {
           </div>
         </div>
         <div className="flex h-4/5 justify-between home-bot">
-          <div className="bg-primary h-[70vh] w-6/12 home-container rounded-3xl m-1.7 ml-0 ">
+          <div className="bg-primary h-[70vh] w-6/12 home-container rounded-3xl m-1.7 ml-0 shadow-md">
             <PieChart />
             <p
               className="float-right p-5 hover:cursor-pointer text-lg  text-button "
@@ -125,7 +125,7 @@ function Home() {
             </p>
           </div>
           <div className="flex flex-col w-6/12 ">
-            <div className=" bg-primary mt-1.7 rounded-3xl overflow-y-scroll h-[30vh] home-container">
+            <div className=" bg-primary mt-1.7 rounded-3xl overflow-y-scroll h-[30vh] home-container shadow-md">
               <p className="text-center text-2xl p-2 pb-5 text-words">
                 Recent Achievements
               </p>
@@ -151,7 +151,7 @@ function Home() {
                 </div>
               </div>
             </div>
-            <div className=" bg-primary mt-1.7 rounded-3xl  h-[35vh] overflow-y-scroll pb-5 home-container">
+            <div className=" bg-primary mt-1.7 rounded-3xl  h-[35vh] overflow-y-scroll pb-5 home-container shadow-md">
               <p className="text-center text-xl  p-2 text-words">Leaderboard</p>
               {/* leaderboard */}
               <div className="flex justify-center mt-5">
@@ -187,7 +187,7 @@ function Home() {
                               {friend.username}
                             </td>
                             <td className="px-6 py-4 text-words">
-                              {friend.level}
+                              {Math.floor(friend.points / 100)}
                             </td>
                           </tr>
                         ))}
