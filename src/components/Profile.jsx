@@ -33,6 +33,7 @@ function Profile() {
 
   const { emissionTotal } = useForm();
 
+
   useEffect(() => {
     const fetchFriendsData = async () => {
       const data = await getFriends();
@@ -47,7 +48,7 @@ function Profile() {
       if (friendsData.length > 0) {
         const { data: friendUsernames, error } = await supabase
           .from("users")
-          .select("id, username, level")
+          .select("id, username, level, created_at")
           .in(
             "id",
             friendsData.map((friend) => friend.friendId)
@@ -177,6 +178,12 @@ function Profile() {
     }
   };
 
+  const getRandomImage = () => {
+    const randomIndex = Math.floor(Math.random() * 3);
+    const randomImages = [achive1, achive2, achive3];
+    return randomImages[randomIndex];
+  };
+
   const fetchUpdatedAcceptedQuests = async () => {
     const data = await FilterAcceptedQuests();
     setAcceptedQuests(data);
@@ -256,6 +263,15 @@ function Profile() {
     }
   };
 
+
+  function capitalizeWords(str) {
+    return str
+      .toLowerCase()
+      .split(" ") //if you don't put a space in here, it will split on each character instead of each word!
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "); //if you don't put a space in here, it will not put spaces between the rejoined words
+  }
+
   return (
     <div className="w-full h-full flex items-center flex-col text-words">
       <div className="text-center m-1.7 ">
@@ -296,7 +312,7 @@ function Profile() {
                         Name
                       </th>
                       <th scope="col" className="px-6 py-3">
-                        Last Login
+                        Member Since
                       </th>
                     </tr>
                   </thead>
@@ -312,7 +328,7 @@ function Profile() {
                         >
                           {friend.username}
                         </th>
-                        <td className="px-6 py-4">{signedInStatus}</td>
+                        <td className="px-6 py-4">{moment(friend.created_at).format('MMMM D, YYYY')}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -354,10 +370,12 @@ function Profile() {
             <div className="flex justify-center flex-col">
               {acceptedQuests.length > 0 ? (
                 acceptedQuests.map((achievement, index) => (
-                  <div key={index} className="mb-6 p-3">
-                    <div className="flex justify-between items-center w-full">
-                      <img className="h-16" src={achive1} alt="" />
-                      <p>{achievement.text}</p>
+                  <div key={index} className="mb-6 p-3 items-center">
+                    <div className="flex w-full">
+                      <img className="flex h-16" src={getRandomImage()} alt="" />
+                      <div className="self-center">
+                      <p className="ml-3">{capitalizeWords(achievement.text)}</p>
+                      </div>
                     </div>
                     <button
                       className="bg-button mr-5 p-2 py-1"
