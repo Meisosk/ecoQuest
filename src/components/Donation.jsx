@@ -3,7 +3,7 @@ import React from "react";
 function Donation() {
   return (
     <div className="grid grid-cols-3 mt-10 mb-10 justify-items-center donate-col">
-      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4 shadow-lg">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -19,7 +19,7 @@ function Donation() {
           making a significant impact in the fight against climate change.
         </p>
       </div>
-      <div className=" w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className=" w-4/5 bg-primary rounded-3xl m-1.7 p-4 shadow-lg">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-3xl "
@@ -37,7 +37,7 @@ function Donation() {
           solutions for cleaner air and a healthier planet.
         </p>
       </div>
-      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4 shadow-lg">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -54,7 +54,7 @@ function Donation() {
           to gigaton scale.
         </p>
       </div>
-      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4 shadow-lg">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -72,7 +72,7 @@ function Donation() {
           the environment and empowering communities.
         </p>
       </div>
-      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4 shadow-lg">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
@@ -91,7 +91,7 @@ function Donation() {
           its inhabitants.
         </p>
       </div>
-      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4">
+      <div className="h-auto w-4/5 bg-primary rounded-3xl m-1.7 p-4 shadow-lg ">
         <p className="text-center p-5">
           <a
             className="text-slate-200 text-4xl "
