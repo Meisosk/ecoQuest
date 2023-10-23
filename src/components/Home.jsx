@@ -179,12 +179,16 @@ function Home() {
                           >
                             <th
                               scope="row"
-                              className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                              className="px-6 py-4 font-medium  whitespace-nowrap text-words"
                             >
                               {index + 1}
                             </th>
-                            <td className="px-6 py-4">{friend.username}</td>
-                            <td className="px-6 py-4">{friend.level}</td>
+                            <td className="px-6 py-4 text-words">
+                              {friend.username}
+                            </td>
+                            <td className="px-6 py-4 text-words">
+                              {friend.level}
+                            </td>
                           </tr>
                         ))}
                       </tbody>

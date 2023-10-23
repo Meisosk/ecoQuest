@@ -33,7 +33,6 @@ function Profile() {
 
   const { emissionTotal } = useForm();
 
-
   useEffect(() => {
     const fetchFriendsData = async () => {
       const data = await getFriends();
@@ -263,7 +262,6 @@ function Profile() {
     }
   };
 
-
   function capitalizeWords(str) {
     return str
       .toLowerCase()
@@ -306,7 +304,7 @@ function Profile() {
             <div className="flex justify-center mt-5">
               <div className="relative overflow-x-auto w-4/6">
                 <table className="w-full  text-gray-500 dark:text-gray-400 text-lg">
-                  <thead className="text-sm text-gray-700 uppercase bg-background dark:text-gray-400">
+                  <thead className="text-sm text-gray-700 uppercase bg-background dark:text-gray-400 ">
                     <tr>
                       <th scope="col" className="px-6 py-3">
                         Name
@@ -324,11 +322,13 @@ function Profile() {
                       >
                         <th
                           scope="row"
-                          className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          className="px-6 py-4 font-medium text-words whitespace-nowrap "
                         >
                           {friend.username}
                         </th>
-                        <td className="px-6 py-4">{moment(friend.created_at).format('MMMM D, YYYY')}</td>
+                        <td className="px-6 py-4">
+                          {moment(friend.created_at).format("MMMM D, YYYY")}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -372,9 +372,15 @@ function Profile() {
                 acceptedQuests.map((achievement, index) => (
                   <div key={index} className="mb-6 p-3 items-center">
                     <div className="flex w-full">
-                      <img className="flex h-16" src={getRandomImage()} alt="" />
+                      <img
+                        className="flex h-16"
+                        src={getRandomImage()}
+                        alt=""
+                      />
                       <div className="self-center">
-                      <p className="ml-3">{capitalizeWords(achievement.text)}</p>
+                        <p className="ml-3">
+                          {capitalizeWords(achievement.text)}
+                        </p>
                       </div>
                     </div>
                     <button
