@@ -37,10 +37,13 @@ function QuestsPage() {
     userData();
   }, []);
 
+const compareQuestsLevel = (a, b) => a.level - b.level
+
   useEffect(() => {
     const fetchData = async () => {
       const data = await GetQuests();
-      setQuests(data);
+      const sortedQuests = data.sort(compareQuestsLevel);
+      setQuests(sortedQuests);
     };
     fetchData();
   }, []);
