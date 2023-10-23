@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../App";
 import deleteUser from "../DeleteUser";
+import DeleteCheck from "../DeleteCheck";
 
 function SettingsModal({ closeModal }) {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
-
+  const [isDeleteCheckVisible, setDeleteCheckVisible] = useState(false);
 
   const handleLogout = async () => {
     if (isLoggingOut) {
@@ -31,7 +32,11 @@ function SettingsModal({ closeModal }) {
     closeModal();
   };
 
-  const handleDeleteUser = async () => {
+  const handleDeleteUser = () => {
+    setDeleteCheckVisible(true);
+  };
+
+  const confirmDeleteUser = async () => {
     await deleteUser();
     await handleLogout();
     closeModal();
@@ -66,6 +71,12 @@ function SettingsModal({ closeModal }) {
               >
                 Delete Account
               </button>
+              {isDeleteCheckVisible && (
+                <DeleteCheck
+                  onCancel={() => setDeleteCheckVisible(false)}
+                  onConfirm={confirmDeleteUser}
+                />
+              )}
               <button
                 data-modal-hide="popup-modal"
                 type="button"
