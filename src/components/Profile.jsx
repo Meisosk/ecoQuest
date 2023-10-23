@@ -276,7 +276,7 @@ function Profile() {
         <h3 className="text-2xl">{username}</h3>
         <p>{email}</p>
       </div>
-      <div className="bg-primary w-3/4 h-2/5 rounded-3xl mb-1.7 ">
+      <div className="bg-primary w-3/4 h-2/5 rounded-3xl mb-1.7 shadow-lg ">
         <div className="flex justify-around text-center">
           <p className="p-4 text-lg pl-9">Your Emissions </p>
           <p className="p-4 text-lg pl-9  explaining-text">
@@ -290,7 +290,7 @@ function Profile() {
           </p>
         </div>
         <div className="relative  left-[10%]">
-          <div className="bg-gradient-to-r from-red-600 via-yellow-400 to-green-600 rounded-full h-10 w-4/5 m-1.7"></div>
+          <div className="bg-gradient-to-r from-red-600 via-yellow-400 to-green-600 rounded-full h-10 w-4/5 m-1.7  shadow-lg"></div>
           <div
             className="bg-black bottom-0  absolute h-10 mt-5 pointer"
             style={{ width: "1%", left: percent }}
@@ -298,12 +298,12 @@ function Profile() {
         </div>
       </div>
       <div className="flex justify-between w-3/4 mb-10 profile-container">
-        <div className="h-[60vh] w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll about-text">
+        <div className="h-[60vh] w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll about-text shadow-lg">
           <p className="p-5 text-lg">Friends List:</p>
           <div>
             <div className="flex justify-center mt-5">
               <div className="relative overflow-x-auto w-4/6">
-                <table className="w-full  text-gray-500 dark:text-gray-400 text-lg">
+                <table className="w-full  text-gray-500 dark:text-gray-400 text-lg ">
                   <thead className="text-sm text-gray-700 uppercase bg-background dark:text-gray-400 ">
                     <tr>
                       <th scope="col" className="px-6 py-3">
@@ -364,7 +364,7 @@ function Profile() {
             )}
           </div>
         </div>
-        <div className="h-[60vh] w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll about-text">
+        <div className="h-[60vh] w-2/4 bg-primary text-center rounded-3xl m-2 overflow-y-scroll about-text  shadow-lg">
           <p className="p-5 text-lg">Accepted Quests</p>
           <div>
             <div className="flex justify-center flex-col">
