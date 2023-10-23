@@ -121,7 +121,7 @@ const Register = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="location">Location:</label>
+              <label htmlFor="location">Location (Your City):</label>
               <input
                 type="text"
                 id="location"

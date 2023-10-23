@@ -26,17 +26,12 @@ function Home() {
   useEffect(() => {
     const fetchCompletedQuests = async () => {
       const quests = await FilterCompletedQuests();
+      console.log(quests);
       setCompletedQuests(quests);
     };
 
     fetchCompletedQuests();
   }, []);
-
-  const getRandomImage = () => {
-    const randomIndex = Math.floor(Math.random() * 3);
-    const randomImages = [achive1, achive2, achive3];
-    return randomImages[randomIndex];
-  };
 
   useEffect(() => {
     setLevelName(getCurrentName(level));
@@ -138,7 +133,11 @@ function Home() {
                           key={index}
                           className="flex justify-between pl-9 pr-9 pb-3 items-center text-words"
                         >
-                          <img className="h-16" src={getRandomImage()} alt="" />
+                          <img
+                            className="h-16"
+                            src={achievement.img_name}
+                            alt=""
+                          />
                           <p>{achievement.text}</p>
                         </div>
                       ))
