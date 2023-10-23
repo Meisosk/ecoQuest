@@ -69,9 +69,8 @@ function Home() {
     const xpBar = async () => {
       const user = await supabase.auth.getUser();
 
-      if (!user) {
-        console.error("User is not logged in");
-        return;
+      if (!user.data.user) {
+        return null;
       }
 
       const userId = user.data.user.id;

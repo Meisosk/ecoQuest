@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { supabase } from "../App";
-import { Navigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./signin.css";
 
 const Register = () => {
@@ -13,7 +13,9 @@ const Register = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false); // disabling multiple clicks
-  const [isRegistered, setIsRegistered] = useState(false);
+
+  const navigate = useNavigate();
+
 
   //using refs avoids unnecessary re-renders whenever we enter the input
 
@@ -77,13 +79,18 @@ const Register = () => {
       const { data, error } = await register();
       if (!error && data) {
         setMsg("Registration Successful!");
+        setTimeout(() => {
+          navigate('/profile');
+          window.location.reload();
+        }, 1000);
         setIsRegistered(true);
       }
     } catch (error) {
-      setErrorMsg("Error in Creating Account");
+      setErrorMsg("Please wait");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  };
+  }
 
   useEffect(() => {
     if (signInSectionRef.current) {
@@ -172,7 +179,7 @@ const Register = () => {
                 Click Here!
               </Link>
             </p>
-            {isRegistered && <Navigate to="/profile" />}
+        
             <div className="text-center mt-20 mb-20">
               <button
                 disabled={loading}
