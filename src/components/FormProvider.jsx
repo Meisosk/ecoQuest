@@ -25,6 +25,7 @@ export function FormProvider({ children }) {
     setFormData(exsistingFormData);
   }, [exsistingFormData]);
 
+  //adds everything in the form data array to get total
   useEffect(() => {
     const updateFormData = async () => {
       if (formData && formData.length > 0) {

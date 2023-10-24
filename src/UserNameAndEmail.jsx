@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { supabase } from "./App";
+import { supabase } from "./GetTables";
 import getMyUserData from "./GetMyUserData";
 
 const UserContext = createContext({});

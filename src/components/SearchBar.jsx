@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../App";
+import { supabase } from "../GetTables";
 
 import { dataFetchingFunctions } from "../GetTables";
 const { GetCities, GetLocation } = dataFetchingFunctions;
@@ -54,6 +54,7 @@ const SearchBar = (props) => {
   }, []);
 
   useEffect(() => {
+    //filters through all of the cities from the database making it not case sensitive
     const chosenCityLower = chosenCity.toLowerCase();
     const filteredResults = props.data.filter((facility) =>
       facility.CityName.toLowerCase().includes(chosenCityLower)
@@ -90,6 +91,7 @@ const SearchBar = (props) => {
     }
   };
 
+  //makes only 4 cities populate the recomended cities at a time
   const topFour = Filtered.slice(0, 4);
 
   return (

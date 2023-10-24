@@ -6,8 +6,8 @@ const AuthRoute = () => {
   const { user } = useAuth();
   const location = useLocation();
 
-  return user || localStorage.getItem('accessToken') ? (
-    <Profile /> //outlet is a placeholder component. where the component matches the current route to be rendered
+  return user || localStorage.getItem("accessToken") ? (
+    <Profile />
   ) : (
     <Navigate to={"/signin"} replace state={{ path: location.pathname }} />
   );

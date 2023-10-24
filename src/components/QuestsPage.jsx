@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../App";
+import { supabase } from "../GetTables";
 import { dataFetchingFunctions } from "../GetTables";
 import { Link } from "react-router-dom";
 
@@ -13,9 +13,9 @@ function QuestsPage() {
   function capitalizeWords(str) {
     return str
       .toLowerCase()
-      .split(" ") //if you don't put a space in here, it will split on each character instead of each word!
+      .split(" ")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" "); //if you don't put a space in here, it will not put spaces between the rejoined words
+      .join(" ");
   }
 
   useEffect(() => {

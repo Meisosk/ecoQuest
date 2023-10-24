@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { supabase } from "../App";
+import { supabase } from "../GetTables";
 import { useNavigate, Link } from "react-router-dom";
 import "./signin.css";
 
@@ -40,13 +40,11 @@ const Register = () => {
     const username = usernameRef.current?.value ?? "";
     const location = locationRef.current?.value ?? "";
 
-    // Check if any required fields are empty
     if (!email || !password || !confirmPassword || !username || !location) {
       setErrorMsg("Please fill out all the fields");
       return;
     }
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       setErrorMsg("Passwords don't match");
       return;

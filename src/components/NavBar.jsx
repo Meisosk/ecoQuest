@@ -1,6 +1,6 @@
 import logo from "../assets/ecoquestlogo.png";
 import { useState, useEffect } from "react";
-import { supabase } from "../App";
+import { supabase } from "../GetTables";
 import { Link } from "react-router-dom";
 import { useUser } from "../UserNameAndEmail";
 import SettingsModal from "./SettingsModal";

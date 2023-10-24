@@ -1,4 +1,4 @@
-import { supabase } from "./App";
+import { supabase } from "./GetTables";
 
 async function getUsernames() {
   try {

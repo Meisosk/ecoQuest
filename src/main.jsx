@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
 import "./input.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -13,7 +12,6 @@ import About from "./components/About.jsx";
 import QuestsPage from "./components/QuestsPage.jsx";
 import AuthProvider from "./components/AuthProvider.jsx";
 import Register from "./components/Register.jsx";
-import AddUserToDatabase from "./AddUserToDatabase.jsx";
 import Login from "./components/SignIn.jsx";
 import { FormProvider } from "./components/FormProvider.jsx";
 import { UserProvider } from "./UserNameAndEmail.jsx";
