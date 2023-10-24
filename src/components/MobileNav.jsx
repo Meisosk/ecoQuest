@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/ecoquestlogo.png";
 import NavModal from "./NavModal";
+import { Link } from "react-router-dom";
 
 function MobileNav() {
   const [navOptions, setnavOptions] = useState(false);
@@ -16,7 +17,9 @@ function MobileNav() {
     <>
       <div className="mobilenav bg-secondary w-full justify-between p-5 pl-7">
         <div className="">
-          <img className="w-32" src={logo} alt="logo" />
+          <Link to="/">
+            <img className="w-32" src={logo} alt="logo" />
+          </Link>
         </div>
         <button onClick={openModal} className="bg-transparent ">
           <svg

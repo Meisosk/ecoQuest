@@ -44,7 +44,9 @@ function NavBar() {
       {isModalOpen && <SettingsModal closeModal={closeSettingsModal} />}
       <div className="navbar sticky top-0 h-screen">
         <div className="rounded-r bg-secondary flex justify-center w-full p-2 items-center ">
-          <img className="w-32" src={logo} alt="logo" />
+          <Link to="/">
+            <img className="w-32" src={logo} alt="logo" />
+          </Link>
         </div>
         <div
           id="Main"
