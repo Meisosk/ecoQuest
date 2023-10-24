@@ -1,4 +1,7 @@
 import React from "react";
+import achive1 from "../assets/acheivmentIcons/planet-earth_1598431.png";
+import achive2 from "../assets/acheivmentIcons/plant_1892747.png";
+import achive3 from "../assets/acheivmentIcons/trophy_3113025.png";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import { useForm } from "./FormProvider";
@@ -354,11 +357,7 @@ function Profile() {
                 acceptedQuests.map((achievement, index) => (
                   <div key={index} className="mb-6 p-3 items-center">
                     <div className="flex w-full">
-                      <img
-                        className="flex h-16"
-                        src={achievement.img_name}
-                        alt=""
-                      />
+                      <img className="flex h-16" src={achive1} alt="" />
                       <div className="self-center">
                         <p className="ml-3">
                           {capitalizeWords(achievement.text)}
