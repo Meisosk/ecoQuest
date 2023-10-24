@@ -11,13 +11,14 @@
 
  
 ## Demo
-**[EcoQuestDemo](WEB ADDRESS TO DEMO HERE)**
+**[EcoQuestDemo](https://drive.google.com/file/d/1HTuBP4txU2l04UuWVSCm5e5g8o6z5_SD/view)**
 <p align="center">
-<img src="SCREENSHOT HERE" alt="EcoQuest Demo"></a>
+<img src="./src/assets/screenshot.png" alt="EcoQuest Demo"></a>
 </p>
 
 ## Features
 - Register, Sign In, Log Out
+- Apex Charts
 - User and Friend information Populating on Multiple Pages
 - Protected Profile Route
 - Persistent Data via Supabase
@@ -57,6 +58,8 @@ Deployed@**[EcoQuest](https://eco-quest.netlify.app/)**
 
 
 ## Stretch Goals
+- [ ] Pending friend requests
+- [ ] Reset and recover passwords
 - [ ] More detailed but user-friendly carbon calculator
 - [ ] Logged in user appears in the leaderboard rankings with friends
 - [ ] Filter Quests by levels
@@ -74,7 +77,8 @@ Deployed@**[EcoQuest](https://eco-quest.netlify.app/)**
 - Route protection for the profile page while still creating a smooth experience from sign in to populating authenticated user data when signing in
 - Only two merge conflicts and quick resolution to both
 - Fixing the netlify refresh bug in regards to React Router when _redirects folder solution failed
-- Researching and building from the ground up a working carbon calculator when there was no API (things like SIMAP run 500 dollars a year)
+- Researching and building from the ground up a working carbon calculator with breakdown chart and slider
+- Transition on landing page
 
 ## Capstone Project Credits Go To The Following Builders
  
@@ -87,9 +91,9 @@ Deployed@**[EcoQuest](https://eco-quest.netlify.app/)**
 
 ## Tech Stack Review
 
-<h1>TECHNOLOGIES USED</h1>
+<h1>Technologies Used</h1>
 
-<h2>CHALLENGE DECISIONS:</h2>
+<h2>Challenge Decisions:</h2>
 
 TAILWIND CSS
 
@@ -97,16 +101,23 @@ REACT CONTEXT
 
 With no previous experience with React Context, we chose to use React Context in place of props drilling. With no previous experience with Tailwind CSS, we chose to challenge ourselves by using this inline foundational styling as opposed to Bootstrap’s templates.
 
-<h3>TAKEAWAY ON REACT CONTEXT:</h3>
+<h3>Takeaway on Context:</h3>
 React Context was sufficient for the size of our app and did prevent some prop drilling and with more time we would have refactored to use it a bit more. A trade-off was that in using a Context Provider on the routing did cause some minor lag (about 3 seconds) for certain reusable information to populate on a page. Overall, redux would have been overkill.
 
-<h3>TAKEAWAY ON TAILWIND CSS:</h3>
+<h3>Takeaway on Tailwind CSS:</h3>
 Inline styling can benefit developers sometimes by allowing faster tag customization. Unlike Bootstrap, Tailwind is not a series of fully styled elements like buttons. Its base code though makes for a smaller file and it is easier to customize, though the installation was more involved and required troubleshooting compared to installing Bootstrap. Property names are fairly usual “w” for “width”. However, some properties like view height were less intuitive and not quite the same as using CSS.
 
-<h2>OTHER TECHNOLOGIES AND PACKAGES:</h2>
+<h2>Other Technologies and Packages:</h2>
 
-<h3>SUPABASE</h3>
+<h3>Supabase</h3>
 The learning curve for Supabase was mitigated by both its on-site documentation as well as its dedicated users sharing their own experiences with the database. Supabase is SQL and comes with its own methods for authentication, password hashing and encryption, as well as protecting routes. This was a good database choice for us though we had never used it before because we had a lot of related data and it made security easier for building the site in just two weeks.
 
-<h3>TAKEAWAY ON SUPABASE:</h3>
+<h3>Takeaway on Supabase:</h3>
 Supabase was easier and faster to learn and utilize than Firebase. If documentation on the site was not thorough enough, another developer or their help desk had already explained how to fix issues elsewhere. With more time, we would have learned to utilize their Row Level Security and Policies. As is, we used the SQL Query for one remote call function and for directly implementing a function and trigger for the authenticated users table to pass some information to the public users table and match ids across the tables.
+
+
+<h3>Apex Charts</h3>
+Documentation for Apex charts was lacking. Many tutorials on same also did not often answer the specific developer questions for this project. However, through trial and error, we were still able to have this feature working as intended under the time constraints.
+
+<h3>Takeaway on Apex Charts:</h3>
+After using Apex Charts, getting used to its ins and outs, and having overcome the z-index fight between it and the settings modal, this goes on the list of "would use again".
