@@ -357,11 +357,7 @@ function Profile() {
                 acceptedQuests.map((achievement, index) => (
                   <div key={index} className="mb-6 p-3 items-center">
                     <div className="flex w-full">
-                      <img
-                        className="flex h-16"
-                        src={achievement.img_name}
-                        alt=""
-                      />
+                      <img className="flex h-16" src={achive3} alt="" />
                       <div className="self-center">
                         <p className="ml-3">
                           {capitalizeWords(achievement.text)}
