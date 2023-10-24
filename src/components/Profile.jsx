@@ -6,7 +6,7 @@ import moment from "moment";
 import { useEffect, useState } from "react";
 import { useForm } from "./FormProvider";
 import { dataFetchingFunctions } from "../GetTables";
-import { supabase } from "../App";
+import { supabase } from "../GetTables";
 import { friendFunctions } from "../GetFriends";
 import getUsers from "../GetUsers";
 import { useUser } from "../UserNameAndEmail";
@@ -23,13 +23,10 @@ function Profile() {
   const [newFriendUsername, setNewFriendUsername] = useState("");
   const [showUsernameInput, setShowUsernameInput] = useState(false);
   const [friendRequestError, setFriendRequestError] = useState("");
-  const [signedInStatus, setSignedInStatus] = useState(null);
   const [completedQuests, setCompletedQuests] = useState([]);
 
   const { username } = useUser();
   const { email } = useUser();
-
-  //     moment formula  const formattedDate = moment(lastSignInDate).format("MMM DD, YYYY");
 
   const { emissionTotal } = useForm();
 
@@ -147,10 +144,6 @@ function Profile() {
     }
   };
 
-  useEffect(() => {
-    getFriends();
-  }, []);
-
   const insertCompletedQuest = async (questId) => {
     const user = await supabase.auth.getUser();
 
@@ -198,7 +191,7 @@ function Profile() {
       const points = pointsData[0].xp;
 
       const userPromise = getUsersPoints(userId);
-      const userData = await userPromise; // Wait for the promise to resolve
+      const userData = await userPromise;
       const userCurrentPoints = userData[0].points;
       const updatedpoints = userCurrentPoints + points;
 
@@ -349,7 +342,7 @@ function Profile() {
             ) : (
               <button
                 onClick={handleFriendAddClick}
-                className="bg-button mt-8 w-2/4"
+                className="bg-button mt-8 w-2/4 p-3"
               >
                 Add Friend
               </button>

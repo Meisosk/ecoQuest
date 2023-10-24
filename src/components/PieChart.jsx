@@ -8,7 +8,7 @@ const PieChart = () => {
   return (
     <Chart
       type="donut"
-      series={formData ? formData : []}
+      series={formData ? formData : []} //makes pie chart based on the data from FormProvider
       width="100%"
       height="90%"
       options={{

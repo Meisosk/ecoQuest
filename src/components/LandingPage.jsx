@@ -17,7 +17,7 @@ function LandingPage() {
   const parallaxEffect = () => {
     const scrollPosition = window.scrollY;
 
-    const newHeight = Math.max(37 + scrollPosition * 0.15, 0);
+    const newHeight = Math.max(37 + scrollPosition * 0.13, 0);
     setTreeDivHeight(newHeight);
   };
 

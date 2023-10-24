@@ -5,7 +5,7 @@ const { GetFacilities } = dataFetchingFunctions;
 
 function Facilities() {
   const [facilities, setFacilities] = useState([]);
-  const [filteredFacilities, setFilteredFacilities] = useState([]); // State for filtered results
+  const [filteredFacilities, setFilteredFacilities] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,7 +19,7 @@ function Facilities() {
     const sortedResults = filteredResults.sort((a, b) =>
       a.STATE.localeCompare(b.STATE)
     );
-    setFilteredFacilities(filteredResults);
+    setFilteredFacilities(sortedResults);
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { supabase } from "../App";
+import { supabase } from "../GetTables";
 import deleteUser from "../DeleteUser";
 import DeleteCheck from "../DeleteCheck";
 
@@ -9,6 +9,7 @@ function SettingsModal({ closeModal }) {
 
   const modalRef = useRef(null);
 
+  //allows you to clode the modal by clicking outside the div
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -64,7 +65,7 @@ function SettingsModal({ closeModal }) {
         id="popup-modal"
         tabIndex="-1"
         className="z-50 relative p-2  md:inset-0 h-[calc(100%-1rem)] max-h-full "
-        ref={modalRef} // Ref added here
+        ref={modalRef}
       >
         <div className="fixed z-50 top-[60vh] left-[288px] right-0 w-full max-w-[270px] max-h-full settings-mobile">
           <div className="relative rounded-lg shadow bg-gray-700">

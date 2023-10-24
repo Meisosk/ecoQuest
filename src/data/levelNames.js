@@ -22,9 +22,10 @@ const suffixes = [
 ];
 1;
 function getCurrentName(level) {
-  const maxLevel = 100; // Maximum level, adjust as needed
-  const interval = 5; // Every 5 levels
-
+  if (level === 100) {
+    return;
+  }
+  const interval = 5;
   let intervalLevel = Math.floor(level / interval);
   const nextName = `Eco${suffixes[intervalLevel]}`;
   return nextName;

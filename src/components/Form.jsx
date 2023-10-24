@@ -22,7 +22,8 @@ function Form({ onSubmit }) {
   const [skirts, setSkirts] = useState(0);
   const [jackets, setJackets] = useState(0);
 
-  const pieData = [];
+  const pieData = []; //storing data here to bring to the FormProvider
+
   const calculateEmissions = (clothingTotal) => {
     pieData.push(clothingTotal);
     const carEmissions =
@@ -88,7 +89,6 @@ function Form({ onSubmit }) {
   };
 
   const calculateClothingEmissions = () => {
-    // Calculate emissions for each clothing type based on the number of items
     const totalClothingEmissions =
       tops * EmissionConstants.EMISSIONS_PER_TOP +
       dresses * EmissionConstants.EMISSIONS_PER_DRESS +
