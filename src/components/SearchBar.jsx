@@ -109,7 +109,7 @@ const SearchBar = (props) => {
 
             <button
               onClick={handleSubmit}
-              className=" h-12 bg-button rounded-r-xl rounded-l-none p-1"
+              className=" h-12 bg-button rounded-r-xl rounded-l-none p-2"
               type="submit"
             >
               Submit

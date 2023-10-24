@@ -183,7 +183,7 @@ const Register = () => {
               <button
                 disabled={loading}
                 type="submit"
-                className="w-full bg-button"
+                className="w-full bg-button p-3"
               >
                 SIGN UP
               </button>

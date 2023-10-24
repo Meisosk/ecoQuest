@@ -331,7 +331,7 @@ function Profile() {
                 />
                 <button
                   onClick={handleFriendAdd}
-                  className="bg-button mt-3 w-2/4"
+                  className="bg-button mt-3 w-2/4 p-2"
                 >
                   Add Friend
                 </button>
@@ -342,7 +342,7 @@ function Profile() {
             ) : (
               <button
                 onClick={handleFriendAddClick}
-                className="bg-button mt-8 w-2/4 p-3"
+                className="bg-button mt-8 w-2/4 p-2"
               >
                 Add Friend
               </button>
